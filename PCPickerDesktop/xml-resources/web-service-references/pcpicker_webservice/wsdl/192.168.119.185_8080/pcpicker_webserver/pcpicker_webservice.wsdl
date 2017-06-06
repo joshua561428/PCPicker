@@ -37,6 +37,12 @@
 <message name="addPowerSupply">
 <part name="parameters" element="tns:addPowerSupply"/>
 </message>
+<message name="getGPUMemoryTypes">
+<part name="parameters" element="tns:getGPUMemoryTypes"/>
+</message>
+<message name="getGPUMemoryTypesResponse">
+<part name="parameters" element="tns:getGPUMemoryTypesResponse"/>
+</message>
 <message name="addMemory">
 <part name="parameters" element="tns:addMemory"/>
 </message>
@@ -124,6 +130,18 @@
 <message name="addGPU">
 <part name="parameters" element="tns:addGPU"/>
 </message>
+<message name="getMaxResolutions">
+<part name="parameters" element="tns:getMaxResolutions"/>
+</message>
+<message name="getMaxResolutionsResponse">
+<part name="parameters" element="tns:getMaxResolutionsResponse"/>
+</message>
+<message name="getMemoryTypes">
+<part name="parameters" element="tns:getMemoryTypes"/>
+</message>
+<message name="getMemoryTypesResponse">
+<part name="parameters" element="tns:getMemoryTypesResponse"/>
+</message>
 <portType name="Pcpicker_webservice">
 <operation name="getGraphicsCardList">
 <input wsam:Action="http://pcpicker/Pcpicker_webservice/getGraphicsCardListRequest" message="tns:getGraphicsCardList"/>
@@ -147,6 +165,10 @@
 </operation>
 <operation name="addPowerSupply">
 <input wsam:Action="http://pcpicker/Pcpicker_webservice/addPowerSupply" message="tns:addPowerSupply"/>
+</operation>
+<operation name="getGPUMemoryTypes">
+<input wsam:Action="http://pcpicker/Pcpicker_webservice/getGPUMemoryTypesRequest" message="tns:getGPUMemoryTypes"/>
+<output wsam:Action="http://pcpicker/Pcpicker_webservice/getGPUMemoryTypesResponse" message="tns:getGPUMemoryTypesResponse"/>
 </operation>
 <operation name="addMemory">
 <input wsam:Action="http://pcpicker/Pcpicker_webservice/addMemory" message="tns:addMemory"/>
@@ -209,6 +231,14 @@
 <operation name="addGPU">
 <input wsam:Action="http://pcpicker/Pcpicker_webservice/addGPU" message="tns:addGPU"/>
 </operation>
+<operation name="getMaxResolutions">
+<input wsam:Action="http://pcpicker/Pcpicker_webservice/getMaxResolutionsRequest" message="tns:getMaxResolutions"/>
+<output wsam:Action="http://pcpicker/Pcpicker_webservice/getMaxResolutionsResponse" message="tns:getMaxResolutionsResponse"/>
+</operation>
+<operation name="getMemoryTypes">
+<input wsam:Action="http://pcpicker/Pcpicker_webservice/getMemoryTypesRequest" message="tns:getMemoryTypes"/>
+<output wsam:Action="http://pcpicker/Pcpicker_webservice/getMemoryTypesResponse" message="tns:getMemoryTypesResponse"/>
+</operation>
 </portType>
 <binding name="Pcpicker_webservicePortBinding" type="tns:Pcpicker_webservice">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
@@ -262,6 +292,15 @@
 <input>
 <soap:body use="literal"/>
 </input>
+</operation>
+<operation name="getGPUMemoryTypes">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
 </operation>
 <operation name="addMemory">
 <soap:operation soapAction=""/>
@@ -397,6 +436,24 @@
 <input>
 <soap:body use="literal"/>
 </input>
+</operation>
+<operation name="getMaxResolutions">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getMemoryTypes">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
 </operation>
 </binding>
 <service name="pcpicker_webservice">

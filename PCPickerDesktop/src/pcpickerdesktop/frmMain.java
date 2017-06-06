@@ -594,6 +594,7 @@ public class frmMain extends javax.swing.JFrame {
         //Processor myproc = new Processor();
         //myproc.addCPU(compIdText.getText(), compManufacturerText.getText(), compNameText.getText(), Integer.parseInt(cpuFrequencyText.getText()), Integer.parseInt(cpuCountText.getText()), Integer.parseInt(cpuThreadText.getText()), cpuSocketText.getText(), Integer.parseInt(cpuTDPText.getText()), Double.parseDouble(compPriceText.getText()), compTypeCombo.getSelectedItem().toString());
         
+        //addCPU(compIdText.getText(), compManufacturerText.getText(), compNameText.getText(), Integer.parseInt(cpuFrequencyText.getText()), Integer.parseInt(cpuCountText.getText()), Integer.parseInt(cpuThreadText.getText()), cpuSocketText.getText(), Integer.parseInt(cpuTDPText.getText()), Double.parseDouble(compPriceText.getText()), compTypeCombo.getSelectedItem().toString());
         addGPU(compIdText.getText(), compManufacturerText.getText(), compNameText.getText(), Integer.parseInt(cpuFrequencyText.getText()), cpuCountText.getText(), cpuSocketText.getText(), Integer.parseInt(cpuThreadText.getText()), Integer.parseInt(cpuTDPText.getText()), compTypeCombo.getSelectedItem().toString());
     }//GEN-LAST:event_addComponentButtonActionPerformed
 
