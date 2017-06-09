@@ -14,7 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import pcpicker.Component;
+import pcpicker.Part;
 
 /**
  *
@@ -58,7 +58,7 @@ public class Cart extends HttpServlet {
         //todo -- get motherboard formfactor
         ShoppingCart sc = ShoppingCart.GetInstance();
         
-        List<Component> components = sc.getList();
+        List<Part> components = sc.getList();
         
         for(int i = 0; i < components.size();i++)
             manuf.put(i, components.get(i));
@@ -78,19 +78,40 @@ public class Cart extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String submit = (String) request.getAttribute("submit");
-        //for(int i = 0; i < )
-        if(submit.equals("Add to Cart"))
-        {
-            ShoppingCart instance = ShoppingCart.GetInstance();
-            Component component = new Component();
-            String compname = (String)request.getAttribute("compname");
-            System.out.println("companme"+ compname);
-
-            component.setCompName(compname);
-            instance.addItem(component);
+        
        
+        int numListItems = Integer.parseInt((String)request.getParameter("numListItems"));
+        List<String> parameterNames = new ArrayList<String>(request.getParameterMap().keySet());
+        System.out.println("*********start doPost cart Method*************************");
+//        System.out.println("parameter list--");
+//        for(String s : parameterNames)
+//            System.out.println("  paramname " + s);
+//        System.out.println("--");
+//        
+        String[] names = request.getParameterValues("compname");
+//        for(String s: names)
+//            System.out.println("  compnames -" + s);
+        for(int i = 0; i < numListItems; i++)
+        {
+            String is = Integer.toString(i);
+            
+            String submit = (String) request.getParameter("submit" + is);
+            if(submit!=null)
+            {
+                System.out.println("index = " + is);
+                ShoppingCart instance = ShoppingCart.GetInstance();
+                Part component = new Part();
+             
+                String compname = names[i];
+               
+                System.out.println("companme val = "+ compname);
+
+                component.setPartName(compname);
+                instance.addItem(component);
+
+            }
         }
+            System.out.println("*********end doPost cart Method*******************");
         request.getRequestDispatcher("ShoppingCart.jsp").forward(request,response);
     }
 

@@ -11,7 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import pcpicker.Component;
+import pcpicker.Part;
 
 /**
  *
@@ -61,11 +61,11 @@ public class CartAdd extends HttpServlet {
             throws ServletException, IOException {
         
         ShoppingCart instance = ShoppingCart.GetInstance();
-        Component component = new Component();
+        Part component = new Part();
         String compname = (String)request.getAttribute("compname");
         
         
-        component.setCompName(compname);
+        component.setPartName(compname);
         instance.addItem(component);
        
         request.getRequestDispatcher(request.getContextPath()+"/Cart").forward(request,response);

@@ -13,7 +13,7 @@ import javax.xml.ws.WebServiceRef;
  *
  * @author admin
  */
-public class Methods {
+public class WebMethods {
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/192.168.119.185_8080/pcpicker_webserver/pcpicker_webservice.wsdl")
     private static PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
     
