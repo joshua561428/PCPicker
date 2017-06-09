@@ -3,7 +3,7 @@ package pcpicker;
 import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Keyboard")
-public class Keyboard extends Component
+public class Keyboard extends Part
 {    
 
     /**

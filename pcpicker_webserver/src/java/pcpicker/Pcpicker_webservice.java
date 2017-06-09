@@ -32,13 +32,13 @@ public class Pcpicker_webservice
                 int last = a.size();
                 a.add(new Processor()); ////////////////////////////////////////////
 
-                a.get(last).setComp_id(rs.getString(1));/////////////////////////////
-                a.get(last).setComp_type(rs.getString(2));//////////////////
-                a.get(last).setComp_manufacturer(rs.getString(3));////////////////
-                a.get(last).setComp_name(rs.getString(4));///////////////
-                a.get(last).setComp_price(rs.getDouble(5));////////////////
+                a.get(last).setPart_id(rs.getString(1));/////////////////////////////
+                a.get(last).setPart_type(rs.getString(2));//////////////////
+                a.get(last).setPart_manufacturer(rs.getString(3));////////////////
+                a.get(last).setPart_name(rs.getString(4));///////////////
+                a.get(last).setPart_price(rs.getDouble(5));////////////////
                 //*****************************************nadoble comp_id
-                a.get(last).setCore_clock(rs.getString(7));/////////////////
+                a.get(last).setCore_clock(rs.getDouble(7));/////////////////
                 a.get(last).setCore_num(rs.getInt(8));/////////////////
                 a.get(last).setThread_num(rs.getInt(9));////////////////////
                 a.get(last).setSocket_(rs.getString(10));////////////////
@@ -69,11 +69,11 @@ public class Pcpicker_webservice
                 int last = a.size();
                 a.add(new Cooler()); ////////////////////////////////////////////
 
-                a.get(last).setComp_id(rs.getString(1));/////////////////////////////
-                a.get(last).setComp_type(rs.getString(2));//////////////////
-                a.get(last).setComp_manufacturer(rs.getString(3));////////////////
-                a.get(last).setComp_name(rs.getString(4));///////////////
-                a.get(last).setComp_price(rs.getDouble(5));////////////////
+                a.get(last).setPart_id(rs.getString(1));/////////////////////////////
+                a.get(last).setPart_type(rs.getString(2));//////////////////
+                a.get(last).setPart_manufacturer(rs.getString(3));////////////////
+                a.get(last).setPart_name(rs.getString(4));///////////////
+                a.get(last).setPart_price(rs.getDouble(5));////////////////
                 //*****************************************nadoble comp_id
                 a.get(last).setSupported_sockets(rs.getString(7));/////////////////
                 a.get(last).setLiquid_cooling(rs.getBoolean(8));/////////////////
@@ -104,15 +104,15 @@ public class Pcpicker_webservice
                 int last = a.size();
                 a.add(new GraphicsCard()); ////////////////////////////////////////////
 
-                a.get(last).setComp_id(rs.getString(1));/////////////////////////////
-                a.get(last).setComp_type(rs.getString(2));//////////////////
-                a.get(last).setComp_manufacturer(rs.getString(3));////////////////
-                a.get(last).setComp_name(rs.getString(4));///////////////
-                a.get(last).setComp_price(rs.getDouble(5));////////////////
+                a.get(last).setPart_id(rs.getString(1));/////////////////////////////
+                a.get(last).setPart_type(rs.getString(2));//////////////////
+                a.get(last).setPart_manufacturer(rs.getString(3));////////////////
+                a.get(last).setPart_name(rs.getString(4));///////////////
+                a.get(last).setPart_price(rs.getDouble(5));////////////////
                 //*****************************************nadoble comp_id
                 a.get(last).setCore_clock(rs.getInt(7));/////////////////
                 a.get(last).setMem_ddr(rs.getString(8));/////////////////
-                a.get(last).setMem_capacity(rs.getString(9));////////////////////
+                a.get(last).setMem_capacity(rs.getInt(9));////////////////////
                 a.get(last).setMem_clock(rs.getInt(10));/////////////////////
             }
             callableStatement.close();
@@ -140,11 +140,11 @@ public class Pcpicker_webservice
                 int last = a.size();
                 a.add(new Keyboard()); ////////////////////////////////////////////
 
-                a.get(last).setComp_id(rs.getString(1));/////////////////////////////
-                a.get(last).setComp_type(rs.getString(2));//////////////////
-                a.get(last).setComp_manufacturer(rs.getString(3));////////////////
-                a.get(last).setComp_name(rs.getString(4));///////////////
-                a.get(last).setComp_price(rs.getDouble(5));////////////////
+                a.get(last).setPart_id(rs.getString(1));/////////////////////////////
+                a.get(last).setPart_type(rs.getString(2));//////////////////
+                a.get(last).setPart_manufacturer(rs.getString(3));////////////////
+                a.get(last).setPart_name(rs.getString(4));///////////////
+                a.get(last).setPart_price(rs.getDouble(5));////////////////
                 //*****************************************nadoble comp_id
                 a.get(last).setBacklit(rs.getBoolean(7));/////////////////
                 a.get(last).setType_(rs.getString(8));/////////////////
@@ -174,11 +174,11 @@ public class Pcpicker_webservice
                 int last = a.size();
                 a.add(new Memory()); ////////////////////////////////////////////
 
-                a.get(last).setComp_id(rs.getString(1));/////////////////////////////
-                a.get(last).setComp_type(rs.getString(2));//////////////////
-                a.get(last).setComp_manufacturer(rs.getString(3));////////////////
-                a.get(last).setComp_name(rs.getString(4));///////////////
-                a.get(last).setComp_price(rs.getDouble(5));////////////////
+                a.get(last).setPart_id(rs.getString(1));/////////////////////////////
+                a.get(last).setPart_type(rs.getString(2));//////////////////
+                a.get(last).setPart_manufacturer(rs.getString(3));////////////////
+                a.get(last).setPart_name(rs.getString(4));///////////////
+                a.get(last).setPart_price(rs.getDouble(5));////////////////
                 //*****************************************nadoble comp_id
                 a.get(last).setMem_capacity(rs.getInt(7));/////////////////
                 a.get(last).setMem_ddr(rs.getString(8));/////////////////
@@ -209,11 +209,11 @@ public class Pcpicker_webservice
                 int last = a.size();
                 a.add(new Monitor()); ////////////////////////////////////////////
 
-                a.get(last).setComp_id(rs.getString(1));/////////////////////////////
-                a.get(last).setComp_type(rs.getString(2));//////////////////
-                a.get(last).setComp_manufacturer(rs.getString(3));////////////////
-                a.get(last).setComp_name(rs.getString(4));///////////////
-                a.get(last).setComp_price(rs.getDouble(5));////////////////
+                a.get(last).setPart_id(rs.getString(1));/////////////////////////////
+                a.get(last).setPart_type(rs.getString(2));//////////////////
+                a.get(last).setPart_manufacturer(rs.getString(3));////////////////
+                a.get(last).setPart_name(rs.getString(4));///////////////
+                a.get(last).setPart_price(rs.getDouble(5));////////////////
                 //*****************************************nadoble comp_id
                 a.get(last).setAspect_ratio(rs.getString(7));/////////////////
                 a.get(last).setScreen_size(rs.getInt(8));/////////////////
@@ -245,11 +245,11 @@ public class Pcpicker_webservice
                 int last = a.size();
                 a.add(new Motherboard()); ////////////////////////////////////////////
 
-                a.get(last).setComp_id(rs.getString(1));/////////////////////////////
-                a.get(last).setComp_type(rs.getString(2));//////////////////
-                a.get(last).setComp_manufacturer(rs.getString(3));////////////////
-                a.get(last).setComp_name(rs.getString(4));///////////////
-                a.get(last).setComp_price(rs.getDouble(5));////////////////
+                a.get(last).setPart_id(rs.getString(1));/////////////////////////////
+                a.get(last).setPart_type(rs.getString(2));//////////////////
+                a.get(last).setPart_manufacturer(rs.getString(3));////////////////
+                a.get(last).setPart_name(rs.getString(4));///////////////
+                a.get(last).setPart_price(rs.getDouble(5));////////////////
                 //*****************************************nadoble comp_id
                 a.get(last).setSocket(rs.getString(7));/////////////////
                 a.get(last).setMem_slots(rs.getInt(8));/////////////////
@@ -280,11 +280,11 @@ public class Pcpicker_webservice
                 int last = a.size();
                 a.add(new Mouse()); ////////////////////////////////////////////
 
-                a.get(last).setComp_id(rs.getString(1));/////////////////////////////
-                a.get(last).setComp_type(rs.getString(2));//////////////////
-                a.get(last).setComp_manufacturer(rs.getString(3));////////////////
-                a.get(last).setComp_name(rs.getString(4));///////////////
-                a.get(last).setComp_price(rs.getDouble(5));////////////////
+                a.get(last).setPart_id(rs.getString(1));/////////////////////////////
+                a.get(last).setPart_type(rs.getString(2));//////////////////
+                a.get(last).setPart_manufacturer(rs.getString(3));////////////////
+                a.get(last).setPart_name(rs.getString(4));///////////////
+                a.get(last).setPart_price(rs.getDouble(5));////////////////
                 //*****************************************nadoble comp_id
                 a.get(last).setDpi(rs.getInt(7));/////////////////
                 a.get(last).setConnection_(rs.getString(8));/////////////////
@@ -314,11 +314,11 @@ public class Pcpicker_webservice
                 int last = a.size();
                 a.add(new Storage()); ////////////////////////////////////////////
 
-                a.get(last).setComp_id(rs.getString(1));/////////////////////////////
-                a.get(last).setComp_type(rs.getString(2));//////////////////
-                a.get(last).setComp_manufacturer(rs.getString(3));////////////////
-                a.get(last).setComp_name(rs.getString(4));///////////////
-                a.get(last).setComp_price(rs.getDouble(5));////////////////
+                a.get(last).setPart_id(rs.getString(1));/////////////////////////////
+                a.get(last).setPart_type(rs.getString(2));//////////////////
+                a.get(last).setPart_manufacturer(rs.getString(3));////////////////
+                a.get(last).setPart_name(rs.getString(4));///////////////
+                a.get(last).setPart_price(rs.getDouble(5));////////////////
                 //*****************************************nadoble comp_id
                 a.get(last).setType_(rs.getString(7));/////////////////
                 a.get(last).setCapacity(rs.getInt(8));/////////////////
@@ -349,11 +349,11 @@ public class Pcpicker_webservice
                 int last = a.size();
                 a.add(new PowerSupply()); ////////////////////////////////////////////
 
-                a.get(last).setComp_id(rs.getString(1));/////////////////////////////
-                a.get(last).setComp_type(rs.getString(2));//////////////////
-                a.get(last).setComp_manufacturer(rs.getString(3));////////////////
-                a.get(last).setComp_name(rs.getString(4));///////////////
-                a.get(last).setComp_price(rs.getDouble(5));////////////////
+                a.get(last).setPart_id(rs.getString(1));/////////////////////////////
+                a.get(last).setPart_type(rs.getString(2));//////////////////
+                a.get(last).setPart_manufacturer(rs.getString(3));////////////////
+                a.get(last).setPart_name(rs.getString(4));///////////////
+                a.get(last).setPart_price(rs.getDouble(5));////////////////
                 //*****************************************nadoble comp_id
                 a.get(last).setWattage(rs.getInt(7));/////////////////
                 a.get(last).setRating(rs.getString(8));/////////////////

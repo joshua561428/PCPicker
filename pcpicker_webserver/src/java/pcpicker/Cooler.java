@@ -3,7 +3,7 @@ package pcpicker;
 import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Cooler")
-public class Cooler extends Component
+public class Cooler extends Part
 {    
 
     /**
@@ -49,12 +49,7 @@ public class Cooler extends Component
     }
 
 
-    /**
-     * @param comp_type the comp_type to set
-     */
-    public void setComp_type(String comp_type) {
-        this.comp_type = comp_type;
-    }
+   
     @XmlElement(name = "liquid_cooling")
     private boolean liquid_cooling;    
     @XmlElement(name = "rated_tdp")

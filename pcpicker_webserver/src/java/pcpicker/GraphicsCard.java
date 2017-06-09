@@ -3,7 +3,7 @@ package pcpicker;
 import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GraphicsCard")
-public class GraphicsCard extends Component
+public class GraphicsCard extends Part
 {
 
    
@@ -39,14 +39,14 @@ public class GraphicsCard extends Component
     /**
      * @return the mem_capacity
      */
-    public String getMem_capacity() {
+    public int getMem_capacity() {
         return mem_capacity;
     }
 
     /**
      * @param mem_capacity the mem_capacity to set
      */
-    public void setMem_capacity(String mem_capacity) {
+    public void setMem_capacity(int mem_capacity) {
         this.mem_capacity = mem_capacity;
     }
 
@@ -70,7 +70,7 @@ public class GraphicsCard extends Component
     @XmlElement(name = "mem_ddr")
     private String mem_ddr;
     @XmlElement(name = "mem_capacity")
-    private String mem_capacity ;
+    private int mem_capacity ;
     @XmlElement(name = "mem_clock")
     private int mem_clock;
 }

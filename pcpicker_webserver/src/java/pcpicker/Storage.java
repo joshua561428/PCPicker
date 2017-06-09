@@ -3,7 +3,7 @@ package pcpicker;
 import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Storage")
-public class Storage extends Component
+public class Storage extends Part
 {    
 
     /**

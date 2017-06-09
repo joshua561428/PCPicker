@@ -3,20 +3,20 @@ package pcpicker;
 import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Processor")
-public class Processor extends Component {
+public class Processor extends Part {
 
 
     /**
      * @return the core_clock
      */
-    public String getCore_clock() {
+    public double getCore_clock() {
         return core_clock;
     }
 
     /**
      * @param core_clock the core_clock to set
      */
-    public void setCore_clock(String core_clock) {
+    public void setCore_clock(double core_clock) {
         this.core_clock = core_clock;
     }
 
@@ -83,7 +83,7 @@ public class Processor extends Component {
   
 
     @XmlElement(name = "core_clock")
-    protected String core_clock;    
+    protected double core_clock;    
     @XmlElement(name = "core_num")
     protected int core_num;
     @XmlElement(name = "thread_num")

@@ -3,7 +3,7 @@ package pcpicker;
 import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PowerSupply")
-public class PowerSupply extends Component
+public class PowerSupply extends Part
 {
 
     /**

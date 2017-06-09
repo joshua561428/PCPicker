@@ -3,7 +3,7 @@ package pcpicker;
 import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Monitor")
-public class Monitor extends Component
+public class Monitor extends Part
 {    
 
     /**

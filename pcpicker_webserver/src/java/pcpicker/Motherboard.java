@@ -3,7 +3,7 @@ package pcpicker;
 import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Motherboard")
-public class Motherboard extends Component
+public class Motherboard extends Part
 {    
 
     /**
