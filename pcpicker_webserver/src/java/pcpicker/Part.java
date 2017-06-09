@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlElement;
  */
 import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Component")
+@XmlType(name = "Part")
 public class Part {
     @XmlElement(name = "part_id")
     protected String part_id;    
