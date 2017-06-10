@@ -40,8 +40,9 @@ public class ShoppingCart {
     {
         return parts;
     }
-    public void destroy()
+    public void delete()
     {
+        parts = null;
         instance = null;
     }
 }

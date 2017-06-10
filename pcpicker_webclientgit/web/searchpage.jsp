@@ -247,7 +247,8 @@
         <div class="content">
            
                 <div class ="search_filter_container">
-
+                    <form action="SearchPage" method="get">
+                        <input type="hidden" name="componentType" value="${componentType}">
                         <div class ="search_filter_banner">
                             Filter
                         </div>
@@ -646,7 +647,7 @@
                         <div class ="search_filter_wrapper"> 
                             <br><input type="submit" value="Filter results">
                         </div>
-
+                    </form>
 
 
                 </div>
@@ -672,6 +673,7 @@
                                     <c:choose>
                                         <c:when test="${loopCounter2.index == 0}">
                                             compid: ${details.value}
+                                            <input type ="hidden" name ="partid" value ="${details.value}">
                                         </c:when>
                                         <c:when test="${loopCounter2.index == 1}">
                                             partname: ${details.value}
@@ -684,9 +686,10 @@
                                         </c:otherwise>
                                     </c:choose>
                                    
-                                     
+                                   
                                 </c:forEach>
-                                <br>
+                                 <input type="submit" value="Add to Cart" name="submit${loopCounter.index}">
+                               <br>
                             </c:forEach>
                             
                        </form>      

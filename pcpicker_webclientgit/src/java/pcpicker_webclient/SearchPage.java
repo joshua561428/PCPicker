@@ -41,7 +41,7 @@ public class SearchPage extends HttpServlet {
         String componentType = (String) request.getParameter("test");
         if(componentType==null||componentType.equals(""))
             componentType = (String) request.getParameter("componentType");
-
+        
         
         //todo - on filterget get value max min
         int setMaxPrice = getMaxPrice(componentType);
@@ -106,7 +106,7 @@ public class SearchPage extends HttpServlet {
         request.setAttribute("setMinrefreshrate", setMinrefreshrate);
         request.setAttribute("maxrefreshrate",200);
         
-        
+        request.setAttribute("componentType", componentType);
         request.setAttribute("aspectRatios",getAspectRatios());
         request.setAttribute("maxResolutions",getMaxResolutions());
         request.setAttribute("storageInterface",getStorageInterface());

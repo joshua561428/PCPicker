@@ -80,6 +80,10 @@
 
 <xs:element name="getOrder_componentListResponse" type="tns:getOrder_componentListResponse"/>
 
+<xs:element name="getPart" type="tns:getPart"/>
+
+<xs:element name="getPartResponse" type="tns:getPartResponse"/>
+
 <xs:element name="getPowerSupplyList" type="tns:getPowerSupplyList"/>
 
 <xs:element name="getPowerSupplyListResponse" type="tns:getPowerSupplyListResponse"/>
@@ -290,6 +294,18 @@
 <xs:element name="form_factor" type="xs:string" minOccurs="0"/>
 <xs:element name="comp_price" type="xs:double"/>
 <xs:element name="comp_type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPart">
+<xs:sequence>
+<xs:element name="part_id" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPartResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:Part" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

@@ -115,4 +115,10 @@ public class WebMethods {
         pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
         return port.getPowerSupplyList();
     }
+
+    public static Part getPart(java.lang.String partId) {
+      
+        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
+        return port.getPart(partId);
+    }
 }
