@@ -16,6 +16,7 @@ public class PCPickerInventory {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        WinForms.MainForm().setVisible(true);
     }
     
 }

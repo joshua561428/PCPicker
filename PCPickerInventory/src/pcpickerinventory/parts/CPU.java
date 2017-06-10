@@ -29,16 +29,11 @@ create procedure add_processor
 )
 */
 
-public class Processor extends pcpickerinventory.lib.PCPart {
+public class CPU extends pcpickerinventory.lib.PCPart {
     
     // Default Constructor
-    public Processor()
+    public CPU()
     {}
     
     // Constructor Parameters
-    public Processor(int _id, String _name, String _description, String _manufacturer, String _branch, int _quantity, double _price)
-    {
-        super(_id, _name, _description, _manufacturer, _branch, _quantity, _price);
-        super.Type(Parts.Type.Processor);
-    }
 }

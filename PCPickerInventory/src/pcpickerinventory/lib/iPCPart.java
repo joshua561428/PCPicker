@@ -14,16 +14,10 @@ public interface iPCPart {
     public void ID(int _id);
     public String Name();
     public void Name(String _name);
-    public String Type();
-    public void Type(Parts.Type _type);
-    public String Description();
-    public void Description(String _description);
-    public String Manufacturer();
-    public void Manufacturer(String _manufacturer);
-    public String Branch();
-    public void Branch(String _branch);
-    public int Quantity();
-    public void Quantity(int _quantity);
     public double Price();
     public void Price(double _price);
+    public String Manufacturer();
+    public void Manufacturer(String _manufacturer);
+    public String Type();
+    public void Type(Parts.Type _type);
 }

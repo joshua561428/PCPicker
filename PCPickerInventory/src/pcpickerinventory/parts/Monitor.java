@@ -17,9 +17,4 @@ public class Monitor extends pcpickerinventory.lib.PCPart {
     {}
     
     // Constructor Parameters
-    public Monitor(int _id, String _name, String _description, String _manufacturer, String _branch, int _quantity, double _price)
-    {
-super(_id, _name, _description, _manufacturer, _branch, _quantity, _price);
-        super.Type(Parts.Type.Monitor);
-    }
 }

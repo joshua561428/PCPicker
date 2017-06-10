@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package pcpickerinventory;
-import javax.sql.*;
 import javax.swing.*;
 
 /**

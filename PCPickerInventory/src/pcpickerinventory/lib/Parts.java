@@ -11,16 +11,29 @@ package pcpickerinventory.lib;
  */
 public class Parts {
     //
+    // Global Variables
+    //
+    public static String partID = "";
+    public static String partName = "";
+    public static double partPrice = 0.0;
+    public static String partManufacturer = "";
+    public static String partType = "";
+    
+    //
     // PC Parts
     //
     public enum Type
     {
-        Generic,
-        Keyboard,
-        Monitor,
-        Chassis,
-        Mouse,
-        Processor
+        CPU,
+        MEMORY,
+        POWER_SUPPLY,
+        GRAPHICS_CARD,
+        MOUSE,
+        KEYBOARD,
+        COOLER,
+        MOTHERBOARD,
+        STORAGE,
+        MONITOR
     }
     
     //
@@ -33,7 +46,9 @@ public class Parts {
         Dell,
         Lenovo,
         Logitech,
+        Memorex,
         Microsoft,
+        MSI,
         Toshiba,
         Samsung,
         Sony
