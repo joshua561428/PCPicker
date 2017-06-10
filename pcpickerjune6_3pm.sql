@@ -1,12 +1,17 @@
 use pcpicker;
 
+delimiter //
+create procedure getManufacturers(parttype_  varchar(50))
+BEGIN
+    select distinct part_manufacturer from part where part_type = parttype_;
+END//
 
 
 delimiter //
 create procedure getMemoryTypes()
 BEGIN
     select distinct mem_ddr 
-    from component_memory;
+    from part_memory;
 END//
 
 
@@ -14,14 +19,14 @@ delimiter //
 create procedure getGPUMemoryTypes()
 BEGIN
     select distinct mem_ddr 
-    from component_graphicscard;
+    from part_graphicscard;
 END//
 
 delimiter //
 create procedure getMaxResolutions()
 BEGIN
     select distinct max_resolution 
-    from peripheral_monitor;
+    from part_monitor;
 END//
 
 delimiter //
@@ -41,20 +46,20 @@ BEGIN
 END//
 
 delimiter //
-create procedure addOrderComponent(order_id int,  comp_id varchar(25), quantity int)
+create procedure addOrderpart(order_id int,  part_id varchar(25), quantity int)
 BEGIN
-    insert into order_component values(order_id, comp_id, quantity);
+    insert into order_part values(order_id, part_id, quantity);
 END//
 
 call addOrder(null,null);
 
 use pcpicker;
 
-call add_processor('ccpu123','Intel','Celeron G1840','2.8Ghz',2,2,'LGA 1150',53,2090,'Processor');
-call add_processor('ccpu124','Intel','Pentium G4400','3.3Ghz',2,2,'LGA 1151',54,2700,'Processor');
-call add_processor('ccpu125','Intel','Core i3-7100','3.9Ghz',2,2,'LGA 1151',53,5790,'Processor');
-call add_processor('ccpu126','Intel','Core i5-7600','3.5Ghz-4.1Ghz',4,4,'LGA 1151',65,11200,'Processor');
-call add_processor('ccpu127','Intel','Core i7-6700k','4.0Ghz-4.2Ghz',4,4,'LGA 1151',91,16940,'Processor');
+call add_processor('ccpu123','Intel','Celeron G1840',2.8,2,2,'LGA 1150',53,2090,'Processor');
+call add_processor('ccpu124','Intel','Pentium G4400',3.3,2,2,'LGA 1151',54,2700,'Processor');
+call add_processor('ccpu125','Intel','Core i3-7100',3.9,2,2,'LGA 1151',53,5790,'Processor');
+call add_processor('ccpu126','Intel','Core i5-7600',3.5,4,4,'LGA 1151',65,11200,'Processor');
+call add_processor('ccpu127','Intel','Core i7-6700k',4.0,4,4,'LGA 1151',91,16940,'Processor');
 
 call add_memory('cmem001','Kingston','HyperX Fury',8,'ddr3',1866,3190,'Memory');
 call add_memory('cmem002','Gskill','RipjawsX',16,'ddr3',2400,6500,'Memory');
@@ -67,9 +72,9 @@ call add_powersupply('cpsu002','Aerocool','Strike-X',850,'80+ Silver','Full Modu
 call add_powersupply('cpsu003','Corsair','AX1200i',1200,'80+ Platinum','Full modular',14990,'Power Supply');
 
 
-call add_graphicscard('cgpu001','Nvidia','MSI GT730 OC',1006,'GDDR5','2GB',5000,3050,'Graphics Card');
-call add_graphicscard('cgpu002','Nvidia','Asus GTX1050 Expedition',1455,'GDDR5','2GB',7008,5860,'Graphics Card');
-call add_graphicscard('cgpu003','Nvidia','Gigabyte GTX1080 Ti Founders Edition',1582,'GDDR5','11GB',11010,38500,'Graphics Card');
+call add_graphicscard('cgpu001','Nvidia','MSI GT730 OC',1006,'GDDR5',2,5000,3050,'Graphics Card');
+call add_graphicscard('cgpu002','Nvidia','Asus GTX1050 Expedition',1455,'GDDR5',2,7008,5860,'Graphics Card');
+call add_graphicscard('cgpu003','Nvidia','Gigabyte GTX1080 Ti Founders Edition',1582,'GDDR5',11,11010,38500,'Graphics Card');
 
 call add_cooler('cc001','Cooler Master','MasterAir Maker 8','Intel & Amd: All sockets',false,250,6450,'Heatsink');
 call add_cooler('cc002','NZXT','Kraken X52','Intel & Amd: All sockets',true,520,6800,'Heatsink');

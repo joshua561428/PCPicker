@@ -2,118 +2,118 @@ drop database pcpicker;
 create database pcpicker;
 use pcpicker;
 
-create table component
+create table part
 (
-    comp_id varchar(25),
-    comp_type varchar(50),
-    comp_manufacturer varchar(50),
-    comp_name varchar(50),
-    comp_price double,
-    primary key (comp_id)
+    part_id varchar(25),
+    part_type varchar(50),
+    part_manufacturer varchar(50),
+    part_name varchar(50),
+    part_price double,
+    primary key (part_id)
 );
 
-create table component_processor
+create table part_processor
 (
-    comp_id varchar(25),
-    core_clock varchar(20),
+    part_id varchar(25),
+    core_clock double,
     core_num int,
     thread_num int,
     socket_ varchar(50),
     tdp int,
-    primary key (comp_id),
-    foreign key (comp_id) references component(comp_id)    
+    primary key (part_id),
+    foreign key (part_id) references part(part_id)    
 );
 
-create table component_memory
+create table part_memory
 (
-    comp_id varchar(25),
+    part_id varchar(25),
     mem_capacity int,
     mem_ddr varchar(8),
     mem_clock int,
-    primary key (comp_id),
-    foreign key (comp_id) references component(comp_id)   
+    primary key (part_id),
+    foreign key (part_id) references part(part_id)   
 );
 
-create table component_powersupply
+create table part_powersupply
 (
-    comp_id varchar(25),
+    part_id varchar(25),
     wattage int,
     rating varchar(20),
     form_factor varchar(50),    
-    primary key (comp_id),
-    foreign key (comp_id) references component(comp_id)   
+    primary key (part_id),
+    foreign key (part_id) references part(part_id)   
 );
 
 
-create table component_graphicscard
+create table part_graphicscard
 (
-    comp_id varchar(25),
+    part_id varchar(25),
     core_clock int,
     mem_ddr varchar(8),
-    mem_capacity varchar(8),
+    mem_capacity int,
     mem_clock int,
-    primary key (comp_id),
-    foreign key (comp_id) references component(comp_id)   
+    primary key (part_id),
+    foreign key (part_id) references part(part_id)   
 );
 
 
-create table component_cooler
+create table part_cooler
 (
-    comp_id varchar(25),
+    part_id varchar(25),
     supported_sockets varchar(100),
     liquid_cooling boolean,
     rated_tdp int,
-    primary key (comp_id),
-    foreign key (comp_id) references component(comp_id)   
+    primary key (part_id),
+    foreign key (part_id) references part(part_id)   
 );
 
-create table component_motherboard
+create table part_motherboard
 (
-    comp_id varchar(25),
+    part_id varchar(25),
     socket varchar(50),
     mem_slots int,
     form_factor varchar(50),
-    primary key (comp_id),
-    foreign key (comp_id) references component(comp_id)   
+    primary key (part_id),
+    foreign key (part_id) references part(part_id)   
 );
 
-create table component_storage
+create table part_storage
 (
-    comp_id varchar(25),
+    part_id varchar(25),
     type_ varchar(50),
     capacity int,
     interface varchar(50),
-    primary key (comp_id),
-    foreign key (comp_id) references component(comp_id)   
+    primary key (part_id),
+    foreign key (part_id) references part(part_id)   
 );
 
-create table component_mouse
+create table part_mouse
 (
-    comp_id varchar(25),
+    part_id varchar(25),
     dpi int,
     connection_ varchar(50),
-    primary key (comp_id),
-    foreign key (comp_id) references component(comp_id)   
+    primary key (part_id),
+    foreign key (part_id) references part(part_id)   
 );
 
-create table component_keyboard
+create table part_keyboard
 (
-    comp_id varchar(25),
+    part_id varchar(25),
     backlit boolean,
     type_ varchar(50),
-    primary key (comp_id),
-    foreign key (comp_id) references component(comp_id)   
+    primary key (part_id),
+    foreign key (part_id) references part(part_id)   
 );
 
-create table component_monitor
+create table part_monitor
 (
-    comp_id varchar(25),
+    part_id varchar(25),
     aspect_ratio varchar(50),
     screen_size int,
     max_resolution varchar(50),
     refresh_rate int,
-    primary key (comp_id),
-    foreign key (comp_id) references component(comp_id)   
+    primary key (part_id),
+    foreign key (part_id) references part(part_id)   
 );
 
 create table branch
@@ -127,21 +127,21 @@ create table branch
 
 create table image
 (
-    comp_id varchar(25),
+    part_id varchar(25),
     imageclass varchar(100),
     imagepath varchar(100),
-    primary key (comp_id, imageclass),
-    foreign key (comp_id) references component(comp_id)   
+    primary key (part_id, imageclass),
+    foreign key (part_id) references part(part_id)   
 );
 
 create table inventory
 (
-    comp_id varchar(25),
+    part_id varchar(25),
     date_acquired date,
     branch_id int,
     quantity int,
-    primary key (comp_id, date_acquired, branch_id),
-    foreign key (comp_id) references component(comp_id)   
+    primary key (part_id, date_acquired, branch_id),
+    foreign key (part_id) references part(part_id)   
 );
 
 create table customer
@@ -165,12 +165,12 @@ create table order_
     foreign key (cust_id) references customer(cust_id)
 );
 
-create table order_component
+create table order_part
 (
     order_id int,
-    comp_id varchar(25),
+    part_id varchar(25),
     quantity int,
-    primary key (order_id, comp_id)
+    primary key (order_id, part_id)
 );
 
 create table deliver
