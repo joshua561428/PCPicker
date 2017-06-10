@@ -15,6 +15,47 @@ public class Pcpicker_webservice
     String user="root";
     String pass="1825";
     
+        /**
+     * Web service operation
+     * @param part_id
+     * @return 
+     */
+    @WebMethod(operationName = "getPart")
+    public Part getPart(@WebParam(name = "part_id") String part_id) {
+        //TODO write your implementation code here:
+        Part a = new Part(); ///////////////////////////////
+        int i = 0;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+            System.out.println("server getpart" + part_id);
+            String sql = "{call getPart('"+part_id+"')}"; ////////////////////////////////
+            //String sql = "{call getPart(?)};"; 
+            CallableStatement callableStatement = conn.prepareCall(sql);
+           // callableStatement.setString("1", part_id);
+            
+            ResultSet rs = callableStatement.executeQuery();
+            while (rs.next()) {
+                a.setPart_id(rs.getString(1));/////////////////////////////
+                a.setPart_type(rs.getString(2));//////////////////
+                a.setPart_manufacturer(rs.getString(3));////////////////
+                a.setPart_name(rs.getString(4));///////////////
+                a.setPart_price(rs.getDouble(5));////////////////
+            //*****************************************nadoble comp_id         
+            }
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        System.out.println("server: " + a.getPart_id());
+        
+        return a;
+    }
+    
+    
+    
     @WebMethod(operationName = "getProcessorList")
     public ArrayList<Processor> getProcessorList() {
         ArrayList<Processor> a = new ArrayList(); ///////////////////////////////
@@ -837,7 +878,8 @@ public class Pcpicker_webservice
         }
         return a;
     }
-    
+
+
 
 
 }

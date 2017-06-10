@@ -15,16 +15,7 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Part")
 public class Part {
-    @XmlElement(name = "part_id")
-    protected String part_id;    
-    @XmlElement(name = "part_manufacturer")
-    protected String part_manufacturer;    
-    @XmlElement(name = "part_name")
-    protected String part_name;
-    @XmlElement(name = "part_price")
-    protected double part_price;    
-    @XmlElement(name = "part_type")
-    protected String part_type;
+  
     
     public String getPart_id() {
         return part_id;
@@ -86,4 +77,15 @@ public class Part {
     public void setPart_name(String comp_name) {
         this.part_name = comp_name;
     }
+    
+    @XmlElement(name = "part_id")
+    protected String part_id;    
+    @XmlElement(name = "part_manufacturer")
+    protected String part_manufacturer;    
+    @XmlElement(name = "part_name")
+    protected String part_name;
+    @XmlElement(name = "part_price")
+    protected double part_price;    
+    @XmlElement(name = "part_type")
+    protected String part_type;
 }
