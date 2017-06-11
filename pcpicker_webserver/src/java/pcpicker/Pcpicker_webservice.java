@@ -619,7 +619,7 @@ public class Pcpicker_webservice
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
-            System.out.println("server getpart" + part_id);
+           
             String sql = "{call getPart('"+part_id+"')}"; ////////////////////////////////
             //String sql = "{call getPart(?)};"; 
             CallableStatement callableStatement = conn.prepareCall(sql);
@@ -645,8 +645,8 @@ public class Pcpicker_webservice
     }
     
     @WebMethod(operationName = "addOrder")
-    public String addOrder(@WebParam(name = "cust_id") int cust_id, @WebParam(name = "part_ids") ArrayList<String> part_ids, @WebParam(name = "quantity") ArrayList<Integer> quantity, @WebParam(name = "paymentType") String paymentType) {
-        String order_id = ""; 
+    public int addOrder(@WebParam(name = "cust_id") int cust_id, @WebParam(name = "part_ids") ArrayList<String> part_ids, @WebParam(name = "quantity") ArrayList<Integer> quantity, @WebParam(name = "paymentType") String paymentType) {
+        int order_id = 0; 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
@@ -658,7 +658,7 @@ public class Pcpicker_webservice
             
             ResultSet rs = callableStatement.executeQuery();
             while (rs.next()) {
-                order_id = rs.getString(1);
+                order_id = rs.getInt(1);
                    
             }
             callableStatement.close();
@@ -677,9 +677,9 @@ public class Pcpicker_webservice
             {
                 String partId = part_ids.get(i);
                 int qty = quantity.get(i);
-                
+                System.out.println("add orderpart: "+partId);
                 CallableStatement callableStatement = conn.prepareCall(sql);
-                callableStatement.setInt(1, cust_id);
+                callableStatement.setInt(1, order_id);
                 callableStatement.setString(2,partId);
                 callableStatement.setInt(3,qty);
                 callableStatement.executeUpdate();
