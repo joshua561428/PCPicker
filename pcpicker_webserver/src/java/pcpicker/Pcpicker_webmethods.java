@@ -482,8 +482,8 @@ public class Pcpicker_webmethods {
         return a;
     }
 
-    public ArrayList<Order_component> getOrder_componentList() {
-        ArrayList<Order_component> a = new ArrayList(); ///////////////////////////////
+    public ArrayList<Order_Parts> getOrder_componentList() {
+        ArrayList<Order_Parts> a = new ArrayList(); ///////////////////////////////
         int i = 0;
 
         try {
@@ -496,7 +496,7 @@ public class Pcpicker_webmethods {
 
             while (rs.next()) {
                 int last = a.size();
-                a.add(new Order_component()); ////////////////////////////////////////////
+                a.add(new Order_Parts()); ////////////////////////////////////////////
 
                 a.get(last).setOrder_id(rs.getInt(1));/////////////////////////////
                 a.get(last).setComp_id(rs.getString(2));//////////////////
@@ -566,4 +566,36 @@ public class Pcpicker_webmethods {
         }
         return a;
     }
+
+    public ArrayList<Order> getOrderList() {
+        ArrayList<Order> a = new ArrayList(); ///////////////////////////////
+        int i = 0;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql::localhost:3306/pcpicker", "root", "");
+
+            String sql = "{call getActiveOrders()}"; ////////////////////////////////
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            ResultSet rs = callableStatement.executeQuery();
+
+            while (rs.next()) {
+                int last = a.size();
+                a.add(new Order()); ////////////////////////////////////////////
+
+                a.get(last).setOrder_id(rs.getInt(1));/////////////////////////////
+                a.get(last).setCust_id(rs.getInt(2));//////////////////
+                a.get(last).setImagepath(rs.getString(3));////////////////
+            }
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return a;
+    }
+
+
+
+
 }

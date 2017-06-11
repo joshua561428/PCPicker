@@ -19,7 +19,7 @@ import pcpicker.Customer;
 import pcpicker.Delivery;
 import pcpicker.Inventory;
 import pcpicker.Order;
-import pcpicker.Order_component;
+import pcpicker.Order_Parts;
 
 /**
  *
@@ -227,8 +227,8 @@ public class Pcpicker_webserviceForDesktop {
     }
 
     @WebMethod(operationName = "getOrder_componentList")
-    public ArrayList<Order_component> getOrder_componentList() {
-        ArrayList<Order_component> a = new ArrayList(); ///////////////////////////////
+    public ArrayList<Order_Parts> getOrder_componentList() {
+        ArrayList<Order_Parts> a = new ArrayList(); ///////////////////////////////
         int i = 0;
 
         try {
@@ -241,7 +241,7 @@ public class Pcpicker_webserviceForDesktop {
 
             while (rs.next()) {
                 int last = a.size();
-                a.add(new Order_component()); ////////////////////////////////////////////
+                a.add(new Order_Parts()); ////////////////////////////////////////////
 
                 a.get(last).setOrder_id(rs.getInt(1));/////////////////////////////
                 a.get(last).setComp_id(rs.getString(2));//////////////////

@@ -68,5 +68,17 @@ public class Order extends Part
     @XmlElement(name = "date_created")
     private String date_created;
     @XmlElement(name = "payment_type")
-    private String payment_type;    
+    private String payment_type;   
+    @XmlElement(name = "delivered")
+    protected Boolean delivered;
+
+    /**
+     * @return the delivered
+     */
+    public Boolean getDelivered() {
+        return delivered;
+    }  
+    public void setDelivered(Boolean delivered) {
+        this.delivered = delivered;
+    }
 }
