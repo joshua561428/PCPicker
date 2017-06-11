@@ -5,6 +5,7 @@
  */
 package pcpicker_webclient;
 
+import pcpicker_webclient.nonservlet.WebMethods;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,7 +42,7 @@ public class SearchPage extends HttpServlet {
         String componentType = (String) request.getParameter("test");
         if(componentType==null||componentType.equals(""))
             componentType = (String) request.getParameter("componentType");
-        
+        ShoppingCart.getCartSummary(request);
         
         //todo - on filterget get value max min
         int setMaxPrice = getMaxPrice(componentType);

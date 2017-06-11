@@ -30,6 +30,7 @@ public class Logout extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getSession().setAttribute("userid",null);
+        request.getSession().setAttribute("username",null);
         request.getSession().invalidate();
         response.sendRedirect("homepage1.jsp");
     }

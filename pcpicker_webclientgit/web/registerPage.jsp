@@ -22,10 +22,14 @@
             </div>
             <div class="login_button">
                 <a href="<%=request.getContextPath()%>/Login">                   
-                    ${empty sessionScope.userid?'Log in or Register':sessionScope.userid}                    
+                    ${empty sessionScope.username?'Log in or Register':sessionScope.username}                    
                 </a>
             </div>
-            
+            <div class ="cartsummary">
+                <a href="<%=request.getContextPath()%>/ShoppingCart">                   
+                    ${cartsummary}                    
+                </a>
+            </div>
             <div class ="menubar_banner">
                 <div class="dropdown fade">
                     <button class="dropbtn fade">Products ▽ </button>
@@ -60,7 +64,7 @@
                    
                     <div>
                         <div class ="label">Email</div>
-                        <div class = "field"><input type ="email" name="username" placeholder="email address"required ></div>
+                        <div class = "field"><input type ="email" name="username" placeholder="email address"required value="${username}"></div>
                     </div>
                     <div>
                         <div class ="label">Password</div>
@@ -69,7 +73,7 @@
                     <div>
                         <div class ="label">Retype Password</div>
                         <div class = "field">
-                            <input type ="password" name="passwordre" placeholder="Retype password"required onkeyup="checkPass(); return false;" >
+                            <input type ="password" name="passwordre" placeholder="Retype password"required  >
                             <span id="confirmMessage" class="confirmMessage"></span>
 
                         </div>
@@ -77,7 +81,11 @@
                     </div>
                     <div>
                         <div class ="label">Address</div>
-                        <div class = "field"><input type ="text" name="address" placeholder="Address"required ></div>
+                        <div class = "field"><input type ="text" name="address" placeholder="Address"required value="${address}"></div>
+                    </div>
+                    <div>
+                        <div class ="label">Zip code</div>
+                        <div class = "field"><input type ="number" name="zipCode" placeholder="Zip code"required value="${zipCode}"></div>
                     </div>
                     <div>
                         <div class ="label">City</div>
@@ -91,6 +99,9 @@
                     </div>
                    
                     <input type="submit" value="Register">
+                    <div> 
+                        ${message}
+                    </div>
                 </form>
             </div>
         </div>

@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import pcpicker_webclient.nonservlet.WebMethods;
 
 /**
  *
@@ -49,11 +50,13 @@ public class CreateAccount extends HttpServlet {
         HashMap cities = new HashMap();
         //todo - get from database
         cities.put("0", "Antipolo");
-        cities.put("1", "Makati");
-        
+        cities.put("1", "Makati");    
         request.setAttribute("map", cities);
+        ////
+        ShoppingCart.getCartSummary(request);
         request.getRequestDispatcher("registerPage.jsp").forward(request,response);
     }
+    
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -69,10 +72,55 @@ public class CreateAccount extends HttpServlet {
         String username = (String) request.getParameter("username");
         String password = (String) request.getParameter("password");
         String address =(String) request.getParameter("address");
+        String passwordre = (String) request.getParameter("passwordre");
+        String city = (String) request.getParameter("city");
+        String zipCode = (String) request.getParameter("zipCode");
+        int zip = 0;
+        Boolean error= false;
+        String message = "";
+        try
+        {
+            zip = Integer.parseInt(zipCode);
+        }catch(Exception e)
+        {
+            System.out.println("numformat exception parse int" + e.getMessage());
+            error = true;
+            message += "Invalid Zip Code";
+        }
+        if(!password.equals(passwordre))
+        {
+            error = true;
+            message += "Password does not match";
+        }
         
+        if(!error)
+        {
+            if(WebMethods.addCustomer(username, password, address, city, Integer.parseInt(zipCode)))
+            {
+                message+="Register Success!";
+                request.setAttribute("message", message);
+                doGet(request,response);
+            }
+            else
+            {
+                error = true;
+                message+="Duplicate username";
+            }
+        }
+        
+        if(error)
+        {
+            request.setAttribute("message", message);
+            request.setAttribute("username", username);
+            request.setAttribute("address", address);
+            request.setAttribute("city", city);
+            request.setAttribute("zipCode", city);
+            doGet(request,response);
+        }
+            
         //todo createaccount
     
-        response.sendRedirect("homepage1.jsp");
+      
     }
 
     /**

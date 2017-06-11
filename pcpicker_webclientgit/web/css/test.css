@@ -182,7 +182,21 @@ html, body{
     color: white;
     font-weight: bold;
 }
-
+.cartsummary{
+    position:absolute;
+    top:1em;
+    right:20.5em;
+}
+.cartsummary a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+.cartsummary a:hover{
+    text-decoration: underline;    
+    color: white;
+    font-weight: bold;
+}
 
 
 .content{
@@ -603,7 +617,10 @@ html, body{
     cursor: pointer;
     margin:1em;
 }
-
+.message{
+    color:white;
+    text-align: center;
+}
 .loginContainer  input[type=submit]:hover {
     background-color: #0D4D4D;
     transition:all 0.2s ease;
@@ -630,6 +647,17 @@ html, body{
     width: 8em;
 }
 .create_account_container input[type=text]{
+    vertical-align: top;
+    width: 16em;
+    padding: 7px 15px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background-color: white;  
+  
+}
+.create_account_container input[type=number]{
     vertical-align: top;
     width: 16em;
     padding: 7px 15px;

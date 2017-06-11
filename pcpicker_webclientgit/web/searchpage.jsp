@@ -213,10 +213,16 @@
             </div>
             <div class="login_button">
                 <a href="<%=request.getContextPath()%>/Login">                   
-                    ${empty sessionScope.userid?'Log in or Register':sessionScope.userid}                    
+                    ${empty sessionScope.username?'Log in or Register':sessionScope.username}                    
                 </a>
             </div>
             
+            <div class ="cartsummary">
+                <a href="<%=request.getContextPath()%>/ShoppingCart">                   
+                    ${cartsummary}                    
+                </a>
+            </div>
+                
             <div class ="menubar_banner">
                 <div class="dropdown fade">
                     <button class="dropbtn fade">Products ▽ </button>
@@ -658,14 +664,13 @@
                     </div>
                     <div class="search_results_container_inner">                      
                       
-                        <form method="post" action = "Cart">
-                                <a href ="#" style="color:black;"></a>
-                                
-                                <input type="submit" name = "submit" value ="qwe" >                                
-                               <br>
-                        </form>
+                     
                                       
-                        <form method="post" action = "Cart">
+                        <form method="post" action = "ShoppingCart">
+                            <%-- todo get search filter parameters------------------------------------------------------------------------------------------------%>                            
+                            <input type="hidden" name ="componentType" value ="${componentType}">
+                            
+                            
                             
                             <input type="hidden" name ="numListItems" value ="${fn:length(componentslist)}">
                             <c:forEach items="${componentslist}" var="components_" varStatus ="loopCounter">
@@ -688,8 +693,8 @@
                                    
                                    
                                 </c:forEach>
-                                 <input type="submit" value="Add to Cart" name="submit${loopCounter.index}">
-                               <br>
+                                <input type="submit" value="Add to Cart" name="submit${loopCounter.index}">
+                                <br>
                             </c:forEach>
                             
                        </form>      

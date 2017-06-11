@@ -11,13 +11,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import pcpicker_webclient.nonservlet.WebMethods;
 
 /**
  *
  * @author admin
  */
-public class Login extends HttpServlet {
+public class OrderPage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,8 +29,19 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet OrderPage</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet OrderPage at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -46,18 +56,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (( request.getSession().getAttribute("userid") == null) || ( request.getSession().getAttribute("userid") == "")) 
-        {
-            //not logged in - go to login page
-            request.getRequestDispatcher("loginpage.jsp").forward(request, response);
-        }
-        else
-        {
-            //todo log in - go to account page 
-           request.setAttribute("user", request.getSession().getAttribute("username"));
-           request.getRequestDispatcher("accountpage.jsp").forward(request, response);
-        }
-        
+        processRequest(request, response);
     }
 
     /**
@@ -71,29 +70,8 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String username = (String) request.getParameter("username");
-        String password = (String) request.getParameter("password");
-        
-        //todo login
-        String custid = WebMethods.login(username, password);
-        if(custid == null || custid.equals(""))
-        {
-            request.setAttribute("message", "Incorrect username or password");
-            doGet(request,response);
-        }
-        else
-        {
-            request.getSession().setAttribute("username",username);
-            request.getSession().setAttribute("userid",custid);
-            response.sendRedirect("homepage1.jsp");         
-        }
-        
-       
-      
+        processRequest(request, response);
     }
-    
-   
 
     /**
      * Returns a short description of the servlet.

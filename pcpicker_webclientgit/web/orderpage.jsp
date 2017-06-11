@@ -1,13 +1,15 @@
 <%-- 
-    Document   : accountpage
-    Created on : 06 5, 17, 6:29:26 PM
+    Document   : orderpage
+    Created on : 06 11, 17, 12:51:19 PM
     Author     : admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
-    <head>
+   <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="css/test.css">
@@ -55,16 +57,36 @@
         </div>
         
         <div class="content">
-            <div>
-                Hello ${user}!<br>
-                <input type="submit" value="Logout" name="button" onclick=location.href='${pageContext.request.contextPath}/Logout;' style="border:1px solid #ccc; padding:5px">
-            </div>
-            <div>
-                <form method ="get" action="OrderPage">
-                    <input type="submit" value="Active orders" name="active">
-                    <input type="submit" value="Order history" name="history">
-                </form>
-            </div>
+            
+             
+            <input type="hidden" name ="numOrders" value ="${fn:length(orderslist)}">
+            <c:forEach items="${orderslist}" var="order" varStatus ="loopCounter">                
+                <c:forEach items="${order.value}" var="details" varStatus="loopCounter2">
+                    <c:choose>
+                        <c:when test="${loopCounter2.index == 0}">
+                            order id:${details.value}
+                            <input type ="hidden" name ="partid" value ="${details.value}">
+                        </c:when>
+                        <c:when test="${loopCounter2.index == 1}">
+                            partname: ${details.value}
+                        </c:when>
+                        <c:when test="${loopCounter2.index == 2}">
+                            price: ${details.value}
+                        </c:when>
+                        <c:otherwise>
+                            ${details.value}
+                        </c:otherwise>
+                    </c:choose>
+
+
+                </c:forEach>
+                <input type="submit" value="Add to Cart" name="submit${loopCounter.index}">
+                <br>
+            </c:forEach>
+            
+            
+            
+            
         </div>
     </body>
 </html>

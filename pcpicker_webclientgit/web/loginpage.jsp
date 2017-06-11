@@ -19,10 +19,14 @@
             </div>
             <div class="login_button">
                 <a href="<%=request.getContextPath()%>/Login">                   
-                    ${empty sessionScope.userid?'Log in or Register':sessionScope.userid}                    
+                    ${empty sessionScope.username?'Log in or Register':sessionScope.username}                    
                 </a>
             </div>
-            
+            <div class ="cartsummary">
+                <a href="<%=request.getContextPath()%>/ShoppingCart">                   
+                    ${cartsummary}                    
+                </a>
+            </div>
             <div class ="menubar_banner">
                 <div class="dropdown fade">
                     <button class="dropbtn fade">Products ▽ </button>
@@ -69,6 +73,9 @@
                 </form>
                 
                 <input type="submit" value="Create Account" name="button" onclick=location.href='${pageContext.request.contextPath}/CreateAccount;'>
+                <div class = "message">
+                    ${message}
+                </div>
                 
             </div>
             

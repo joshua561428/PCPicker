@@ -20,7 +20,7 @@
             </div>
             <div class="login_button">
                 <a href="<%=request.getContextPath()%>/Login">                   
-                    ${empty sessionScope.userid?'Log in or Register':sessionScope.userid}                    
+                    ${empty sessionScope.username?'Log in or Register':sessionScope.username}                    
                 </a>
             </div>
             
