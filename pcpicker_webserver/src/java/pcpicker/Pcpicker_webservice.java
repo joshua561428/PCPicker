@@ -701,7 +701,7 @@ public class Pcpicker_webservice
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql::localhost:3306/pcpicker", "root", "");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
 
             String sql = "{call getActiveOrders(?)}"; ////////////////////////////////
             
@@ -734,7 +734,7 @@ public class Pcpicker_webservice
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql::localhost:3306/pcpicker", "root", "");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
 
             String sql = "{call getOrderItems(?)}"; ////////////////////////////////
             CallableStatement callableStatement = conn.prepareCall(sql);
@@ -744,7 +744,7 @@ public class Pcpicker_webservice
             while (rs.next()) {
                 int last = a.size();
                 a.add(new Order_Parts()); ////////////////////////////////////////////
-                a.get(last).setOrder_id(rs.getInt(1));/////////////////////////////
+                a.get(last).setOrder_id(rs.getInt(1));/////////////////////////////t
                 a.get(last).setPart_id(rs.getString(2));//////////////////
                 a.get(last).setQuantity(rs.getInt(3));////////////////                
             }
