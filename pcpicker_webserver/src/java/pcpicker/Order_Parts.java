@@ -23,14 +23,14 @@ public class Order_Parts
     /**
      * @return the part_id
      */
-    public String getComp_id() {
+    public String getPart_id() {
         return part_id;
     }
 
     /**
      * @param part_id the part_id to set
      */
-    public void setComp_id(String part_id) {
+    public void setPart_id(String part_id) {
         this.part_id = part_id;
     }
 

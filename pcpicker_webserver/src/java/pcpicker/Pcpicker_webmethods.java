@@ -5,6 +5,8 @@
  */
 package pcpicker;
 
+import Pcpicker_webserviceForDesktop.Inventory;
+import Pcpicker_webserviceForDesktop.Branch;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -499,7 +501,7 @@ public class Pcpicker_webmethods {
                 a.add(new Order_Parts()); ////////////////////////////////////////////
 
                 a.get(last).setOrder_id(rs.getInt(1));/////////////////////////////
-                a.get(last).setComp_id(rs.getString(2));//////////////////
+                a.get(last).setPart_id(rs.getString(2));//////////////////
                 a.get(last).setQuantity(rs.getInt(3));////////////////
             }
             callableStatement.close();
@@ -567,33 +569,6 @@ public class Pcpicker_webmethods {
         return a;
     }
 
-    public ArrayList<Order> getOrderList() {
-        ArrayList<Order> a = new ArrayList(); ///////////////////////////////
-        int i = 0;
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql::localhost:3306/pcpicker", "root", "");
-
-            String sql = "{call getActiveOrders()}"; ////////////////////////////////
-            CallableStatement callableStatement = conn.prepareCall(sql);
-            ResultSet rs = callableStatement.executeQuery();
-
-            while (rs.next()) {
-                int last = a.size();
-                a.add(new Order()); ////////////////////////////////////////////
-
-                a.get(last).setOrder_id(rs.getInt(1));/////////////////////////////
-                a.get(last).setCust_id(rs.getInt(2));//////////////////
-                a.get(last).setImagepath(rs.getString(3));////////////////
-            }
-            callableStatement.close();
-            conn.close();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-        return a;
-    }
 
 
 

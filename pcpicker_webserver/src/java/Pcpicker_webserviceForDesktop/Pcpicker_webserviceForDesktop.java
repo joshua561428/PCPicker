@@ -14,10 +14,8 @@ import javax.jws.Oneway;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import pcpicker.Branch;
 import pcpicker.Customer;
 import pcpicker.Delivery;
-import pcpicker.Inventory;
 import pcpicker.Order;
 import pcpicker.Order_Parts;
 
@@ -244,7 +242,7 @@ public class Pcpicker_webserviceForDesktop {
                 a.add(new Order_Parts()); ////////////////////////////////////////////
 
                 a.get(last).setOrder_id(rs.getInt(1));/////////////////////////////
-                a.get(last).setComp_id(rs.getString(2));//////////////////
+                a.get(last).setPart_id(rs.getString(2));//////////////////
                 a.get(last).setQuantity(rs.getInt(3));////////////////
             }
             callableStatement.close();
