@@ -99,7 +99,8 @@ public class CreateAccount extends HttpServlet {
             {
                 message+="Register Success!";
                 request.setAttribute("message", message);
-                doGet(request,response);
+                SessionMessage.setMessage(request, message);
+                response.sendRedirect(request.getContextPath()+"/Login");
             }
             else
             {

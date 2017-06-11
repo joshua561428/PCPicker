@@ -58,30 +58,30 @@
         
         <div class="content">
             
-             
+            Order id : ${orderid}<br>
+            Total Price: ${totalprice}<br>
             <input type="hidden" name ="numOrders" value ="${fn:length(orderslist)}">
-            <c:forEach items="${orderslist}" var="order" varStatus ="loopCounter">                
+            <c:forEach items="${orderitems}" var="order" varStatus ="loopCounter">                
                 <c:forEach items="${order.value}" var="details" varStatus="loopCounter2">
                     <c:choose>
-                        <c:when test="${loopCounter2.index == 0}">
-                            order id:${details.value}
+                        <c:when test="${loopCounter2.index == 0 }">
+                            partid :${details.value}
                             <input type ="hidden" name ="partid" value ="${details.value}">
                         </c:when>
                         <c:when test="${loopCounter2.index == 1}">
-                            partname: ${details.value}
+                            quantity:    ${details.value}
                         </c:when>
                         <c:when test="${loopCounter2.index == 2}">
-                            price: ${details.value}
+                            partname ${details.value}
                         </c:when>
                         <c:otherwise>
-                            ${details.value}
+                            part price: ${details.value}
                         </c:otherwise>
                     </c:choose>
-
+                            <br>
 
                 </c:forEach>
-                <input type="submit" value="Add to Cart" name="submit${loopCounter.index}">
-                <br>
+                            <br>
             </c:forEach>
             
             

@@ -23,6 +23,11 @@
                     ${empty sessionScope.username?'Log in or Register':sessionScope.username}                    
                 </a>
             </div>
+            <div class ="cartsummary">
+                <a href="<%=request.getContextPath()%>/ShoppingCart">                   
+                    ${cartsummary}                    
+                </a>
+            </div>
             
             <div class ="menubar_banner">
                 <div class="dropdown fade">

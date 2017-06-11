@@ -7,10 +7,16 @@ package pcpicker_webclient;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import pcpicker.Order;
+import pcpicker.OrderParts;
+import pcpicker.Part;
+import pcpicker_webclient.nonservlet.WebMethods;
 
 /**
  *
@@ -41,7 +47,11 @@ public class AccountPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
+        ShoppingCart.getCartSummary(request);
+        int cust_id = Integer.parseInt((String)request.getSession().getAttribute("userid"));
+        List<Order> orders = WebMethods.getOrderList(cust_id);
+        request.setAttribute("orders", createOrderHashMap(orders));
+        request.getRequestDispatcher("accountpage.jsp").forward(request, response);
     }
 
     /**
@@ -57,6 +67,8 @@ public class AccountPage extends HttpServlet {
             throws ServletException, IOException {
       
     }
+    
+    
 
     /**
      * Returns a short description of the servlet.
@@ -68,4 +80,36 @@ public class AccountPage extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    
+    
+     private HashMap createOrderHashMap( List<Order> op)
+    {
+        HashMap map = new HashMap();
+        for(int i = 0; i < op.size(); i++)
+        {
+            Order o = op.get(i);
+            HashMap items = new HashMap();
+            
+            items.put("1",o.getOrderId());
+            items.put("2", o.getDateCreated());
+            items.put("3", o.getPaymentType());
+                    
+            List<OrderParts> ops = WebMethods.getOrderItems(o.getOrderId());
+            
+            int numItems = ops.size();
+            double totalPrice = 0;
+            for(OrderParts orderParts : ops)
+                totalPrice += orderParts.getQuantity() * orderParts.getPrice();
+            
+            
+            items.put("4", numItems);
+            items.put("5",totalPrice);
+            
+            
+           
+            
+            map.put(Integer.toString(i), items);
+        }
+        return map;
+    }
 }

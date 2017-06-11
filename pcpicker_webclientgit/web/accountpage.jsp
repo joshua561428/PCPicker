@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -56,13 +58,41 @@
         
         <div class="content">
             <div>
-                Hello ${user}!<br>
+                Hello ${sessionScope.username}!<br>
                 <input type="submit" value="Logout" name="button" onclick=location.href='${pageContext.request.contextPath}/Logout;' style="border:1px solid #ccc; padding:5px">
             </div>
             <div>
-                <form method ="get" action="OrderPage">
-                    <input type="submit" value="Active orders" name="active">
-                    <input type="submit" value="Order history" name="history">
+                <form action ="OrderPage" method ="get">
+                    <input type="hidden" name ="orderLength" value="${fn:length(orders)}">
+                    <c:forEach items="${orders}" var="order" varStatus ="loopCounter">                
+                        <c:forEach items="${order.value}" var="details" varStatus="loopCounter2">
+                            <c:choose>
+                                <c:when test="${loopCounter2.index == 0 }">
+                                    orderid :${details.value}
+                                    <input type ="hidden" name ="orderid" value ="${details.value}">
+                                </c:when>
+                                <c:when test="${loopCounter2.index == 1}">
+                                    date created:    ${details.value}
+                                </c:when>
+                                <c:when test="${loopCounter2.index == 2}">
+                                    paymenttype: ${details.value}
+                                </c:when>
+                                <c:when test="${loopCounter2.index == 3}">
+                                    num items: ${details.value}
+                                </c:when>
+                                <c:otherwise>
+                                    total price: ${details.value}
+                                </c:otherwise>
+                            </c:choose>
+                                   <br>
+
+                           
+
+                    </c:forEach>
+                    
+                    <input type="submit" value="View Order" name="submit${loopCounter.index}">
+                    <br><br>
+                    </c:forEach>
                 </form>
             </div>
         </div>

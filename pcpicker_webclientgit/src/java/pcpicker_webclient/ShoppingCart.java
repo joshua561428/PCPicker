@@ -36,7 +36,7 @@ public class ShoppingCart extends HttpServlet {
         Cart cart = getCart(request);
         getCartSummary(request);
         
-        getMessage(request);
+        SessionMessage.getMessage(request);
         
         
         
@@ -47,15 +47,7 @@ public class ShoppingCart extends HttpServlet {
     }
     
     
-    private void getMessage(HttpServletRequest request)
-    {
-        String message = (String)request.getSession().getAttribute("message");
-        if(message!=null)
-        {
-            request.getSession().setAttribute("message",null);
-            request.setAttribute("message",message);
-        }
-    }
+ 
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -89,8 +81,8 @@ public class ShoppingCart extends HttpServlet {
         int numListItems = Integer.parseInt((String)request.getParameter("numListItems"));
         String[] partIds = request.getParameterValues("partid");
         String partid = "";
-        System.out.println("********************************");
-        System.out.println("numlistitems " + numListItems);
+        //System.out.println("********************************");
+        //System.out.println("numlistitems " + numListItems);
         for(int i = 0; i < numListItems; i++)
         {
             String is = Integer.toString(i);            
@@ -102,7 +94,7 @@ public class ShoppingCart extends HttpServlet {
                 break;
             }
         }
-        System.out.println("----------------partid= "+ partid);    
+        //System.out.println("----------------partid= "+ partid);    
         Part a = WebMethods.getPart(partid);
         System.out.println("submitPart"+a.getPartId());
         

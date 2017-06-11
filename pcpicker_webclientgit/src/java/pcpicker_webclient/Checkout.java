@@ -34,7 +34,7 @@ public class Checkout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        ShoppingCart.getCartSummary(request);
     }
 
     /**
@@ -48,21 +48,28 @@ public class Checkout extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Cart cart = (Cart)request.getSession().getAttribute("cart");
         if (( request.getSession().getAttribute("userid") == null) || ( request.getSession().getAttribute("userid") == "")) 
         {
-            //not logged in       
-            request.getSession().setAttribute("message","Please login before Checking out");
+            //not logged in   
+            SessionMessage.setMessage(request, "Please login before Checking out");
             response.sendRedirect(request.getContextPath()+"/ShoppingCart");           
+        }
+        else if(cart == null || cart.getList().size() == 0)
+        {
+            SessionMessage.setMessage(request, "No items in cart");
+            response.sendRedirect(request.getContextPath()+"/ShoppingCart");     
         }
         else
         {
             int userid = Integer.parseInt((String)request.getSession().getAttribute("userid"));
-            Cart cart = (Cart)request.getSession().getAttribute("cart");
+          
             
-            WebMethods.addOrder(userid, cart.getPartList(), cart.getQuantityList(), "");
+            int orderId = WebMethods.addOrder(userid, cart.getPartList(), cart.getQuantityList(), "");
             request.getSession().setAttribute("cart", null);
            
-            response.sendRedirect("/OrderPage");
+            SessionMessage.setInt(request,orderId);
+            response.sendRedirect(request.getContextPath()+"/OrderPage");
         }
     }
 

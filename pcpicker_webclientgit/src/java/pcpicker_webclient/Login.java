@@ -46,6 +46,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ShoppingCart.getCartSummary(request);
         if (( request.getSession().getAttribute("userid") == null) || ( request.getSession().getAttribute("userid") == "")) 
         {
             //not logged in - go to login page
@@ -54,8 +55,8 @@ public class Login extends HttpServlet {
         else
         {
             //todo log in - go to account page 
-           request.setAttribute("user", request.getSession().getAttribute("username"));
-           request.getRequestDispatcher("accountpage.jsp").forward(request, response);
+           SessionMessage.getMessage(request);
+           response.sendRedirect(request.getContextPath()+"/AccountPage");
         }
         
     }
