@@ -745,8 +745,11 @@ public class Pcpicker_webservice
                 int last = a.size();
                 a.add(new Order_Parts()); ////////////////////////////////////////////
                 a.get(last).setOrder_id(rs.getInt(1));/////////////////////////////t
-                a.get(last).setPart_id(rs.getString(2));//////////////////
-                a.get(last).setQuantity(rs.getInt(3));////////////////                
+                String partId = rs.getString(2);
+                Part part = getPart(partId);
+                a.get(last).setPart_id(partId);//////////////////
+                a.get(last).setQuantity(rs.getInt(3));////////////////     
+                a.get(last).setPrice(part.getPart_price());
             }
             callableStatement.close();
             conn.close();
@@ -755,4 +758,8 @@ public class Pcpicker_webservice
         }
         return a;
     }
+    
+    
+    
+    
 }

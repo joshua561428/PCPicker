@@ -53,4 +53,20 @@ public class Order_Parts
     private String part_id;    
     @XmlElement(name = "quantity")
     private int quantity;
+    @XmlElement(name = "price")
+    protected double price;
+
+    /**
+     * @return the price
+     */
+    public double getPrice() {
+        return price;
+    }
+
+    /**
+     * @param price the price to set
+     */
+    public void setPrice(double price) {
+        this.price = price;
+    }
 }
