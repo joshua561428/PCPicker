@@ -18,6 +18,7 @@ import pcpicker.Customer;
 import pcpicker.Delivery;
 import pcpicker.Order;
 import pcpicker.Order_Parts;
+import pcpicker.Part;
 
 /**
  *
@@ -28,6 +29,107 @@ public class Pcpicker_webserviceForDesktop {
 
     String user="root"; // meron rin sa Pcpicker_webservice
     String pass="1825";
+    
+    
+    @WebMethod(operationName = "getActivePendingOrders")
+    public ArrayList<Order> getActivePendingOrders() {
+        ArrayList<Order> a = new ArrayList(); ///////////////////////////////
+        int i = 0;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+
+            String sql = "{call getActivePendingOrders(?)}"; ////////////////////////////////
+            
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            ResultSet rs = callableStatement.executeQuery();
+
+            while (rs.next()) {
+                int last = a.size();
+                a.add(new Order()); ////////////////////////////////////////////
+
+                a.get(last).setOrder_id(rs.getInt(1));/////////////////////////////
+                a.get(last).setCust_id(rs.getInt(2));//////////////////
+                a.get(last).setDate_created(rs.getString(3));////////////////
+                a.get(last).setPayment_type(rs.getString(4));
+                a.get(last).setActive(rs.getBoolean(5));
+                a.get(last).setItems(getOrderItems(a.get(last).getOrder_id()));
+            }
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return a;
+    }
+    
+    private ArrayList<Order_Parts> getOrderItems(int order_id) {
+        ArrayList<Order_Parts> a = new ArrayList(); ///////////////////////////////
+        int i = 0;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+
+            String sql = "{call getOrderItems(?)}"; ////////////////////////////////
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            callableStatement.setInt(1, order_id);
+            ResultSet rs = callableStatement.executeQuery();
+
+            while (rs.next()) {
+                int last = a.size();
+                a.add(new Order_Parts()); ////////////////////////////////////////////
+                a.get(last).setOrder_id(rs.getInt(1));/////////////////////////////t
+                String partId = rs.getString(2);
+                Part part = getPart(partId);
+                a.get(last).setPart_id(partId);//////////////////
+                a.get(last).setQuantity(rs.getInt(3));////////////////     
+                a.get(last).setPrice(part.getPart_price());
+            }
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return a;
+    }
+    @WebMethod(operationName = "getPart")
+    public Part getPart(@WebParam(name = "part_id") String part_id) {
+        //TODO write your implementation code here:
+        Part a = new Part(); ///////////////////////////////
+        int i = 0;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+           
+            String sql = "{call getPart('"+part_id+"')}"; ////////////////////////////////
+            //String sql = "{call getPart(?)};"; 
+            CallableStatement callableStatement = conn.prepareCall(sql);
+           // callableStatement.setString("1", part_id);
+            
+            ResultSet rs = callableStatement.executeQuery();
+            while (rs.next()) {
+                a.setPart_id(rs.getString(1));/////////////////////////////
+                a.setPart_type(rs.getString(2));//////////////////
+                a.setPart_manufacturer(rs.getString(3));////////////////
+                a.setPart_name(rs.getString(4));///////////////
+                a.setPart_price(rs.getDouble(5));////////////////
+            //*****************************************nadoble comp_id         
+            }
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        
+        return a;
+    }
+    
+    
+    
     
     /**
      * Web service operation

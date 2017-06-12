@@ -1,10 +1,52 @@
 package pcpicker;
 
+import java.util.List;
 import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Order")
-public class Order extends Part
+public class Order
 {
+    @XmlElement(name = "order_id")
+    private int order_id;    
+    @XmlElement(name = "cust_id")
+    private int cust_id;    
+    @XmlElement(name = "date_created")
+    private String date_created;
+    @XmlElement(name = "payment_type")
+    private String payment_type;   
+    @XmlElement(name = "active")
+    protected Boolean active;
+    @XmlElement(name ="items")
+    protected List<Order_Parts> items;  
+    
+    
+    
+    
+    
+    
+    /**
+     * @return the 
+     */
+    public Boolean getActive() {
+        return active;
+    }  
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    /**
+     * @return the items
+     */
+    public List<Order_Parts> getItems() {
+        return items;
+    }
+
+    /**
+     * @param items the items to set
+     */
+    public void setItems(List<Order_Parts> items) {
+        this.items = items;
+    }
 
     /**
      * @return the order_id
@@ -61,24 +103,6 @@ public class Order extends Part
     public void setPayment_type(String payment_type) {
         this.payment_type = payment_type;
     }
-    @XmlElement(name = "order_id")
-    private int order_id;    
-    @XmlElement(name = "cust_id")
-    private int cust_id;    
-    @XmlElement(name = "date_created")
-    private String date_created;
-    @XmlElement(name = "payment_type")
-    private String payment_type;   
-    @XmlElement(name = "active")
-    protected Boolean active;
-
-    /**
-     * @return the delivered
-     */
-    public Boolean getActive() {
-        return active;
-    }  
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
+    
+ 
 }

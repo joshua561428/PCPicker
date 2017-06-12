@@ -5,7 +5,18 @@ import javax.xml.bind.annotation.*;
 @XmlType(name = "Order_Parts")
 public class Order_Parts 
 {
+    @XmlElement(name = "order_id")
+    private int order_id;    
+    @XmlElement(name = "part_id")
+    private String part_id;    
+    @XmlElement(name = "quantity")
+    private int quantity;
+    @XmlElement(name = "price")
+    protected double price;
 
+    
+    
+    
     /**
      * @return the order_id
      */
@@ -47,15 +58,7 @@ public class Order_Parts
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    @XmlElement(name = "order_id")
-    private int order_id;    
-    @XmlElement(name = "part_id")
-    private String part_id;    
-    @XmlElement(name = "quantity")
-    private int quantity;
-    @XmlElement(name = "price")
-    protected double price;
-
+   
     /**
      * @return the price
      */

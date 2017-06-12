@@ -577,7 +577,7 @@ public class Pcpicker_webservice
     
     
     @WebMethod(operationName = "addCustomer")
-    public Boolean addCustomer(@WebParam(name = "username") String username, @WebParam(name = "password") String password, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "zipCode") int zipCode) {
+    public Boolean addCustomer(@WebParam(name = "username") String username, @WebParam(name = "password") String password, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "zipCode") int zipCode,@WebParam(name = "firstname") String firstname,@WebParam(name = "lastname") String lastname) {
         
          
         
@@ -587,7 +587,7 @@ public class Pcpicker_webservice
 
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
      
-            String sql = "{call addCustomer(?,?,?,?,?)}"; ////////////////////////////////
+            String sql = "{call addCustomer(?,?,?,?,?,?,?)}"; ////////////////////////////////
             CallableStatement callableStatement = conn.prepareCall(sql);
         
             callableStatement.setString(1, username);
@@ -595,7 +595,8 @@ public class Pcpicker_webservice
             callableStatement.setString(3, address);
             callableStatement.setString(4, city);
             callableStatement.setInt(5, zipCode);
-          
+            callableStatement.setString(6, firstname);
+            callableStatement.setString(7, lastname);
            
             
             callableStatement.executeQuery();
@@ -639,7 +640,7 @@ public class Pcpicker_webservice
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        System.out.println("server: " + a.getPart_id());
+        
         
         return a;
     }
@@ -694,7 +695,7 @@ public class Pcpicker_webservice
         
         return order_id;
     }
-    
+    @WebMethod(operationName = "getOrderList")
     public ArrayList<Order> getOrderList(@WebParam(name = "cust_id") int cust_id) {
         ArrayList<Order> a = new ArrayList(); ///////////////////////////////
         int i = 0;
@@ -718,7 +719,7 @@ public class Pcpicker_webservice
                 a.get(last).setDate_created(rs.getString(3));////////////////
                 a.get(last).setPayment_type(rs.getString(4));
                 a.get(last).setActive(rs.getBoolean(5));
-                
+                a.get(last).setItems(getOrderItems(a.get(last).getOrder_id()));
             }
             callableStatement.close();
             conn.close();
@@ -728,7 +729,7 @@ public class Pcpicker_webservice
         return a;
     }
     
-    public ArrayList<Order_Parts> getOrderItems(@WebParam(name = "order_id") int order_id) {
+    private ArrayList<Order_Parts> getOrderItems(int order_id) {
         ArrayList<Order_Parts> a = new ArrayList(); ///////////////////////////////
         int i = 0;
 
