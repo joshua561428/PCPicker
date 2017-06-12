@@ -102,7 +102,7 @@ public class Pcpicker_webserviceForDesktop {
         }
     }
     @WebMethod(operationName = "acceptOrder")
-    public void acceptOrder(@WebParam(name = "order_id") String order_id, @WebParam(name = "branch_id") int branch_id, @WebParam(name = "deliveryDate_") int deliveryDate_) {
+    public void acceptOrder(@WebParam(name = "order_id") String order_id, @WebParam(name = "branch_id") int branch_id, @WebParam(name = "deliveryDate_") String deliveryDate_) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
@@ -111,7 +111,7 @@ public class Pcpicker_webserviceForDesktop {
             CallableStatement callableStatement = conn.prepareCall(sql);
             callableStatement.setString(1, order_id);
             callableStatement.setInt(2,branch_id);
-            callableStatement.setInt(3,deliveryDate_);
+            callableStatement.setString(3,deliveryDate_);
             
             callableStatement.executeUpdate();
             
