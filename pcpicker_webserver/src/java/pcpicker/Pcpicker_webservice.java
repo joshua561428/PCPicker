@@ -579,10 +579,8 @@ public class Pcpicker_webservice
     @WebMethod(operationName = "addCustomer")
     public Boolean addCustomer(@WebParam(name = "username") String username, @WebParam(name = "password") String password, @WebParam(name = "address") String address, @WebParam(name = "city") String city, @WebParam(name = "zipCode") int zipCode,@WebParam(name = "firstname") String firstname,@WebParam(name = "lastname") String lastname) {
         
-         
-        
         try {
-               System.out.println("a0");
+            
             Class.forName("com.mysql.jdbc.Driver");
 
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
@@ -763,7 +761,25 @@ public class Pcpicker_webservice
         return a;
     }
     
-    
+    @WebMethod(operationName = "cancelOrder")
+    public String cancelOrder(@WebParam(name = "order_id")int order_id) {
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+
+            String sql = "{call cancelOrder(?)}"; ////////////////////////////////
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            callableStatement.setInt(1, order_id);
+            callableStatement.executeUpdate();
+           
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return "";
+    }
     
     
 }
