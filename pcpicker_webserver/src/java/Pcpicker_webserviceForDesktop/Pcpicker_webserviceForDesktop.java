@@ -55,6 +55,7 @@ public class Pcpicker_webserviceForDesktop {
                 a.get(last).setPayment_type(rs.getString(4));
                 a.get(last).setActive(rs.getBoolean(5));
                 a.get(last).setItems(getOrderItems(a.get(last).getOrder_id()));
+                a.get(last).setDeliveryDate(rs.getDate(7));
             }
             callableStatement.close();
             conn.close();

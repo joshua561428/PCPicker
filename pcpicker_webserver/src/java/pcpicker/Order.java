@@ -1,5 +1,6 @@
 package pcpicker;
 
+import java.sql.Date;
 import java.util.List;
 import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -18,7 +19,8 @@ public class Order
     protected Boolean active;
     @XmlElement(name ="items")
     protected List<Order_Parts> items;  
-    
+    @XmlElement(name ="deliveryDate")
+    protected Date deliveryDate; 
     
     
     
@@ -102,6 +104,20 @@ public class Order
      */
     public void setPayment_type(String payment_type) {
         this.payment_type = payment_type;
+    }
+
+    /**
+     * @return the deliveryDate
+     */
+    public Date getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    /**
+     * @param deliveryDate the deliveryDate to set
+     */
+    public void setDeliveryDate(Date deliveryDate) {
+        this.deliveryDate = deliveryDate;
     }
     
  
