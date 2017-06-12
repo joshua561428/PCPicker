@@ -22,13 +22,13 @@ public class service {
     // systemLog(Exception, String)
     public static void systemLog(Exception ex, String systemMessage)
     {
-        sysLog.append("\n(System):  <" + ex.getClass().getSimpleName() + "> -- " + systemMessage);
+        sysLog.append("(System):  <" + ex.getClass().getSimpleName() + "> -- " + systemMessage + "\n");
     }
 
     // systemLog(String)
     public static void systemLog(String systemMessage)
     {
-        sysLog.append("\n(System): <!> -- " + systemMessage);
+        sysLog.append("(System): <!> -- " + systemMessage + "\n");
     }
 
     // alert(JMenu)
@@ -74,28 +74,30 @@ public class service {
     //
     // Web Services
     //
- 
+
     private static String addCPU(java.lang.String compId, java.lang.String compManufacturer, java.lang.String compName, int coreClock, int coreNum, int threadNum, java.lang.String socket, int tdp, double compPrice, java.lang.String compType) {
-        pcpickerinventory.PcpickerWebserviceForDesktop_Service service = new pcpickerinventory.PcpickerWebserviceForDesktop_Service();
-        pcpickerinventory.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service service = new pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service();
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
         return port.addCPU(compId, compManufacturer, compName, coreClock, coreNum, threadNum, socket, tdp, compPrice, compType);
     }
 
     private static String addGPU(java.lang.String compId, java.lang.String compManufacturer, java.lang.String compName, int coreClock, java.lang.String memDdr, java.lang.String memCapacity, int memClock, double compPrice, java.lang.String compType) {
-        pcpickerinventory.PcpickerWebserviceForDesktop_Service service = new pcpickerinventory.PcpickerWebserviceForDesktop_Service();
-        pcpickerinventory.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service service = new pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service();
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
         return port.addGPU(compId, compManufacturer, compName, coreClock, memDdr, memCapacity, memClock, compPrice, compType);
     }
 
     private static String addMemory(java.lang.String compId, java.lang.String compManufacturer, java.lang.String compName, int memCapacity, java.lang.String memDdr, int memClock, double compPrice, java.lang.String compType) {
-        pcpickerinventory.PcpickerWebserviceForDesktop_Service service = new pcpickerinventory.PcpickerWebserviceForDesktop_Service();
-        pcpickerinventory.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service service = new pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service();
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
         return port.addMemory(compId, compManufacturer, compName, memCapacity, memDdr, memClock, compPrice, compType);
     }
 
     private static String addPowerSupply(java.lang.String compId, java.lang.String compManufacturer, java.lang.String compName, int wattage, java.lang.String rating, java.lang.String formFactor, double compPrice, java.lang.String compType) {
-        pcpickerinventory.PcpickerWebserviceForDesktop_Service service = new pcpickerinventory.PcpickerWebserviceForDesktop_Service();
-        pcpickerinventory.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service service = new pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service();
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
         return port.addPowerSupply(compId, compManufacturer, compName, wattage, rating, formFactor, compPrice, compType);
     }
+ 
+    
 }

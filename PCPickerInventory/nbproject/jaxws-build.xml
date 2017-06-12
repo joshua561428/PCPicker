@@ -19,7 +19,7 @@
     <target name="wsimport-client-Pcpicker_webserviceForDesktop" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/Pcpicker_webserviceForDesktop"/>
         <property name="wsdl-Pcpicker_webserviceForDesktop" location="xml-resources/web-service-references/Pcpicker_webserviceForDesktop/wsdl/localhost_8080/pcpicker_webserver/Pcpicker_webserviceForDesktop.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/Pcpicker_webserviceForDesktop" destdir="${build.generated.dir}/jax-wsCache/Pcpicker_webserviceForDesktop" wsdl="${wsdl-Pcpicker_webserviceForDesktop}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/pcpicker_webserver/Pcpicker_webserviceForDesktop?wsdl" xnocompile="true" xendorsed="true" package="pcpickerinventory">
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/Pcpicker_webserviceForDesktop" destdir="${build.generated.dir}/jax-wsCache/Pcpicker_webserviceForDesktop" wsdl="${wsdl-Pcpicker_webserviceForDesktop}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/pcpicker_webserver/Pcpicker_webserviceForDesktop?wsdl" xnocompile="true" xendorsed="true">
             <depends file="${wsdl-Pcpicker_webserviceForDesktop}"/>
             <produces dir="${build.generated.dir}/jax-wsCache/Pcpicker_webserviceForDesktop"/>
         </wsimport>
@@ -31,7 +31,7 @@
     </target>
     <target name="wsimport-client-clean-Pcpicker_webserviceForDesktop" depends="-init-project">
         <delete dir="${build.generated.dir}/jax-wsCache/Pcpicker_webserviceForDesktop"/>
-        <delete dir="${build.generated.sources.dir}/jax-ws/pcpickerinventory"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/pcpicker_webservicefordesktop"/>
     </target>
     <target name="wsimport-client-generate" depends="wsimport-client-Pcpicker_webserviceForDesktop"/>
 </project>

@@ -175,47 +175,42 @@ public class frmMain extends javax.swing.JFrame {
             .addGroup(cpuPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(cpuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblParam1)
-                    .addComponent(lblParam2)
-                    .addComponent(lblParam3)
-                    .addComponent(lblParam4)
-                    .addComponent(lblParam5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(cpuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cpuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtParam3, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                        .addComponent(txtParam1)
-                        .addComponent(txtParam2)
-                        .addComponent(txtParam4, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addComponent(txtParam5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtParam4)
+                    .addComponent(txtParam1)
+                    .addComponent(txtParam2)
+                    .addComponent(txtParam3)
+                    .addComponent(txtParam5)
+                    .addComponent(lblParam1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblParam2, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                    .addComponent(lblParam3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblParam4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblParam5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         cpuPanelLayout.setVerticalGroup(
             cpuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cpuPanelLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(cpuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(cpuPanelLayout.createSequentialGroup()
-                        .addGroup(cpuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblParam1)
-                            .addComponent(txtParam1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(cpuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblParam2)
-                            .addComponent(txtParam2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(cpuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtParam3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblParam3))
-                        .addGap(32, 32, 32))
-                    .addGroup(cpuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtParam4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblParam4)))
-                .addGap(6, 6, 6)
-                .addGroup(cpuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblParam5)
-                    .addComponent(txtParam5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lblParam1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtParam1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblParam2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtParam2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblParam3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtParam3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblParam4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtParam4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblParam5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtParam5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
         );
 
         btnClear.setText("Clear");
@@ -302,7 +297,7 @@ public class frmMain extends javax.swing.JFrame {
                         .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnClear)
                             .addComponent(addComponentButton)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
 
@@ -388,10 +383,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuFileInventoryActionPerformed
 
     private void compTypeComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compTypeComboActionPerformed
-        if (compTypeCombo.getSelectedItem().toString() == "CPU"){
-            cpuPanel.setVisible(true);
-            cpuPanel.setEnabled(true);
-        }
+        FormControl.setParameters((String)compTypeCombo.getSelectedItem(), lblParam1, txtParam1, lblParam2, txtParam2, lblParam3, txtParam3, lblParam4, txtParam4, lblParam5, txtParam5);
     }//GEN-LAST:event_compTypeComboActionPerformed
 
     private void addComponentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addComponentButtonActionPerformed
@@ -399,7 +391,7 @@ public class frmMain extends javax.swing.JFrame {
         {
             try {
                 service.insert_CPU(compIdText.getText(), compManufacturerText.getText(), compNameText.getText(), Double.parseDouble(compPriceText.getText()), compTypeCombo.getSelectedItem().toString(), Integer.parseInt(txtParam3.getText()), Integer.parseInt(txtParam1.getText()), Integer.parseInt(txtParam2.getText()), txtParam4.getText(), Integer.parseInt(txtParam5.getText()));
-                service.systemLog("CPU Added");
+                service.systemLog(compTypeCombo.getSelectedItem() + " Added");
             } catch (Exception e) {
                 service.errAlert(mnuSystem);
                 service.systemLog(e, e.getMessage());
@@ -409,7 +401,27 @@ public class frmMain extends javax.swing.JFrame {
         {
             try {
                 service.insert_GPU(compIdText.getText(), compManufacturerText.getText(), compNameText.getText(), Double.parseDouble(compPriceText.getText()), compTypeCombo.getSelectedItem().toString(), Integer.parseInt(txtParam1.getText()), txtParam2.getText(), txtParam3.getText(), Integer.parseInt(txtParam4.getText()));
-                service.systemLog("GPU Added");
+                service.systemLog(compTypeCombo.getSelectedItem() + " Added");
+            } catch (Exception e) {
+                service.errAlert(mnuSystem);
+                service.systemLog(e, e.getMessage());
+            }
+        }
+        else if (compTypeCombo.getSelectedItem().toString().equals(Parts.Type.Memory.toString().replaceAll("_", " ")))
+        {
+            try {
+                service.insert_Memory(compIdText.getText(), compManufacturerText.getText(), compNameText.getText(), Double.parseDouble(compPriceText.getText()), compTypeCombo.getSelectedItem().toString(), Integer.parseInt(txtParam1.getText()), txtParam2.getText(), Integer.parseInt(txtParam3.getText()));
+                service.systemLog(compTypeCombo.getSelectedItem() + " Added");
+            } catch (Exception e) {
+                service.errAlert(mnuSystem);
+                service.systemLog(e, e.getMessage());
+            }
+        }
+        else if (compTypeCombo.getSelectedItem().toString().equals(Parts.Type.Power_Supply.toString().replaceAll("_", " ")))
+        {
+            try {
+                service.insert_PowerSupply(compIdText.getText(), compManufacturerText.getText(), compNameText.getText(), Double.parseDouble(compPriceText.getText()), compTypeCombo.getSelectedItem().toString(), Integer.parseInt(txtParam1.getText()), txtParam2.getText(), txtParam3.getText());
+                service.systemLog(compTypeCombo.getSelectedItem() + " Added");
             } catch (Exception e) {
                 service.errAlert(mnuSystem);
                 service.systemLog(e, e.getMessage());
@@ -459,10 +471,12 @@ public class frmMain extends javax.swing.JFrame {
         if (!service.isErrorLogged)
         {
             mnuSystem.setForeground(Color.BLACK);
+            mnuSystemLog.setForeground(Color.BLACK);
         }
         else
         {
             mnuSystem.setForeground(Color.RED);
+            mnuSystemLog.setForeground(Color.RED);
         }
     }//GEN-LAST:event_formWindowDeactivated
 

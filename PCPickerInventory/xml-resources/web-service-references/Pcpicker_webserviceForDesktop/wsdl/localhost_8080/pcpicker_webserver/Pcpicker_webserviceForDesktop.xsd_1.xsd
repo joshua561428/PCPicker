@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.3 (tags/2.3-7528; 2013-04-29T19:34:10+0000) JAXWS-RI/2.2.8 JAXWS/2.2 svn-revision#unknown. --><xs:schema xmlns:tns="http://Pcpicker_webserviceForDesktop/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://Pcpicker_webserviceForDesktop/">
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://Pcpicker_webserviceForDesktop/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://Pcpicker_webserviceForDesktop/">
 
 <xs:element name="acceptOrder" type="tns:acceptOrder"/>
 
@@ -173,17 +173,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="setOrderDeliveryDate">
-<xs:sequence>
-<xs:element name="order_id" type="xs:string" minOccurs="0"/>
-<xs:element name="deliveryDate_" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="setOrderDeliveryDateResponse">
-<xs:sequence/>
-</xs:complexType>
-
 <xs:complexType name="getBranchesList">
 <xs:sequence/>
 </xs:complexType>
@@ -201,6 +190,17 @@
 <xs:element name="address" type="xs:string" minOccurs="0"/>
 <xs:element name="zip_code" type="xs:int"/>
 </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setOrderDeliveryDate">
+<xs:sequence>
+<xs:element name="order_id" type="xs:string" minOccurs="0"/>
+<xs:element name="deliveryDate_" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setOrderDeliveryDateResponse">
+<xs:sequence/>
 </xs:complexType>
 
 <xs:complexType name="acceptOrder">
@@ -240,6 +240,27 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="getCustomerList">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getCustomerListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:Customer" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Customer">
+<xs:sequence>
+<xs:element name="cust_id" type="xs:int"/>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="address" type="xs:string" minOccurs="0"/>
+<xs:element name="city" type="xs:string" minOccurs="0"/>
+<xs:element name="zip_code" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="getInventoryList">
 <xs:sequence/>
 </xs:complexType>
@@ -260,27 +281,6 @@
 <xs:element name="comp_price" type="xs:double"/>
 <xs:element name="comp_manufacturer" type="xs:string" minOccurs="0"/>
 <xs:element name="comp_type" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getCustomerList">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="getCustomerListResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:Customer" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Customer">
-<xs:sequence>
-<xs:element name="cust_id" type="xs:int"/>
-<xs:element name="username" type="xs:string" minOccurs="0"/>
-<xs:element name="password" type="xs:string" minOccurs="0"/>
-<xs:element name="address" type="xs:string" minOccurs="0"/>
-<xs:element name="city" type="xs:string" minOccurs="0"/>
-<xs:element name="zip_code" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 

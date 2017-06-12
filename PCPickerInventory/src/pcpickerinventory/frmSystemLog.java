@@ -36,6 +36,9 @@ public class frmSystemLog extends javax.swing.JFrame {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
+            public void windowDeactivated(java.awt.event.WindowEvent evt) {
+                formWindowDeactivated(evt);
+            }
         });
 
         txtSysLog.setBackground(new java.awt.Color(0, 0, 0));
@@ -70,6 +73,11 @@ public class frmSystemLog extends javax.swing.JFrame {
         txtSysLog.removeAll();
         txtSysLog.setText(service.sysLog.getText());
     }//GEN-LAST:event_formWindowActivated
+
+    private void formWindowDeactivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeactivated
+        // TODO add your handling code here:
+        service.isErrorLogged = false;
+    }//GEN-LAST:event_formWindowDeactivated
 
     /**
      * @param args the command line arguments

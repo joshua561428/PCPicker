@@ -217,7 +217,7 @@
                                   <Component id="addComponentButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="jScrollPane1" pref="492" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -351,21 +351,16 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblParam1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblParam2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblParam3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblParam4" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblParam5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace pref="28" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtParam3" pref="165" max="32767" attributes="0"/>
-                                  <Component id="txtParam1" max="32767" attributes="0"/>
-                                  <Component id="txtParam2" max="32767" attributes="0"/>
-                                  <Component id="txtParam4" alignment="1" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="txtParam5" alignment="1" min="-2" pref="165" max="-2" attributes="0"/>
+                              <Component id="txtParam4" max="32767" attributes="0"/>
+                              <Component id="txtParam1" max="32767" attributes="0"/>
+                              <Component id="txtParam2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtParam3" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtParam5" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblParam1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblParam2" alignment="0" pref="272" max="32767" attributes="0"/>
+                              <Component id="lblParam3" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblParam4" max="32767" attributes="0"/>
+                              <Component id="lblParam5" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -374,36 +369,27 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="lblParam1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtParam1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="lblParam2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtParam2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="txtParam3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblParam3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txtParam4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblParam4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblParam5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtParam5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblParam1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txtParam1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblParam2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txtParam2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblParam3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txtParam3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblParam4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
+                          <Component id="txtParam4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblParam5" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txtParam5" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
