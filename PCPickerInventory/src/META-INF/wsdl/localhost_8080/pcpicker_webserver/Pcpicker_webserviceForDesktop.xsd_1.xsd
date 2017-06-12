@@ -20,6 +20,10 @@
 
 <xs:element name="addPowerSupplyResponse" type="tns:addPowerSupplyResponse"/>
 
+<xs:element name="getActivePendingOrderList" type="tns:getActivePendingOrderList"/>
+
+<xs:element name="getActivePendingOrderListResponse" type="tns:getActivePendingOrderListResponse"/>
+
 <xs:element name="getActivePendingOrders" type="tns:getActivePendingOrders"/>
 
 <xs:element name="getActivePendingOrdersResponse" type="tns:getActivePendingOrdersResponse"/>
@@ -40,9 +44,9 @@
 
 <xs:element name="getInventoryListResponse" type="tns:getInventoryListResponse"/>
 
-<xs:element name="getOrderList" type="tns:getOrderList"/>
+<xs:element name="getOrder" type="tns:getOrder"/>
 
-<xs:element name="getOrderListResponse" type="tns:getOrderListResponse"/>
+<xs:element name="getOrderResponse" type="tns:getOrderResponse"/>
 
 <xs:element name="getOrder_componentList" type="tns:getOrder_componentList"/>
 
@@ -114,13 +118,30 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getOrder_componentList">
-<xs:sequence/>
+<xs:complexType name="getOrder">
+<xs:sequence>
+<xs:element name="prder_id" type="xs:int"/>
+</xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getOrder_componentListResponse">
+<xs:complexType name="getOrderResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:Order_Parts" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="return" type="tns:Order" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Order">
+<xs:sequence>
+<xs:element name="order_id" type="xs:int"/>
+<xs:element name="cust_id" type="xs:int"/>
+<xs:element name="date_created" type="xs:string" minOccurs="0"/>
+<xs:element name="payment_type" type="xs:string" minOccurs="0"/>
+<xs:element name="active" type="xs:boolean" minOccurs="0"/>
+<xs:element name="acceptedBy" type="xs:int"/>
+<xs:element name="items" type="tns:Order_Parts" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="deliveryDate" type="xs:string" minOccurs="0"/>
+<xs:element name="cancel" type="xs:boolean" minOccurs="0"/>
+<xs:element name="cancelDate" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -130,6 +151,16 @@
 <xs:element name="part_id" type="xs:string" minOccurs="0"/>
 <xs:element name="quantity" type="xs:int"/>
 <xs:element name="price" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOrder_componentList">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getOrder_componentListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:Order_Parts" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -149,6 +180,16 @@
 <xs:complexType name="addPowerSupplyResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getActivePendingOrderList">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getActivePendingOrderListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:Order" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -207,7 +248,7 @@
 <xs:sequence>
 <xs:element name="order_id" type="xs:string" minOccurs="0"/>
 <xs:element name="branch_id" type="xs:int"/>
-<xs:element name="deliveryDate_" type="xs:int"/>
+<xs:element name="deliveryDate_" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -222,42 +263,6 @@
 <xs:complexType name="getActivePendingOrdersResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:Order" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Order">
-<xs:sequence>
-<xs:element name="order_id" type="xs:int"/>
-<xs:element name="cust_id" type="xs:int"/>
-<xs:element name="date_created" type="xs:string" minOccurs="0"/>
-<xs:element name="payment_type" type="xs:string" minOccurs="0"/>
-<xs:element name="active" type="xs:boolean" minOccurs="0"/>
-<xs:element name="acceptedBy" type="xs:int"/>
-<xs:element name="items" type="tns:Order_Parts" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="deliveryDate" type="xs:string" minOccurs="0"/>
-<xs:element name="cancel" type="xs:boolean" minOccurs="0"/>
-<xs:element name="cancelDate" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getCustomerList">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="getCustomerListResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:Customer" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Customer">
-<xs:sequence>
-<xs:element name="cust_id" type="xs:int"/>
-<xs:element name="username" type="xs:string" minOccurs="0"/>
-<xs:element name="password" type="xs:string" minOccurs="0"/>
-<xs:element name="address" type="xs:string" minOccurs="0"/>
-<xs:element name="city" type="xs:string" minOccurs="0"/>
-<xs:element name="zip_code" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -284,6 +289,27 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="getCustomerList">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getCustomerListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:Customer" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Customer">
+<xs:sequence>
+<xs:element name="cust_id" type="xs:int"/>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="address" type="xs:string" minOccurs="0"/>
+<xs:element name="city" type="xs:string" minOccurs="0"/>
+<xs:element name="zip_code" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="getPart">
 <xs:sequence>
 <xs:element name="part_id" type="xs:string" minOccurs="0"/>
@@ -303,16 +329,6 @@
 <xs:element name="part_name" type="xs:string" minOccurs="0"/>
 <xs:element name="part_price" type="xs:double"/>
 <xs:element name="part_type" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getOrderList">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="getOrderListResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:Order" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>

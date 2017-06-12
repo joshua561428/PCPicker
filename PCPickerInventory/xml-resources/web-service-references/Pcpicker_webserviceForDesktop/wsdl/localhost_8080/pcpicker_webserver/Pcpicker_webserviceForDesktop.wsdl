@@ -4,17 +4,53 @@
 <xsd:import namespace="http://Pcpicker_webserviceForDesktop/" schemaLocation="http://localhost:8080/pcpicker_webserver/Pcpicker_webserviceForDesktop?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="getOrderList">
-<part name="parameters" element="tns:getOrderList"/>
+<message name="getBranchesList">
+<part name="parameters" element="tns:getBranchesList"/>
 </message>
-<message name="getOrderListResponse">
-<part name="parameters" element="tns:getOrderListResponse"/>
+<message name="getBranchesListResponse">
+<part name="parameters" element="tns:getBranchesListResponse"/>
 </message>
 <message name="getDeliveryList">
 <part name="parameters" element="tns:getDeliveryList"/>
 </message>
 <message name="getDeliveryListResponse">
 <part name="parameters" element="tns:getDeliveryListResponse"/>
+</message>
+<message name="getInventoryList">
+<part name="parameters" element="tns:getInventoryList"/>
+</message>
+<message name="getInventoryListResponse">
+<part name="parameters" element="tns:getInventoryListResponse"/>
+</message>
+<message name="getCustomerList">
+<part name="parameters" element="tns:getCustomerList"/>
+</message>
+<message name="getCustomerListResponse">
+<part name="parameters" element="tns:getCustomerListResponse"/>
+</message>
+<message name="getOrder">
+<part name="parameters" element="tns:getOrder"/>
+</message>
+<message name="getOrderResponse">
+<part name="parameters" element="tns:getOrderResponse"/>
+</message>
+<message name="addMemory">
+<part name="parameters" element="tns:addMemory"/>
+</message>
+<message name="addMemoryResponse">
+<part name="parameters" element="tns:addMemoryResponse"/>
+</message>
+<message name="addPowerSupply">
+<part name="parameters" element="tns:addPowerSupply"/>
+</message>
+<message name="addPowerSupplyResponse">
+<part name="parameters" element="tns:addPowerSupplyResponse"/>
+</message>
+<message name="addGPU">
+<part name="parameters" element="tns:addGPU"/>
+</message>
+<message name="addGPUResponse">
+<part name="parameters" element="tns:addGPUResponse"/>
 </message>
 <message name="acceptOrder">
 <part name="parameters" element="tns:acceptOrder"/>
@@ -28,47 +64,11 @@
 <message name="addCPUResponse">
 <part name="parameters" element="tns:addCPUResponse"/>
 </message>
-<message name="addGPU">
-<part name="parameters" element="tns:addGPU"/>
+<message name="getPart">
+<part name="parameters" element="tns:getPart"/>
 </message>
-<message name="addGPUResponse">
-<part name="parameters" element="tns:addGPUResponse"/>
-</message>
-<message name="getCustomerList">
-<part name="parameters" element="tns:getCustomerList"/>
-</message>
-<message name="getCustomerListResponse">
-<part name="parameters" element="tns:getCustomerListResponse"/>
-</message>
-<message name="addPowerSupply">
-<part name="parameters" element="tns:addPowerSupply"/>
-</message>
-<message name="addPowerSupplyResponse">
-<part name="parameters" element="tns:addPowerSupplyResponse"/>
-</message>
-<message name="addMemory">
-<part name="parameters" element="tns:addMemory"/>
-</message>
-<message name="addMemoryResponse">
-<part name="parameters" element="tns:addMemoryResponse"/>
-</message>
-<message name="getBranchesList">
-<part name="parameters" element="tns:getBranchesList"/>
-</message>
-<message name="getBranchesListResponse">
-<part name="parameters" element="tns:getBranchesListResponse"/>
-</message>
-<message name="getInventoryList">
-<part name="parameters" element="tns:getInventoryList"/>
-</message>
-<message name="getInventoryListResponse">
-<part name="parameters" element="tns:getInventoryListResponse"/>
-</message>
-<message name="getActivePendingOrders">
-<part name="parameters" element="tns:getActivePendingOrders"/>
-</message>
-<message name="getActivePendingOrdersResponse">
-<part name="parameters" element="tns:getActivePendingOrdersResponse"/>
+<message name="getPartResponse">
+<part name="parameters" element="tns:getPartResponse"/>
 </message>
 <message name="setOrderDeliveryDate">
 <part name="parameters" element="tns:setOrderDeliveryDate"/>
@@ -76,26 +76,56 @@
 <message name="setOrderDeliveryDateResponse">
 <part name="parameters" element="tns:setOrderDeliveryDateResponse"/>
 </message>
+<message name="getActivePendingOrders">
+<part name="parameters" element="tns:getActivePendingOrders"/>
+</message>
+<message name="getActivePendingOrdersResponse">
+<part name="parameters" element="tns:getActivePendingOrdersResponse"/>
+</message>
 <message name="getOrder_componentList">
 <part name="parameters" element="tns:getOrder_componentList"/>
 </message>
 <message name="getOrder_componentListResponse">
 <part name="parameters" element="tns:getOrder_componentListResponse"/>
 </message>
-<message name="getPart">
-<part name="parameters" element="tns:getPart"/>
+<message name="getActivePendingOrderList">
+<part name="parameters" element="tns:getActivePendingOrderList"/>
 </message>
-<message name="getPartResponse">
-<part name="parameters" element="tns:getPartResponse"/>
+<message name="getActivePendingOrderListResponse">
+<part name="parameters" element="tns:getActivePendingOrderListResponse"/>
 </message>
 <portType name="Pcpicker_webserviceForDesktop">
-<operation name="getOrderList">
-<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getOrderListRequest" message="tns:getOrderList"/>
-<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getOrderListResponse" message="tns:getOrderListResponse"/>
+<operation name="getBranchesList">
+<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getBranchesListRequest" message="tns:getBranchesList"/>
+<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getBranchesListResponse" message="tns:getBranchesListResponse"/>
 </operation>
 <operation name="getDeliveryList">
 <input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getDeliveryListRequest" message="tns:getDeliveryList"/>
 <output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getDeliveryListResponse" message="tns:getDeliveryListResponse"/>
+</operation>
+<operation name="getInventoryList">
+<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getInventoryListRequest" message="tns:getInventoryList"/>
+<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getInventoryListResponse" message="tns:getInventoryListResponse"/>
+</operation>
+<operation name="getCustomerList">
+<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getCustomerListRequest" message="tns:getCustomerList"/>
+<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getCustomerListResponse" message="tns:getCustomerListResponse"/>
+</operation>
+<operation name="getOrder">
+<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getOrderRequest" message="tns:getOrder"/>
+<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getOrderResponse" message="tns:getOrderResponse"/>
+</operation>
+<operation name="addMemory">
+<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/addMemoryRequest" message="tns:addMemory"/>
+<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/addMemoryResponse" message="tns:addMemoryResponse"/>
+</operation>
+<operation name="addPowerSupply">
+<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/addPowerSupplyRequest" message="tns:addPowerSupply"/>
+<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/addPowerSupplyResponse" message="tns:addPowerSupplyResponse"/>
+</operation>
+<operation name="addGPU">
+<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/addGPURequest" message="tns:addGPU"/>
+<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/addGPUResponse" message="tns:addGPUResponse"/>
 </operation>
 <operation name="acceptOrder">
 <input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/acceptOrderRequest" message="tns:acceptOrder"/>
@@ -105,50 +135,30 @@
 <input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/addCPURequest" message="tns:addCPU"/>
 <output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/addCPUResponse" message="tns:addCPUResponse"/>
 </operation>
-<operation name="addGPU">
-<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/addGPURequest" message="tns:addGPU"/>
-<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/addGPUResponse" message="tns:addGPUResponse"/>
-</operation>
-<operation name="getCustomerList">
-<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getCustomerListRequest" message="tns:getCustomerList"/>
-<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getCustomerListResponse" message="tns:getCustomerListResponse"/>
-</operation>
-<operation name="addPowerSupply">
-<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/addPowerSupplyRequest" message="tns:addPowerSupply"/>
-<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/addPowerSupplyResponse" message="tns:addPowerSupplyResponse"/>
-</operation>
-<operation name="addMemory">
-<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/addMemoryRequest" message="tns:addMemory"/>
-<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/addMemoryResponse" message="tns:addMemoryResponse"/>
-</operation>
-<operation name="getBranchesList">
-<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getBranchesListRequest" message="tns:getBranchesList"/>
-<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getBranchesListResponse" message="tns:getBranchesListResponse"/>
-</operation>
-<operation name="getInventoryList">
-<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getInventoryListRequest" message="tns:getInventoryList"/>
-<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getInventoryListResponse" message="tns:getInventoryListResponse"/>
-</operation>
-<operation name="getActivePendingOrders">
-<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getActivePendingOrdersRequest" message="tns:getActivePendingOrders"/>
-<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getActivePendingOrdersResponse" message="tns:getActivePendingOrdersResponse"/>
+<operation name="getPart">
+<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getPartRequest" message="tns:getPart"/>
+<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getPartResponse" message="tns:getPartResponse"/>
 </operation>
 <operation name="setOrderDeliveryDate">
 <input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/setOrderDeliveryDateRequest" message="tns:setOrderDeliveryDate"/>
 <output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/setOrderDeliveryDateResponse" message="tns:setOrderDeliveryDateResponse"/>
 </operation>
+<operation name="getActivePendingOrders">
+<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getActivePendingOrdersRequest" message="tns:getActivePendingOrders"/>
+<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getActivePendingOrdersResponse" message="tns:getActivePendingOrdersResponse"/>
+</operation>
 <operation name="getOrder_componentList">
 <input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getOrder_componentListRequest" message="tns:getOrder_componentList"/>
 <output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getOrder_componentListResponse" message="tns:getOrder_componentListResponse"/>
 </operation>
-<operation name="getPart">
-<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getPartRequest" message="tns:getPart"/>
-<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getPartResponse" message="tns:getPartResponse"/>
+<operation name="getActivePendingOrderList">
+<input wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getActivePendingOrderListRequest" message="tns:getActivePendingOrderList"/>
+<output wsam:Action="http://Pcpicker_webserviceForDesktop/Pcpicker_webserviceForDesktop/getActivePendingOrderListResponse" message="tns:getActivePendingOrderListResponse"/>
 </operation>
 </portType>
 <binding name="Pcpicker_webserviceForDesktopPortBinding" type="tns:Pcpicker_webserviceForDesktop">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="getOrderList">
+<operation name="getBranchesList">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -158,6 +168,60 @@
 </output>
 </operation>
 <operation name="getDeliveryList">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getInventoryList">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getCustomerList">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getOrder">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="addMemory">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="addPowerSupply">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="addGPU">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -184,61 +248,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="addGPU">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getCustomerList">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="addPowerSupply">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="addMemory">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getBranchesList">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getInventoryList">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getActivePendingOrders">
+<operation name="getPart">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -256,6 +266,15 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="getActivePendingOrders">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="getOrder_componentList">
 <soap:operation soapAction=""/>
 <input>
@@ -265,7 +284,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getPart">
+<operation name="getActivePendingOrderList">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
