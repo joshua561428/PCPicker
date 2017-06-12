@@ -672,17 +672,19 @@ public class Pcpicker_webservice
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
           
-            String sql = "{call addOrderpart(?,?,?)}"; 
+            String sql = "{call addOrderpart(?,?,?,?)}"; 
             int numItems = part_ids.size();
             for(int i = 0; i <numItems; i++)
             {
                 String partId = part_ids.get(i);
                 int qty = quantity.get(i);
-                System.out.println("add orderpart: "+partId);
+                Part part = getPart(partId);
+                
                 CallableStatement callableStatement = conn.prepareCall(sql);
                 callableStatement.setInt(1, order_id);
                 callableStatement.setString(2,partId);
                 callableStatement.setInt(3,qty);
+                callableStatement.setDouble(4,part.getPart_price());
                 callableStatement.executeUpdate();
                 callableStatement.close();
             }
