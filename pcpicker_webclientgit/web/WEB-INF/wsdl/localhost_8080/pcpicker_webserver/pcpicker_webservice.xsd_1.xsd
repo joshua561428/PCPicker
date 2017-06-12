@@ -8,6 +8,10 @@
 
 <xs:element name="addOrderResponse" type="tns:addOrderResponse"/>
 
+<xs:element name="cancelOrder" type="tns:cancelOrder"/>
+
+<xs:element name="cancelOrderResponse" type="tns:cancelOrderResponse"/>
+
 <xs:element name="getCoolerList" type="tns:getCoolerList"/>
 
 <xs:element name="getCoolerListResponse" type="tns:getCoolerListResponse"/>
@@ -156,7 +160,11 @@
 <xs:element name="date_created" type="xs:string" minOccurs="0"/>
 <xs:element name="payment_type" type="xs:string" minOccurs="0"/>
 <xs:element name="active" type="xs:boolean" minOccurs="0"/>
+<xs:element name="acceptedBy" type="xs:int"/>
 <xs:element name="items" type="tns:Order_Parts" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="deliveryDate" type="xs:string" minOccurs="0"/>
+<xs:element name="cancel" type="xs:boolean" minOccurs="0"/>
+<xs:element name="cancelDate" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -166,6 +174,18 @@
 <xs:element name="part_id" type="xs:string" minOccurs="0"/>
 <xs:element name="quantity" type="xs:int"/>
 <xs:element name="price" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cancelOrder">
+<xs:sequence>
+<xs:element name="order_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cancelOrderResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

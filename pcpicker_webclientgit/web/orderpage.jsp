@@ -60,6 +60,7 @@
             
             Order id : ${orderid}<br>
             Total Price: ${totalprice}<br>
+            Delivery Date: ${deliveryDate}<br>
             <input type="hidden" name ="numOrders" value ="${fn:length(orderslist)}">
             <c:forEach items="${orderitems}" var="order" varStatus ="loopCounter">                
                 <c:forEach items="${order.value}" var="details" varStatus="loopCounter2">

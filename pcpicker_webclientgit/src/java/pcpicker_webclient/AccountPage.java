@@ -87,27 +87,22 @@ public class AccountPage extends HttpServlet {
         HashMap map = new HashMap();
         for(int i = 0; i < op.size(); i++)
         {
-            Order o = op.get(i);
-            HashMap items = new HashMap();
+            Order order = op.get(i);
             
-            items.put("1",o.getOrderId());
-            items.put("2", o.getDateCreated());
-            items.put("3", o.getPaymentType());
-                    
-            List<OrderParts> ops = o.getItems();
+            HashMap items = new HashMap();
+            items.put("1",order.getOrderId());
+            items.put("2", order.getDateCreated());
+            items.put("3", order.getPaymentType());                    
+            List<OrderParts> ops = order.getItems();  
             
             int numItems = ops.size();
             double totalPrice = 0;
             for(OrderParts orderParts : ops)
                 totalPrice += orderParts.getQuantity() * orderParts.getPrice();
             
-            
             items.put("4", numItems);
-            items.put("5",totalPrice);
-            
-            
-           
-            
+            items.put("5", order.getDeliveryDate());
+            items.put("6",totalPrice);
             map.put(Integer.toString(i), items);
         }
         return map;

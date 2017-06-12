@@ -124,6 +124,12 @@
 <message name="getMaxResolutionsResponse">
 <part name="parameters" element="tns:getMaxResolutionsResponse"/>
 </message>
+<message name="cancelOrder">
+<part name="parameters" element="tns:cancelOrder"/>
+</message>
+<message name="cancelOrderResponse">
+<part name="parameters" element="tns:cancelOrderResponse"/>
+</message>
 <portType name="Pcpicker_webservice">
 <operation name="addOrder">
 <input wsam:Action="http://pcpicker/Pcpicker_webservice/addOrderRequest" message="tns:addOrder"/>
@@ -204,6 +210,10 @@
 <operation name="getMaxResolutions">
 <input wsam:Action="http://pcpicker/Pcpicker_webservice/getMaxResolutionsRequest" message="tns:getMaxResolutions"/>
 <output wsam:Action="http://pcpicker/Pcpicker_webservice/getMaxResolutionsResponse" message="tns:getMaxResolutionsResponse"/>
+</operation>
+<operation name="cancelOrder">
+<input wsam:Action="http://pcpicker/Pcpicker_webservice/cancelOrderRequest" message="tns:cancelOrder"/>
+<output wsam:Action="http://pcpicker/Pcpicker_webservice/cancelOrderResponse" message="tns:cancelOrderResponse"/>
 </operation>
 </portType>
 <binding name="Pcpicker_webservicePortBinding" type="tns:Pcpicker_webservice">
@@ -380,6 +390,15 @@
 </output>
 </operation>
 <operation name="getMaxResolutions">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="cancelOrder">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

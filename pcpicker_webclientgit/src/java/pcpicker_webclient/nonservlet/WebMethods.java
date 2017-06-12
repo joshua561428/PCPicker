@@ -163,6 +163,12 @@ public class WebMethods {
         return port.addCustomer(username, password, address, city, zipCode, firstname, lastname);
     }
 
+    public static String cancelOrder(int orderId) {
+        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
+        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
+        return port.cancelOrder(orderId);
+    }
+
   
 
 

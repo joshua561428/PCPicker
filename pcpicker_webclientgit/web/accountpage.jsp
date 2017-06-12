@@ -80,6 +80,9 @@
                                 <c:when test="${loopCounter2.index == 3}">
                                     num items: ${details.value}
                                 </c:when>
+                                <c:when test="${loopCounter2.index == 4}">
+                                    Delivery Date: ${details.value}
+                                </c:when>
                                 <c:otherwise>
                                     total price: ${details.value}
                                 </c:otherwise>
@@ -89,7 +92,7 @@
                            
 
                     </c:forEach>
-                    
+                    <input type="submit" value="Cancel Order" name="submit${loopCounter.index}"><br>
                     <input type="submit" value="View Order" name="submit${loopCounter.index}">
                     <br><br>
                     </c:forEach>

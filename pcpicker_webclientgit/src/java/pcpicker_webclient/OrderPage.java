@@ -8,12 +8,14 @@ package pcpicker_webclient;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import pcpicker.Order;
 import pcpicker.OrderParts;
 import pcpicker.Part;
@@ -26,80 +28,86 @@ import pcpicker_webclient.nonservlet.WebMethods;
  */
 public class OrderPage extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-  
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    final int VIEW = 1;
+    final int CANCEL = 2;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ShoppingCart.getCartSummary(request);
         int custid = Integer.parseInt((String)request.getSession().getAttribute("userid"));
         Integer orderid = getOrderId(request);
-       // System.out.println("custid------------------------------------------------" + custid);
-        List<Order> orders = WebMethods.getOrderList(custid);        
-        List<OrderParts> op  = null;
-        System.out.println("orders num" + orders.size());
-        for(Order o : orders)
+        Integer submit = getSubmitValue(request);
+        if(submit == VIEW)
         {
-           
-            if(o.getOrderId() == orderid)
-            {
-                op = o.getItems();
-                //System.out.println("adasdasdasdasdqeqweqdzczxdfwewrwesdfsdfsdf");
-                break;
+            List<Order> orders = WebMethods.getOrderList(custid); 
+            String deliveryDate = null;
+            List<OrderParts> op  = null;
+            for(Order o : orders)
+            {           
+                if(o.getOrderId() == orderid)
+                {
+                    op = o.getItems();
+                    deliveryDate = o.getDeliveryDate();
+                    //System.out.println("adasdasdasdasdqeqweqdzczxdfwewrwesdfsdfsdf");
+                    break;
+                }
             }
+
+            HashMap opmap = createOrderPartHashMap(op);
+            double totalprice = calculateTotalPrice(op);
+
+            request.setAttribute("deliveryDate",deliveryDate);
+            request.setAttribute("totalprice",totalprice);
+            request.setAttribute("orderid",orderid);
+            request.setAttribute("orderitems", opmap);
+            request.getRequestDispatcher("/orderpage.jsp").forward(request,response);
         }
-        HashMap opmap = createOrderPartHashMap(op);
-        double totalprice = calculateTotalPrice(op);
-        
-        
-        request.setAttribute("totalprice",totalprice);
-        request.setAttribute("orderid",orderid);
-        request.setAttribute("orderitems", opmap);
-        request.getRequestDispatcher("/orderpage.jsp").forward(request,response);
+        else if (submit == CANCEL)
+        {
+            WebMethods.cancelOrder(orderid);
+            response.sendRedirect(request.getContextPath()+"/AccountPage");
+        }
     }
     
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
     
+    
+    private Integer getSubmitValue(HttpServletRequest request)
+    {
+        if((String)request.getParameter("orderLength") == null || ((String)request.getParameter("orderLength")).equals(""))
+            return VIEW;
+        Integer numListItems = Integer.parseInt((String)request.getParameter("orderLength"));        
+        Integer sv=0;
+        
+        for(Integer i = 0; i < numListItems; i++)
+        {
+            String is = Integer.toString(i);            
+            String submit = (String) request.getParameter("submit" + is);
+            if(submit!=null)
+            {                                 
+                if(submit.equals("View Order"))                 
+                    sv = VIEW;                
+                
+                else if(submit.equals("Cancel Order"))                                 
+                    sv = CANCEL;
+                
+                break;
+            }
+        }
+        if(sv == null)
+            sv = VIEW;
+        return sv;
+    }
     
     private Integer getSelectedOrder(HttpServletRequest request)
     {
@@ -144,6 +152,7 @@ public class OrderPage extends HttpServlet {
             Part part = WebMethods.getPart(o.getPartId());
             items.put("3",part.getPartName());
             items.put("4",o.getPrice());
+          
             
             map.put(Integer.toString(i), items);
         }
