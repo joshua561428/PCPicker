@@ -20,7 +20,7 @@ public class Order
     @XmlElement(name ="items")
     protected List<Order_Parts> items;  
     @XmlElement(name ="deliveryDate")
-    protected Date deliveryDate; 
+    protected String deliveryDate; 
     
     
     
@@ -109,14 +109,14 @@ public class Order
     /**
      * @return the deliveryDate
      */
-    public Date getDeliveryDate() {
+    public String getDeliveryDate() {
         return deliveryDate;
     }
 
     /**
      * @param deliveryDate the deliveryDate to set
      */
-    public void setDeliveryDate(Date deliveryDate) {
+    public void setDeliveryDate(String deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
     
