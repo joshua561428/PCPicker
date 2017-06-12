@@ -44,18 +44,35 @@ public class FormControl {
     //
     public static void getParts(JComboBox _partsCombo)
     {
-        ComboBoxModel cmb = new DefaultComboBoxModel();
-        _partsCombo.setModel(cmb);
+        ComboBoxModel cMod = new DefaultComboBoxModel();
+        _partsCombo.setModel(cMod);
         List<Parts.Type> myParts = Arrays.asList(Parts.Type.values());
         int counter = myParts.size();
         try {
             for (int x = 0;x < counter;x++)
             {
-                _partsCombo.addItem(myParts.get(x));
+                _partsCombo.addItem(myParts.get(x).toString().replaceAll("_", " "));
             }
         } catch (IndexOutOfBoundsException e) {
             System.err.println("Range out of bounds: " + e.getMessage());
         }
-        
+    }
+    
+    public static void getParts(JList _partsList)
+    {
+        ListModel lMod = _partsList.getModel();
+        DefaultListModel modeller = new DefaultListModel();
+        _partsList.setModel(lMod);
+        List<Parts.Type> myParts = Arrays.asList(Parts.Type.values());
+        int counter = myParts.size();
+        try {
+            for (int x = 0; x < counter;x++)
+            {
+                modeller.addElement(myParts.get(x).toString().replaceAll("_", " "));
+            }
+            lMod = (ListModel)modeller;
+            _partsList.setModel(lMod);
+        } catch (Exception e) {
+        }
     }
 }

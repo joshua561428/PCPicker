@@ -24,16 +24,17 @@ public class Parts {
     //
     public enum Type
     {
-        CPU,
-        MEMORY,
-        POWER_SUPPLY,
-        GRAPHICS_CARD,
-        MOUSE,
-        KEYBOARD,
-        COOLER,
-        MOTHERBOARD,
-        STORAGE,
-        MONITOR
+        Processor,
+        Graphics_Card,
+        Memory,
+        Power_Supply,
+        Mouse,
+        Keyboard,
+        Cooler,
+        Monitor,
+        Motherboard,
+        Storage,
+        
     }
     
     //
@@ -41,16 +42,27 @@ public class Parts {
     //
     public enum Manufactuter
     {
-        Generic,
+        Acer,
+        Aerocool,
+        AMD,
         ASUS,
+        Corsair,
+        Crucial,
         Dell,
+        Gigabyte,
+        Kingston,
         Lenovo,
         Logitech,
         Memorex,
         Microsoft,
         MSI,
+        Nvidia,
+        Redragon,
         Toshiba,
+        Thermaltake,
         Samsung,
-        Sony
+        Seagate,
+        Sony,
+        Western_Digital
     }
 }

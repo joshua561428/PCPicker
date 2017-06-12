@@ -13,6 +13,20 @@ import javax.swing.*;
 public class WinForms {
     
     //
+    // Calls the System Log Form
+    //
+    
+    private static JFrame sysLog;
+    public static JFrame SysLog()
+    {
+        if (sysLog == null)
+        {
+            sysLog = new frmSystemLog();
+        }
+        return sysLog;
+    }
+    
+    //
     // Calls the Main Form
     //
     private static JFrame mainForm;

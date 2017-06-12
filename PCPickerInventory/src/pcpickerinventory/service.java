@@ -4,33 +4,77 @@
  * and open the template in the editor.
  */
 package pcpickerinventory;
+import java.awt.Color;
+import javax.swing.*;
 
 /**
  *
  * @author appbenigno
  */
 public class service {
+    
+    //
+    // System Log
+    //
+    public static boolean isErrorLogged = false;
+    public static JTextArea sysLog = new JTextArea();
+    
+    // systemLog(Exception, String)
+    public static void systemLog(Exception ex, String systemMessage)
+    {
+        sysLog.append("\n(System):  <" + ex.getClass().getSimpleName() + "> -- " + systemMessage);
+    }
+
+    // systemLog(String)
+    public static void systemLog(String systemMessage)
+    {
+        sysLog.append("\n(System): <!> -- " + systemMessage);
+    }
+
+    // alert(JMenu)
+    public static void errAlert(JMenu targetMenu)
+    {
+        isErrorLogged = true;
+        targetMenu.setForeground(Color.RED);
+    }
+    public static void errAlert(JMenuItem targetMenuItem)
+    {
+        isErrorLogged = true;
+        targetMenuItem.setForeground(Color.RED);
+    }
 
     //
     // Service Methods
     //
     
-    // addCPU(String, String, String, int, int, int, String, int, Double, String)
-    public static void insert_CPU(String ID, String manufacturer, String name, int coreClock, int coreNum, int threads, String socket, int tdp, double price, String type)
+    // addCPU(String, String, String, Double, String, int, int, int, String, int)
+    public static void insert_CPU(String ID, String manufacturer, String name, double price, String type, int coreClock, int coreNum, int threads, String socket, int tdp)
     {
         addCPU(ID, manufacturer, name, coreClock, coreNum, threads, socket, tdp, price, type);
     }
     
-    // addGPU(String, String, String, int, String, String, int, double, String)
-    public static void insert_GPU(String ID, String manufacturer, String name, int coreClock, String memDDR, String memCapacity, int memClock, double price, String type)
+    // addGPU(String, String, String, double, String, int, String, String, int)
+    public static void insert_GPU(String ID, String manufacturer, String name, double price, String type, int coreClock, String memDDR, String memCapacity, int memClock)
     {    
         addGPU(ID, manufacturer, name, coreClock, memDDR, memCapacity, memClock, price, type);
+    }
+    
+    // addMemory(String, String, String, int, String, int, double, String)
+    public static void insert_Memory(String ID, String manufacturer, String name, double price, String type, int memCapacity, String memDDR, int memClock)
+    {
+        addMemory(ID, manufacturer, name, memCapacity, memDDR, memClock, price, type);
+    }
+    
+    // addPowerSupply(String, String, String, int, String, String, double, String)
+    public static void insert_PowerSupply(String ID, String manufacturer, String name, double price, String type, int wattage, String rating, String formFactor)
+    {
+        addPowerSupply(ID, manufacturer, name, wattage, rating, formFactor, price, type);
     }
     
     //
     // Web Services
     //
-
+ 
     private static String addCPU(java.lang.String compId, java.lang.String compManufacturer, java.lang.String compName, int coreClock, int coreNum, int threadNum, java.lang.String socket, int tdp, double compPrice, java.lang.String compType) {
         pcpickerinventory.PcpickerWebserviceForDesktop_Service service = new pcpickerinventory.PcpickerWebserviceForDesktop_Service();
         pcpickerinventory.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
@@ -54,42 +98,4 @@ public class service {
         pcpickerinventory.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
         return port.addPowerSupply(compId, compManufacturer, compName, wattage, rating, formFactor, compPrice, compType);
     }
-
-    private static java.util.List<pcpickerinventory.Branch> getBranchesList() {
-        pcpickerinventory.PcpickerWebserviceForDesktop_Service service = new pcpickerinventory.PcpickerWebserviceForDesktop_Service();
-        pcpickerinventory.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
-        return port.getBranchesList();
-    }
-
-    private static java.util.List<pcpickerinventory.Customer> getCustomerList() {
-        pcpickerinventory.PcpickerWebserviceForDesktop_Service service = new pcpickerinventory.PcpickerWebserviceForDesktop_Service();
-        pcpickerinventory.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
-        return port.getCustomerList();
-    }
-
-    private static java.util.List<pcpickerinventory.Delivery> getDeliveryList() {
-        pcpickerinventory.PcpickerWebserviceForDesktop_Service service = new pcpickerinventory.PcpickerWebserviceForDesktop_Service();
-        pcpickerinventory.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
-        return port.getDeliveryList();
-    }
-
-    private static java.util.List<pcpickerinventory.Inventory> getInventoryList() {
-        pcpickerinventory.PcpickerWebserviceForDesktop_Service service = new pcpickerinventory.PcpickerWebserviceForDesktop_Service();
-        pcpickerinventory.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
-        return port.getInventoryList();
-    }
-
-    private static java.util.List<pcpickerinventory.Order> getOrderList() {
-        pcpickerinventory.PcpickerWebserviceForDesktop_Service service = new pcpickerinventory.PcpickerWebserviceForDesktop_Service();
-        pcpickerinventory.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
-        return port.getOrderList();
-    }
-
-    private static java.util.List<pcpickerinventory.OrderComponent> getOrderComponentList() {
-        pcpickerinventory.PcpickerWebserviceForDesktop_Service service = new pcpickerinventory.PcpickerWebserviceForDesktop_Service();
-        pcpickerinventory.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
-        return port.getOrderComponentList();
-    }
-
-    
 }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package pcpickerinventory;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import pcpickerinventory.WinForms;
@@ -46,8 +47,8 @@ public class frmMain extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         addComponentButton = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jTextField13 = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
         cpuPanel = new javax.swing.JPanel();
         lblParam1 = new javax.swing.JLabel();
         txtParam1 = new javax.swing.JTextField();
@@ -62,19 +63,25 @@ public class frmMain extends javax.swing.JFrame {
         btnClear = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         compPriceText = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
         mnuMain = new javax.swing.JMenuBar();
         mnuFile = new javax.swing.JMenu();
         mnuFileBranch = new javax.swing.JMenuItem();
         mnuFileInventory = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnuFileExit = new javax.swing.JMenuItem();
-        mnuEdit = new javax.swing.JMenu();
+        mnuSystem = new javax.swing.JMenu();
+        mnuSystemLog = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+            public void windowDeactivated(java.awt.event.WindowEvent evt) {
+                formWindowDeactivated(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -85,6 +92,12 @@ public class frmMain extends javax.swing.JFrame {
         jLabel16.setText("Component Name:");
 
         jLabel18.setText("Component Manufacturer:");
+
+        compManufacturerText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                compManufacturerTextActionPerformed(evt);
+            }
+        });
 
         jLabel19.setText("Component Type:");
 
@@ -129,7 +142,7 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setText("Search");
+        btnSearch.setText("Search");
 
         cpuPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Specs"));
 
@@ -168,13 +181,13 @@ public class frmMain extends javax.swing.JFrame {
                     .addComponent(lblParam4)
                     .addComponent(lblParam5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(cpuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtParam5, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                    .addGroup(cpuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(cpuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cpuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtParam3, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                         .addComponent(txtParam1)
                         .addComponent(txtParam2)
-                        .addComponent(txtParam4, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addComponent(txtParam4, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(txtParam5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         cpuPanelLayout.setVerticalGroup(
@@ -198,9 +211,10 @@ public class frmMain extends javax.swing.JFrame {
                     .addGroup(cpuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtParam4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblParam4)))
+                .addGap(6, 6, 6)
                 .addGroup(cpuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtParam5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblParam5))
+                    .addComponent(lblParam5)
+                    .addComponent(txtParam5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -219,8 +233,8 @@ public class frmMain extends javax.swing.JFrame {
             panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInventoryLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelInventoryLayout.createSequentialGroup()
+                .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelInventoryLayout.createSequentialGroup()
                         .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel16)
                             .addComponent(jLabel15)
@@ -229,32 +243,30 @@ public class frmMain extends javax.swing.JFrame {
                         .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(compNameText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(compIdText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(compTypeCombo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelInventoryLayout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(compPriceText, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(compPriceText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(compManufacturerText, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(compTypeCombo, javax.swing.GroupLayout.Alignment.TRAILING, 0, 150, Short.MAX_VALUE))))
                     .addGroup(panelInventoryLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cpuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelInventoryLayout.createSequentialGroup()
+                                .addGap(162, 162, 162)
                                 .addComponent(addComponentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelInventoryLayout.createSequentialGroup()
-                                .addComponent(jLabel18)
-                                .addGap(20, 20, 20)
-                                .addComponent(compManufacturerText, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(cpuPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel18))
+                        .addGap(0, 2, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelInventoryLayout.createSequentialGroup()
-                        .addComponent(jButton6)
+                        .addComponent(btnSearch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(235, 531, Short.MAX_VALUE))
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(235, 539, Short.MAX_VALUE))
                     .addGroup(panelInventoryLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         panelInventoryLayout.setVerticalGroup(
@@ -264,8 +276,8 @@ public class frmMain extends javax.swing.JFrame {
                 .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(compIdText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSearch)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelInventoryLayout.createSequentialGroup()
@@ -277,37 +289,24 @@ public class frmMain extends javax.swing.JFrame {
                             .addComponent(jLabel19)
                             .addComponent(compTypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel18)
                             .addComponent(compManufacturerText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(compPriceText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel17))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(cpuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnClear)
                             .addComponent(addComponentButton)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         tabInventories.addTab("Inventory", panelInventory);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 474, Short.MAX_VALUE)
-        );
-
-        tabInventories.addTab("tab3", jPanel3);
 
         mnuFile.setText("File");
 
@@ -338,8 +337,17 @@ public class frmMain extends javax.swing.JFrame {
 
         mnuMain.add(mnuFile);
 
-        mnuEdit.setText("Edit");
-        mnuMain.add(mnuEdit);
+        mnuSystem.setText("System");
+
+        mnuSystemLog.setText("Logs");
+        mnuSystemLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuSystemLogActionPerformed(evt);
+            }
+        });
+        mnuSystem.add(mnuSystemLog);
+
+        mnuMain.add(mnuSystem);
 
         setJMenuBar(mnuMain);
 
@@ -350,14 +358,14 @@ public class frmMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tabInventories)
-                .addContainerGap())
+                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
-                .addComponent(tabInventories, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tabInventories)
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -387,11 +395,28 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_compTypeComboActionPerformed
 
     private void addComponentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addComponentButtonActionPerformed
-        service.insert_CPU(compIdText.getText(), compManufacturerText.getText(), compNameText.getText(), Integer.parseInt(txtParam3.getText()), Integer.parseInt(txtParam1.getText()), Integer.parseInt(txtParam2.getText()), txtParam4.getText(), Integer.parseInt(txtParam5.getText()), Double.parseDouble(compPriceText.getText()), compTypeCombo.getSelectedItem().toString());
-        //service.insert_GPU(compIdText.getText(), compManufacturerText.getText(), compNameText.getText(), Integer.parseInt(cpuFrequencyText.getText()), cpuCountText.getText(), cpuSocketText.getText(), Integer.parseInt(cpuThreadText.getText()), Integer.parseInt(cpuTDPText.getText()), compTypeCombo.getSelectedItem().toString());
+        if (compTypeCombo.getSelectedItem().toString().equals(Parts.Type.Processor.toString().replaceAll("_", " ")))
+        {
+            try {
+                service.insert_CPU(compIdText.getText(), compManufacturerText.getText(), compNameText.getText(), Double.parseDouble(compPriceText.getText()), compTypeCombo.getSelectedItem().toString(), Integer.parseInt(txtParam3.getText()), Integer.parseInt(txtParam1.getText()), Integer.parseInt(txtParam2.getText()), txtParam4.getText(), Integer.parseInt(txtParam5.getText()));
+                service.systemLog("CPU Added");
+            } catch (Exception e) {
+                service.errAlert(mnuSystem);
+                service.systemLog(e, e.getMessage());
+            }
+        }
+        else if (compTypeCombo.getSelectedItem().toString().equals(Parts.Type.Graphics_Card.toString().replaceAll("_", " ")))
+        {
+            try {
+                service.insert_GPU(compIdText.getText(), compManufacturerText.getText(), compNameText.getText(), Double.parseDouble(compPriceText.getText()), compTypeCombo.getSelectedItem().toString(), Integer.parseInt(txtParam1.getText()), txtParam2.getText(), txtParam3.getText(), Integer.parseInt(txtParam4.getText()));
+                service.systemLog("GPU Added");
+            } catch (Exception e) {
+                service.errAlert(mnuSystem);
+                service.systemLog(e, e.getMessage());
+            }
+        }
     }//GEN-LAST:event_addComponentButtonActionPerformed
 
-    
     private void txtParam2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtParam2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtParam2ActionPerformed
@@ -408,6 +433,42 @@ public class frmMain extends javax.swing.JFrame {
     private void txtParam5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtParam5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtParam5ActionPerformed
+
+    private void mnuSystemLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSystemLogActionPerformed
+        // TODO add your handling code here:
+        service.isErrorLogged = false;
+        WinForms.SysLog().setVisible(true);
+    }//GEN-LAST:event_mnuSystemLogActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        if (!service.isErrorLogged)
+        {
+            mnuSystem.setForeground(Color.BLACK);
+            mnuSystemLog.setForeground(Color.BLACK);
+        }
+        else
+        {
+            mnuSystem.setForeground(Color.RED);
+            mnuSystemLog.setForeground(Color.RED);
+        }
+    }//GEN-LAST:event_formWindowActivated
+
+    private void formWindowDeactivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeactivated
+        // TODO add your handling code here:
+        if (!service.isErrorLogged)
+        {
+            mnuSystem.setForeground(Color.BLACK);
+        }
+        else
+        {
+            mnuSystem.setForeground(Color.RED);
+        }
+    }//GEN-LAST:event_formWindowDeactivated
+
+    private void compManufacturerTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compManufacturerTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_compManufacturerTextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -448,35 +509,34 @@ public class frmMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addComponentButton;
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JTextField compIdText;
     private javax.swing.JTextField compManufacturerText;
     private javax.swing.JTextField compNameText;
     private javax.swing.JTextField compPriceText;
     private javax.swing.JComboBox<String> compTypeCombo;
     private javax.swing.JPanel cpuPanel;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField13;
     private javax.swing.JLabel lblParam1;
     private javax.swing.JLabel lblParam2;
     private javax.swing.JLabel lblParam3;
     private javax.swing.JLabel lblParam4;
     private javax.swing.JLabel lblParam5;
-    private javax.swing.JMenu mnuEdit;
     private javax.swing.JMenu mnuFile;
     private javax.swing.JMenuItem mnuFileBranch;
     private javax.swing.JMenuItem mnuFileExit;
     private javax.swing.JMenuItem mnuFileInventory;
     private javax.swing.JMenuBar mnuMain;
+    private javax.swing.JMenu mnuSystem;
+    private javax.swing.JMenuItem mnuSystemLog;
     private javax.swing.JPanel panelInventory;
     private javax.swing.JTabbedPane tabInventories;
     private javax.swing.JTextField txtParam1;
@@ -484,5 +544,6 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JTextField txtParam3;
     private javax.swing.JTextField txtParam4;
     private javax.swing.JTextField txtParam5;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
