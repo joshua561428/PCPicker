@@ -60,7 +60,7 @@ public class Pcpicker_webserviceForDesktop {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
 
-            String sql = "{call get_Order_list()}"; ////////////////////////////////
+            String sql = "{call ()}"; ////////////////////////////////
             CallableStatement callableStatement = conn.prepareCall(sql);
             ResultSet rs = callableStatement.executeQuery();
 
