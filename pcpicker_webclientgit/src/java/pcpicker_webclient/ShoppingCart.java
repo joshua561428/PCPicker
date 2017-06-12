@@ -120,7 +120,7 @@ public class ShoppingCart extends HttpServlet {
         {
             HashMap items = new HashMap();
             items.put("1",cart.getList().get(i).part.getPartId());
-            items.put("2",cart.getList().get(i).part.getPartName());
+            items.put("2",cart.getList().get(i).part.getPartId() + " " + cart.getList().get(i).part.getPartName());
             items.put("3",Double.toString(cart.getList().get(i).part.getPartPrice()));
             items.put("4",Integer.toString(cart.getList().get(i).quantity));
             items.put("5",cart.getList().get(i).quantity * cart.getList().get(i).part.getPartPrice());

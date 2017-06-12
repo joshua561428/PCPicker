@@ -63,66 +63,86 @@
                 
          
         <div class="content">       
-            <div class ="search_results_container_outer">
-                <div class="search_results_container_inner">    
-                    <form method="post" action = "ShoppingCart">
-                            
-                        <input type="hidden" name ="numListItems" value ="${fn:length(cart)}">
+            <div class ="cart_container">
+                <div class ="cart_banner">
+                    Shopping Cart
+                </div>
+                <form method="post" action = "ShoppingCart">
 
-                        <c:forEach items="${cart}" var="components_" varStatus ="loopCounter">
-                            <c:forEach items="${components_.value}" var="details" varStatus="loopCounter2">
-                                <c:choose>
-                                    <c:when test="${loopCounter2.index == 0}">
-                                        partid: ${details.value}
+                    <input type="hidden" name ="numListItems" value ="${fn:length(cart)}">
+
+                    <c:forEach items="${cart}" var="components_" varStatus ="loopCounter">
+                        <div class ="searchItemWrapper2">  
+                        <c:forEach items="${components_.value}" var="details" varStatus="loopCounter2">
+                            <c:choose>
+                                <c:when test="${loopCounter2.index == 0}">
+                                    <div class="partid">
                                         <input type ="hidden" name ="partid" value ="${details.value}">
-                                    </c:when>
-                                    <c:when test="${loopCounter2.index == 1}">
-                                        part name: ${details.value}
-                                    </c:when>
-                                    <c:when test="${loopCounter2.index == 2}">
-                                        part price: ${details.value}
-                                    </c:when>
-                                    <c:when test="${loopCounter2.index == 3}">                                        
-                                        quantity:
+                                    </div>
+                                </c:when>
+                                <c:when test="${loopCounter2.index == 1}">
+                                    <div class="partname2">
+                                        ${details.value}
+                                    </div>
+                                </c:when>
+                                <c:when test="${loopCounter2.index == 2}">
+                                    <div class="partprice2">
+                                      <%--  ₱${details.value}--%>
+                                    </div>
+                                </c:when>
+                                <c:when test="${loopCounter2.index == 3}">  
+                                    <div class="partquantity">
+                                        Quantity:
                                         <input type="submit" value="<" name="submit${loopCounter.index}">
                                         ${details.value}
                                         <input type="submit" value=">" name="submit${loopCounter.index}">
-                                    </c:when>
-                                    <c:when test="${loopCounter2.index == 4}">                                        
-                                        subtotal ${details.value}                                        
-                                    </c:when>
-                                    <c:otherwise>
-                                        ${details.value}
-                                    </c:otherwise>
-                                </c:choose>
-                                <br>
-
-                            </c:forEach>
-                                <input type="submit" value="Remove from Cart" name="submit${loopCounter.index}">
-                                <br><br>
-                        </c:forEach>
-                            
-                        <div>
-                            Total Price : ${totalPrice}
+                                    </div>
+                                </c:when>
+                                <c:when test="${loopCounter2.index == 4}">                                        
+                                    <div class="partsubtotal">
+                                        Subtotal:  ₱${details.value}                                        
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    ${details.value}
+                                </c:otherwise>
+                            </c:choose>
                             <br>
+
+                        </c:forEach>
+                            <div class="partAdd2">
+                            <input type="submit" value="Remove from Cart" name="submit${loopCounter.index}">
+                           
+                            </div>
                         </div>
-                            
-                    </form>  
+                    </c:forEach>
+
                     <div>
+                        <div class="totalprice">
+                            Total : ${totalPrice}
+                        </div>
+                    </div>
+
+                </form>  
+                <div class="buttons">
+                    <div class="checkoutbutton">
                         <form method ="post" action ="Checkout">
                             <input type="submit" value="Checkout" name="submit">
+                             ${message}<br>
                         </form>
-                            ${message}<br>
-                        
-                        
+                    </div>
+                       
+
+                    <div class ="continuebutton">    
                         <form method ="get" action="SearchPage">
                         <%-- todo get search filter parameters------------------------------------------------------------------------------------------------%>      
                             <input type ="hidden" name="componentType" value="${componentType}">
                             <input type="submit" name="submit" value="Continue shopping">
                         </form>
                     </div>
-                </div>                    
-            </div>
+                </div>
+            </div>                    
+           
         </div>
     </body>
 </html>
