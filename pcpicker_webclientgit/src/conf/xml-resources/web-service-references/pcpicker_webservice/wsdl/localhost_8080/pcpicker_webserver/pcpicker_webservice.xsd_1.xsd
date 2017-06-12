@@ -56,10 +56,6 @@
 
 <xs:element name="getMouseListResponse" type="tns:getMouseListResponse"/>
 
-<xs:element name="getOrderItems" type="tns:getOrderItems"/>
-
-<xs:element name="getOrderItemsResponse" type="tns:getOrderItemsResponse"/>
-
 <xs:element name="getOrderList" type="tns:getOrderList"/>
 
 <xs:element name="getOrderListResponse" type="tns:getOrderListResponse"/>
@@ -83,27 +79,6 @@
 <xs:element name="login" type="tns:login"/>
 
 <xs:element name="loginResponse" type="tns:loginResponse"/>
-
-<xs:complexType name="getOrderItems">
-<xs:sequence>
-<xs:element name="order_id" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getOrderItemsResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:Order_Parts" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Order_Parts">
-<xs:sequence>
-<xs:element name="order_id" type="xs:int"/>
-<xs:element name="part_id" type="xs:string" minOccurs="0"/>
-<xs:element name="quantity" type="xs:int"/>
-<xs:element name="price" type="xs:double"/>
-</xs:sequence>
-</xs:complexType>
 
 <xs:complexType name="getPart">
 <xs:sequence>
@@ -175,17 +150,23 @@
 </xs:complexType>
 
 <xs:complexType name="Order">
-<xs:complexContent>
-<xs:extension base="tns:Part">
 <xs:sequence>
 <xs:element name="order_id" type="xs:int"/>
 <xs:element name="cust_id" type="xs:int"/>
 <xs:element name="date_created" type="xs:string" minOccurs="0"/>
 <xs:element name="payment_type" type="xs:string" minOccurs="0"/>
 <xs:element name="active" type="xs:boolean" minOccurs="0"/>
+<xs:element name="items" type="tns:Order_Parts" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
-</xs:extension>
-</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="Order_Parts">
+<xs:sequence>
+<xs:element name="order_id" type="xs:int"/>
+<xs:element name="part_id" type="xs:string" minOccurs="0"/>
+<xs:element name="quantity" type="xs:int"/>
+<xs:element name="price" type="xs:double"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="getGPUMemoryTypes">
@@ -470,6 +451,8 @@
 <xs:element name="address" type="xs:string" minOccurs="0"/>
 <xs:element name="city" type="xs:string" minOccurs="0"/>
 <xs:element name="zipCode" type="xs:int"/>
+<xs:element name="firstname" type="xs:string" minOccurs="0"/>
+<xs:element name="lastname" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

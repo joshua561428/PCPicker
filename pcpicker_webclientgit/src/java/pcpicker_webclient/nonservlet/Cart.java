@@ -52,6 +52,17 @@ public class Cart {
             cartItems.get(index).quantity = quantity;
         
     }
+    public void sub(Part part, int quantity)
+    {
+        int index = partInList(part);
+        if(index >=0 )
+        {
+            if(cartItems.get(index).quantity>1)
+                cartItems.get(index).quantity -= quantity;
+        }
+       
+       
+    }
     
     public ArrayList<CartItem> getList()
     {

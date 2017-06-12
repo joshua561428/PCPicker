@@ -94,7 +94,7 @@ public class AccountPage extends HttpServlet {
             items.put("2", o.getDateCreated());
             items.put("3", o.getPaymentType());
                     
-            List<OrderParts> ops = WebMethods.getOrderItems(o.getOrderId());
+            List<OrderParts> ops = o.getItems();
             
             int numItems = ops.size();
             double totalPrice = 0;

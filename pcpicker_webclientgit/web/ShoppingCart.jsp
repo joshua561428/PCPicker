@@ -17,7 +17,7 @@
     <body>
          <div class ="banner">
             <div class ="logo">  
-                <a href="homepage1.jsp"><img src="img/logo.png" alt="logo" /></a>
+               <a href="${pageContext.request.contextPath}/Homepage"><img src="img/logo.png" alt="logo" /></a>
             </div>
             <div class="login_button">
                 <a href="<%=request.getContextPath()%>/Login">                   
@@ -73,29 +73,33 @@
                             <c:forEach items="${components_.value}" var="details" varStatus="loopCounter2">
                                 <c:choose>
                                     <c:when test="${loopCounter2.index == 0}">
-                                        ${details.value}
+                                        partid: ${details.value}
                                         <input type ="hidden" name ="partid" value ="${details.value}">
                                     </c:when>
                                     <c:when test="${loopCounter2.index == 1}">
-                                        ${details.value}
+                                        part name: ${details.value}
                                     </c:when>
                                     <c:when test="${loopCounter2.index == 2}">
-                                       ${details.value}
+                                        part price: ${details.value}
                                     </c:when>
-                                    <c:when test="${loopCounter2.index == 3}">
-                                       ${details.value}
+                                    <c:when test="${loopCounter2.index == 3}">                                        
+                                        quantity:
+                                        <input type="submit" value="<" name="submit${loopCounter.index}">
+                                        ${details.value}
+                                        <input type="submit" value=">" name="submit${loopCounter.index}">
+                                    </c:when>
+                                    <c:when test="${loopCounter2.index == 4}">                                        
+                                        subtotal ${details.value}                                        
                                     </c:when>
                                     <c:otherwise>
                                         ${details.value}
                                     </c:otherwise>
                                 </c:choose>
-
+                                <br>
 
                             </c:forEach>
-
-
-                             <input type="submit" value="Remove from Cart" name="submit${loopCounter.index}">
-                           <br>
+                                <input type="submit" value="Remove from Cart" name="submit${loopCounter.index}">
+                                <br><br>
                         </c:forEach>
                             
                         <div>

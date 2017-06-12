@@ -47,6 +47,7 @@ public class Login extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ShoppingCart.getCartSummary(request);
+        SessionMessage.getMessage(request);
         if (( request.getSession().getAttribute("userid") == null) || ( request.getSession().getAttribute("userid") == "")) 
         {
             //not logged in - go to login page
@@ -55,8 +56,9 @@ public class Login extends HttpServlet {
         else
         {
             //todo log in - go to account page 
-           SessionMessage.getMessage(request);
+         
            response.sendRedirect(request.getContextPath()+"/AccountPage");
+           //response.sendRedirect(request.getParameter("from"));
         }
         
     }
@@ -87,7 +89,7 @@ public class Login extends HttpServlet {
         {
             request.getSession().setAttribute("username",username);
             request.getSession().setAttribute("userid",custid);
-            response.sendRedirect("homepage1.jsp");         
+            response.sendRedirect(request.getContextPath()+"/Homepage");         
         }
         
        

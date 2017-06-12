@@ -39,12 +39,17 @@ public class SearchPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String componentType = (String) request.getParameter("test");
-        if(componentType==null||componentType.equals(""))
-            componentType = (String) request.getParameter("componentType");
+        String componentType = getComponentType(request);
         ShoppingCart.getCartSummary(request);
         
-        //todo - on filterget get value max min
+        filter(request,componentType);
+       
+        request.getRequestDispatcher("searchpage.jsp").forward(request, response);
+    }
+    
+    private void filter(HttpServletRequest request, String componentType)
+    {
+         //todo - on filterget get value max min
         int setMaxPrice = getMaxPrice(componentType);
         int setMinPrice = 0;       
         request.setAttribute("setMaxPrice",setMaxPrice);
@@ -120,10 +125,17 @@ public class SearchPage extends HttpServlet {
         request.setAttribute("formFactor",getFormFactor(componentType));
         
         request.setAttribute("componentslist",getList(componentType));
-       
-        request.getRequestDispatcher("searchpage.jsp").forward(request, response);
     }
     
+    private String getComponentType(HttpServletRequest request)
+    {
+        String componentType = (String) request.getParameter("test");
+        if(componentType==null||componentType.equals(""))
+            componentType = (String) request.getParameter("componentType");
+        if(componentType == null || componentType.equals(""))
+            componentType = "Processor";
+        return componentType;
+    }
     
     private HashMap getList(String compType)
     {

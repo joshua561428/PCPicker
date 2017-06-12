@@ -18,7 +18,7 @@
     <body>
         <div class ="banner">
             <div class ="logo">  
-                <a href="homepage1.jsp"><img src="img/logo.png" alt="logo" /></a>
+               <a href="${pageContext.request.contextPath}/Homepage"><img src="img/logo.png" alt="logo" /></a>
             </div>
             <div class="login_button">
                 <a href="<%=request.getContextPath()%>/Login">                   
@@ -78,6 +78,14 @@
 
                         </div>
                     
+                    </div>
+                    <div>
+                        <div class ="label">Last name</div>
+                        <div class = "field"><input type ="text" name="lastname" placeholder="Lastname"required value="${lastname}"></div>
+                    </div>
+                    <div>
+                        <div class ="label">First name</div>
+                        <div class = "field"><input type ="text" name="firstname" placeholder="Firstname"required value="${firstname}"></div>
                     </div>
                     <div>
                         <div class ="label">Address</div>

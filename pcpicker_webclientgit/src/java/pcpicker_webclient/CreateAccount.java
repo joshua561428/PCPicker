@@ -75,6 +75,8 @@ public class CreateAccount extends HttpServlet {
         String passwordre = (String) request.getParameter("passwordre");
         String city = (String) request.getParameter("city");
         String zipCode = (String) request.getParameter("zipCode");
+        String firstname = (String) request.getParameter("firstname");
+        String lastname = (String) request.getParameter("lastname");
         int zip = 0;
         Boolean error= false;
         String message = "";
@@ -95,7 +97,7 @@ public class CreateAccount extends HttpServlet {
         
         if(!error)
         {
-            if(WebMethods.addCustomer(username, password, address, city, Integer.parseInt(zipCode)))
+            if(WebMethods.addCustomer(username, password, address, city, Integer.parseInt(zipCode),firstname,lastname))
             {
                 message+="Register Success!";
                 request.setAttribute("message", message);
@@ -113,6 +115,8 @@ public class CreateAccount extends HttpServlet {
         {
             request.setAttribute("message", message);
             request.setAttribute("username", username);
+            request.setAttribute("lastname", lastname);
+            request.setAttribute("firstname", firstname);
             request.setAttribute("address", address);
             request.setAttribute("city", city);
             request.setAttribute("zipCode", city);

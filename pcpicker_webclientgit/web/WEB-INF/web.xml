@@ -32,6 +32,10 @@
         <servlet-name>OrderPage</servlet-name>
         <servlet-class>pcpicker_webclient.OrderPage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Homepage</servlet-name>
+        <servlet-class>pcpicker_webclient.Homepage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SearchPage</servlet-name>
         <url-pattern>/SearchPage</url-pattern>
@@ -64,12 +68,16 @@
         <servlet-name>OrderPage</servlet-name>
         <url-pattern>/OrderPage</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Homepage</servlet-name>
+        <url-pattern>/Homepage</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>homepage1.jsp</welcome-file>
+        <welcome-file>/Homepage</welcome-file>
     </welcome-file-list>
 </web-app>

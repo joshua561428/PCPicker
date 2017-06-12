@@ -16,7 +16,7 @@
         
         <div class ="banner">
             <div class ="logo">  
-                <a href="homepage1.jsp"><img src="img/logo.png" alt="logo" /></a>
+                <a href="${pageContext.request.contextPath}/Homepage"><img src="img/logo.png" alt="logo" /></a>
             </div>
             <div class="login_button">
                 <a href="<%=request.getContextPath()%>/Login">                   

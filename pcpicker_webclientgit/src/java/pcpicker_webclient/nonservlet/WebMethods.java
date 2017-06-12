@@ -8,6 +8,7 @@ import pcpicker.*;
 import pcpicker.PcpickerWebservice_Service;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import javax.xml.ws.WebServiceRef;
 /**
  *
@@ -136,11 +137,7 @@ public class WebMethods {
         return port.getPart(partId);
     }
 
-    public static Boolean addCustomer(java.lang.String username, java.lang.String password, java.lang.String address, java.lang.String city, int zipCode) {
-        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
-        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
-        return port.addCustomer(username, password, address, city, zipCode);
-    }
+   
 
     public static String login(java.lang.String username, java.lang.String password) {
         pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
@@ -160,11 +157,13 @@ public class WebMethods {
         return port.getOrderList(custId);
     }
 
-    public static java.util.List<pcpicker.OrderParts> getOrderItems(int orderId) {
+    public static Boolean addCustomer(java.lang.String username, java.lang.String password, java.lang.String address, java.lang.String city, int zipCode, java.lang.String firstname, java.lang.String lastname) {
         pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
         pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
-        return port.getOrderItems(orderId);
+        return port.addCustomer(username, password, address, city, zipCode, firstname, lastname);
     }
+
+  
 
 
 }

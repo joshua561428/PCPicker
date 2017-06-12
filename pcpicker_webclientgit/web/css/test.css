@@ -172,6 +172,16 @@ html, body{
     top:1em;
     right:8.5em;
 }
+.login_button input[type=submit]{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+.login_button input[type=submit]:hover{
+    text-decoration: underline;    
+    color: white;
+    font-weight: bold;
+}
 .login_button a{
     text-decoration: none;
     color: white;

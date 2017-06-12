@@ -15,7 +15,7 @@
     <body>
         <div class ="banner">
             <div class ="logo">  
-                <a href="homepage1.jsp"><img src="img/logo.png" alt="logo" /></a>
+                <a href="${pageContext.request.contextPath}/Homepage"><img src="img/logo.png" alt="logo" /></a>
             </div>
             <div class="login_button">
                 <a href="<%=request.getContextPath()%>/Login">                   
@@ -69,7 +69,8 @@
                     <div>
                         <input type="password" name="password" placeholder="password"required>
                     </div>
-                    <input type="submit" value="Login" name="button">                    
+                    <input type="submit" value="Login" name="button">    
+                    <input type="hidden" name="from" value="${from}">
                 </form>
                 
                 <input type="submit" value="Create Account" name="button" onclick=location.href='${pageContext.request.contextPath}/CreateAccount;'>

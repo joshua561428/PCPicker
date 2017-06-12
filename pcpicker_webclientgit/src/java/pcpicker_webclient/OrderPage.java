@@ -50,9 +50,22 @@ public class OrderPage extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ShoppingCart.getCartSummary(request);
-        
+        int custid = Integer.parseInt((String)request.getSession().getAttribute("userid"));
         Integer orderid = getOrderId(request);
-        List<OrderParts> op = WebMethods.getOrderItems(orderid);
+       // System.out.println("custid------------------------------------------------" + custid);
+        List<Order> orders = WebMethods.getOrderList(custid);        
+        List<OrderParts> op  = null;
+        System.out.println("orders num" + orders.size());
+        for(Order o : orders)
+        {
+           
+            if(o.getOrderId() == orderid)
+            {
+                op = o.getItems();
+                //System.out.println("adasdasdasdasdqeqweqdzczxdfwewrwesdfsdfsdf");
+                break;
+            }
+        }
         HashMap opmap = createOrderPartHashMap(op);
         double totalprice = calculateTotalPrice(op);
         
@@ -130,7 +143,7 @@ public class OrderPage extends HttpServlet {
             items.put("2",o.getQuantity());
             Part part = WebMethods.getPart(o.getPartId());
             items.put("3",part.getPartName());
-            items.put("4",part.getPartPrice());
+            items.put("4",o.getPrice());
             
             map.put(Integer.toString(i), items);
         }
