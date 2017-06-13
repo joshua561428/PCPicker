@@ -374,6 +374,15 @@ html, body{
     width:80%;
     
 }
+.orderbanner{
+    font-family: "Segoe UI", sans-serif;
+    font-size: 3em;
+    font-weight: lighter;
+    padding: 5px;
+    text-align: center;
+    width: 100%;
+    
+}
 .radio_button_label{
     position:relative;
     display:inline-block;
@@ -490,6 +499,22 @@ html, body{
 .searchitem input[type=submit]:hover{
     
 }
+.orderlabel{
+    font-family: "Segoe UI", sans-serif;
+    font-weight: normal;
+    position:relative;
+    display: inline-block;
+    padding : 5px;
+    font-size: 1.5em;
+    margin-left: 5em;
+    
+}
+.olabel{
+    font-weight:lighter;
+     position:relative;
+    display: inline-block;
+     margin-right: 10em;
+}
 .searchItemWrapper2{
     position:relative;
     margin:5px;
@@ -498,7 +523,7 @@ html, body{
     border-bottom: 1px solid #ccc;
     color:black;
     font-weight: 300;
-    min-height: 3em;
+    min-height: 1.5em;
     
 }
 .partimage{
@@ -525,6 +550,7 @@ html, body{
     color: #051C38;
     margin-right: 10px;
 }
+
 .partname{
     left:5em;
     top:0.2em;
@@ -562,9 +588,10 @@ html, body{
     font-weight: 400;
 }
 .partprice2{
-    position:relative;
+    position:absolute;
     display:inline-block;
-     
+    right:30em;
+    top:1em;
     margin:5px;
     font-size: 1.2em;
     font-weight: 400;
@@ -585,8 +612,8 @@ html, body{
 }
 .partquantity{
     position: absolute;   
-    right:10em;
-    top:0.2em;
+    right:19.4em;
+    top:0.7em;
     margin:5px;
     font-size: 1.2em;
     font-weight: 400;
@@ -608,8 +635,8 @@ html, body{
 .partsubtotal{
     position: absolute;    
     margin:5px;
-    right:0.5em;
-    top:0.2em;
+    right:3em;
+    top:0.4em;
     font-size: 1.2em;
     font-weight: 400;
     display: inline-block;
@@ -622,7 +649,7 @@ html, body{
 .totalprice{
     border-bottom: 1px solid #ccc;
     text-align: right;
-    margin-right: 1em;
+    margin-right: 2em;
     font-family: "Segoe UI", sans-serif;
     font-size: 1.5em;
 }
@@ -636,6 +663,34 @@ html, body{
     display: inline-table;
     left: 0.5em;
     
+}
+.labels{
+    position:relative;
+    display: inline-block;
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 300;
+    font-size:1.2em;
+    top:0.1em;
+    border-bottom: 1px solid #ccc;
+    width:100%;
+    min-height: 1.5em;
+}
+.pricelabel{
+    position:absolute;
+    display:inline-block;
+    right: 30em;
+    
+}
+.quantitylabel{
+    position:absolute;
+    display:inline-block;
+    right:20em;
+    
+}
+.subtotallabel{
+    position:absolute;
+    display:inline-block;
+    right:4em;
 }
 .partAdd2 input[type=submit]{
     border: 1px solid #ccc;
@@ -780,10 +835,12 @@ html, body{
 }
 .cart_banner{
     font-family: "Segoe UI", sans-serif;
-    font-size: 2em;
+    font-size: 3em;
     font-weight: lighter;
-    border-bottom: 1px solid #ccc;
     padding: 5px;
+    text-align: center;
+    width: 100%;
+    
 }
 
 

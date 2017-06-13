@@ -70,9 +70,24 @@
                 <form method="post" action = "ShoppingCart">
 
                     <input type="hidden" name ="numListItems" value ="${fn:length(cart)}">
-
+                    
+                    <div class="labels">                            
+                        <div class="quantitylabel">
+                            Quantity
+                        </div>
+                        <div class="pricelabel">
+                            Item Price
+                        </div>
+                        <div class="subtotallabel">
+                            Subtotal
+                        </div>
+                    </div>
+                            
                     <c:forEach items="${cart}" var="components_" varStatus ="loopCounter">
                         <div class ="searchItemWrapper2">  
+                        
+                            
+                            
                         <c:forEach items="${components_.value}" var="details" varStatus="loopCounter2">
                             <c:choose>
                                 <c:when test="${loopCounter2.index == 0}">
@@ -87,12 +102,11 @@
                                 </c:when>
                                 <c:when test="${loopCounter2.index == 2}">
                                     <div class="partprice2">
-                                      <%--  ₱${details.value}--%>
+                                       ₱${details.value}
                                     </div>
                                 </c:when>
                                 <c:when test="${loopCounter2.index == 3}">  
                                     <div class="partquantity">
-                                        Quantity:
                                         <input type="submit" value="<" name="submit${loopCounter.index}">
                                         ${details.value}
                                         <input type="submit" value=">" name="submit${loopCounter.index}">
@@ -100,7 +114,7 @@
                                 </c:when>
                                 <c:when test="${loopCounter2.index == 4}">                                        
                                     <div class="partsubtotal">
-                                        Subtotal:  ₱${details.value}                                        
+                                        ₱${details.value}                                        
                                     </div>
                                 </c:when>
                                 <c:otherwise>
@@ -111,7 +125,7 @@
 
                         </c:forEach>
                             <div class="partAdd2">
-                            <input type="submit" value="Remove from Cart" name="submit${loopCounter.index}">
+                                <input type="submit" value="Remove from Cart" name="submit${loopCounter.index}">
                            
                             </div>
                         </div>
@@ -119,7 +133,7 @@
 
                     <div>
                         <div class="totalprice">
-                            Total : ${totalPrice}
+                            Total : ₱${totalPrice}
                         </div>
                     </div>
 

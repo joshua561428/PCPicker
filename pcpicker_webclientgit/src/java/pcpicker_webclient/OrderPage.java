@@ -48,6 +48,7 @@ public class OrderPage extends HttpServlet {
                 {
                     op = o.getItems();
                     deliveryDate = o.getDeliveryDate();
+                    request.setAttribute("datecreated",o.getDateCreated());
                     //System.out.println("adasdasdasdasdqeqweqdzczxdfwewrwesdfsdfsdf");
                     break;
                 }
@@ -56,6 +57,7 @@ public class OrderPage extends HttpServlet {
             HashMap opmap = createOrderPartHashMap(op);
             double totalprice = calculateTotalPrice(op);
 
+           
             request.setAttribute("deliveryDate",deliveryDate);
             request.setAttribute("totalprice",totalprice);
             request.setAttribute("orderid",orderid);
@@ -148,10 +150,11 @@ public class OrderPage extends HttpServlet {
             HashMap items = new HashMap();
             
             items.put("1",o.getPartId());
-            items.put("2",o.getQuantity());
+            items.put("3",o.getQuantity());
             Part part = WebMethods.getPart(o.getPartId());
-            items.put("3",part.getPartName());
+            items.put("2",o.getPartId() + " " + part.getPartName());
             items.put("4",o.getPrice());
+            items.put("5",o.getPrice() * o.getQuantity());
           
             
             map.put(Integer.toString(i), items);

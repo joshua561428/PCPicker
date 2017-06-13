@@ -57,31 +57,42 @@
         </div>
         
         <div class="content">
-            
-            Order id : ${orderid}<br>
-            Total Price: ${totalprice}<br>
-            Delivery Date: ${deliveryDate}<br>
+            <div class="orderbanner">
+                View Order
+            </div>
+            <div class ="orderlabel">
+                Order id :   <div class ="olabel"> ${orderid}</div>
+                Date created:   <div class ="olabel"> ${datecreated}</div>                
+                Delivery Date: <div class ="olabel"> ${deliveryDate}</div>
+                Total Price:  <div class ="olabel"> ₱${totalprice}</div>
+            </div>
             <input type="hidden" name ="numOrders" value ="${fn:length(orderslist)}">
-            <c:forEach items="${orderitems}" var="order" varStatus ="loopCounter">                
+            <c:forEach items="${orderitems}" var="order" varStatus ="loopCounter">      
+                 <div class ="searchItemWrapper2">  
                 <c:forEach items="${order.value}" var="details" varStatus="loopCounter2">
                     <c:choose>
                         <c:when test="${loopCounter2.index == 0 }">
-                            partid :${details.value}
-                            <input type ="hidden" name ="partid" value ="${details.value}">
-                        </c:when>
-                        <c:when test="${loopCounter2.index == 1}">
-                            quantity:    ${details.value}
+                            <div >
+                                <input type ="hidden" name ="partid" value ="${details.value}">
+                            </div>
                         </c:when>
                         <c:when test="${loopCounter2.index == 2}">
+                            quantity:    ${details.value}
+                        </c:when>
+                        <c:when test="${loopCounter2.index == 1}">
                             partname ${details.value}
                         </c:when>
-                        <c:otherwise>
+                         <c:when test="${loopCounter2.index == 3}">
                             part price: ${details.value}
+                         </c:when>
+                        <c:otherwise>
+                            subtotal: ${details.value}
                         </c:otherwise>
                     </c:choose>
                             <br>
 
                 </c:forEach>
+                 </div>
                             <br>
             </c:forEach>
             
