@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.*;
 @XmlType(name = "Order")
 public class Order
 {
+    
     @XmlElement(name = "order_id")
     protected int order_id;    
     @XmlElement(name = "cust_id")

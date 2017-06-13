@@ -13,7 +13,7 @@ import javax.jws.*;
 public class Pcpicker_webservice
 {
     String user="root"; // meron rin sa Pcpicker_webserviceForDesktop
-    String pass="1825";
+    String pass="";
     
    
     
@@ -729,7 +729,40 @@ public class Pcpicker_webservice
         }
         return a;
     }
-    
+     @WebMethod(operationName = "getOrderHistoryList")
+    public ArrayList<Order> getOrderHistoryList(@WebParam(name = "cust_id") int cust_id) {
+        ArrayList<Order> a = new ArrayList(); ///////////////////////////////
+        int i = 0;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+
+            String sql = "{call getHistoryOrders(?)}"; ////////////////////////////////
+            
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            callableStatement.setInt(1,cust_id);
+            ResultSet rs = callableStatement.executeQuery();
+
+            while (rs.next()) {
+                int last = a.size();
+                a.add(new Order()); ////////////////////////////////////////////
+
+                a.get(last).setOrder_id(rs.getInt(1));/////////////////////////////
+                a.get(last).setCust_id(rs.getInt(2));//////////////////
+                a.get(last).setDate_created(rs.getString(3));////////////////
+                a.get(last).setPayment_type(rs.getString(4));
+                a.get(last).setActive(rs.getBoolean(5));
+                a.get(last).setItems(getOrderItems(a.get(last).getOrder_id()));
+                a.get(last).setDeliveryDate(rs.getString(7));
+            }
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return a;
+    }
     private ArrayList<Order_Parts> getOrderItems(int order_id) {
         ArrayList<Order_Parts> a = new ArrayList(); ///////////////////////////////
         int i = 0;
@@ -780,6 +813,5 @@ public class Pcpicker_webservice
         }
         return "";
     }
-    
     
 }
