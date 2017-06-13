@@ -64,7 +64,7 @@
                 Order id :   <div class ="olabel"> ${orderid}</div>
                 Date created:   <div class ="olabel"> ${datecreated}</div>                
                 Delivery Date: <div class ="olabel"> ${deliveryDate}</div>
-                Total Price:  <div class ="olabel"> ₱${totalprice}</div>
+                
             </div>
             <div class="labels">                            
                 <div class="quantitylabel">
@@ -115,7 +115,11 @@
                      </div>
                                 <br>
                 </c:forEach>
+                <div class="orderlabels">
+                    Total Price:  <div class ="olabel"> ₱${totalprice}</div>
+                </div>
             </div>
+                
             
             
             
