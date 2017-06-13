@@ -66,36 +66,56 @@
                 Delivery Date: <div class ="olabel"> ${deliveryDate}</div>
                 Total Price:  <div class ="olabel"> ₱${totalprice}</div>
             </div>
+            <div class="labels">                            
+                <div class="quantitylabel">
+                    Quantity
+                </div>
+                <div class="pricelabel">
+                    Item Price
+                </div>
+                <div class="subtotallabel">
+                    Subtotal
+                </div>
+            </div>
+            <div class ="orderpagewrapper">
             <input type="hidden" name ="numOrders" value ="${fn:length(orderslist)}">
-            <c:forEach items="${orderitems}" var="order" varStatus ="loopCounter">      
-                 <div class ="searchItemWrapper2">  
-                <c:forEach items="${order.value}" var="details" varStatus="loopCounter2">
-                    <c:choose>
-                        <c:when test="${loopCounter2.index == 0 }">
-                            <div >
-                                <input type ="hidden" name ="partid" value ="${details.value}">
-                            </div>
-                        </c:when>
-                        <c:when test="${loopCounter2.index == 2}">
-                            quantity:    ${details.value}
-                        </c:when>
-                        <c:when test="${loopCounter2.index == 1}">
-                            partname ${details.value}
-                        </c:when>
-                         <c:when test="${loopCounter2.index == 3}">
-                            part price: ${details.value}
-                         </c:when>
-                        <c:otherwise>
-                            subtotal: ${details.value}
-                        </c:otherwise>
-                    </c:choose>
-                            <br>
+                <c:forEach items="${orderitems}" var="order" varStatus ="loopCounter">      
+                     <div class ="searchItemWrapper2">  
+                    <c:forEach items="${order.value}" var="details" varStatus="loopCounter2">
+                        <c:choose>
+                            <c:when test="${loopCounter2.index == 0 }">
+                                <div >
+                                    <input type ="hidden" name ="partid" value ="${details.value}">
+                                </div>
+                            </c:when>
+                            <c:when test="${loopCounter2.index == 2}">
+                                <div class="partquantity">
+                                      ${details.value}
+                                </div>
+                            </c:when>
+                            <c:when test="${loopCounter2.index == 1}">
+                                <div class="partname2">
+                                    ${details.value}
+                                </div>
+                            </c:when>
+                             <c:when test="${loopCounter2.index == 3}">
+                                <div class="partprice3">
+                                    ₱${details.value}
+                                </div>
+                             </c:when>
+                            <c:otherwise>
+                                <div class="partsubtotal">
+                                    ₱${details.value}
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                                <br>
 
+                    </c:forEach>
+                     </div>
+                                <br>
                 </c:forEach>
-                 </div>
-                            <br>
-            </c:forEach>
-            
+            </div>
             
             
             

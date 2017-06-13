@@ -488,6 +488,9 @@ html, body{
     font-weight: 300;
     min-height: 7em;
 }
+.orderpagewrapper{
+
+}
 .searchitem input[type=submit]{
     font-family: "Segoe UI", sans-serif;
     border: 1px solid #ccc;
@@ -588,6 +591,15 @@ html, body{
     font-weight: 400;
 }
 .partprice2{
+    position:absolute;
+    display:inline-block;
+    right:30em;
+    top:1em;
+    margin:5px;
+    font-size: 1.2em;
+    font-weight: 400;
+}
+.partprice3{
     position:absolute;
     display:inline-block;
     right:30em;
