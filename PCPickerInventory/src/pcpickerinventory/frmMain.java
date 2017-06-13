@@ -65,6 +65,8 @@ public class frmMain extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         btnRefresh = new javax.swing.JButton();
+        cmbFilter = new javax.swing.JComboBox<>();
+        btnFilter = new javax.swing.JButton();
         mnuMain = new javax.swing.JMenuBar();
         mnuFile = new javax.swing.JMenu();
         mnuFileBranch = new javax.swing.JMenuItem();
@@ -110,6 +112,11 @@ public class frmMain extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblParts.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPartsMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblParts);
@@ -194,7 +201,7 @@ public class frmMain extends javax.swing.JFrame {
                 .addComponent(txtParam3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblParam4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtParam4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblParam5)
@@ -297,6 +304,19 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
 
+        cmbFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbFilterActionPerformed(evt);
+            }
+        });
+
+        btnFilter.setText("Filter");
+        btnFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelInventoryLayout = new javax.swing.GroupLayout(panelInventory);
         panelInventory.setLayout(panelInventoryLayout);
         panelInventoryLayout.setHorizontalGroup(
@@ -313,13 +333,20 @@ public class frmMain extends javax.swing.JFrame {
                         .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
                     .addGroup(panelInventoryLayout.createSequentialGroup()
-                        .addComponent(btnSearch)
+                        .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                            .addComponent(btnFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRefresh))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE))
+                        .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelInventoryLayout.createSequentialGroup()
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(panelInventoryLayout.createSequentialGroup()
+                                .addComponent(cmbFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnRefresh)))))
                 .addContainerGap())
         );
         panelInventoryLayout.setVerticalGroup(
@@ -330,7 +357,11 @@ public class frmMain extends javax.swing.JFrame {
                     .addGroup(panelInventoryLayout.createSequentialGroup()
                         .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnSearch)
-                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnFilter)
                             .addComponent(btnRefresh))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1))
@@ -343,11 +374,10 @@ public class frmMain extends javax.swing.JFrame {
                         .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnClear)
                             .addComponent(addComponentButton))
-                        .addGap(0, 34, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(64, Short.MAX_VALUE))))
         );
 
-        tabInventories.addTab("Inventory", panelInventory);
+        tabInventories.addTab("Master Inventory", panelInventory);
 
         mnuFile.setText("File");
 
@@ -482,6 +512,7 @@ public class frmMain extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         FormControl.getParts(compTypeCombo);
+        FormControl.getParts(cmbFilter);
     }//GEN-LAST:event_formWindowOpened
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -555,6 +586,25 @@ public class frmMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRefreshActionPerformed
 
+    private void cmbFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFilterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbFilterActionPerformed
+
+    private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
+        // TODO add your handling code here:
+        service.filter(cmbFilter.getSelectedItem().toString(), tblParts);
+    }//GEN-LAST:event_btnFilterActionPerformed
+
+    private void tblPartsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPartsMouseClicked
+        // TODO add your handling code here:
+        int tRow = tblParts.getSelectedRow();
+        int tCol = tblParts.getSelectedColumn();
+        compIdText.setText(tblParts.getValueAt(tRow, 0).toString());
+        compNameText.setText(tblParts.getValueAt(tRow, 1).toString());
+        compTypeCombo.setSelectedItem(tblParts.getValueAt(tRow, 2).toString());
+        
+    }//GEN-LAST:event_tblPartsMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -594,8 +644,10 @@ public class frmMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addComponentButton;
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnFilter;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JComboBox<String> cmbFilter;
     private javax.swing.JTextField compIdText;
     private javax.swing.JTextField compManufacturerText;
     private javax.swing.JTextField compNameText;

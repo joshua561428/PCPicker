@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import pcpicker_webservicefordesktop.Inventory;
 import pcpicker_webservicefordesktop.InventoryItem;
+import pcpickerinventory.lib.Parts;
 
 /**
  *
@@ -95,10 +96,40 @@ public class service {
             row[3] = inv.getItems().get(x).getPart().getPartManufacturer();
             row[4] = inv.getItems().get(x).getPart().getPartPrice();
             mdl.addRow(row);
+            if (row[2].toString().equals("Heatsink"))
+            {
+                
+            }
         }
         targetTable.setModel(mdl);
     }
-     
+    
+    // Filter by type
+    public static void filter(String filterName, JTable targetTable)
+    {
+        DefaultTableModel myTable = (DefaultTableModel)targetTable.getModel();
+        myTable.setRowCount(0);
+        targetTable.setModel(myTable);
+        DefaultTableModel mdl = (DefaultTableModel)targetTable.getModel();
+        pcpicker_webservicefordesktop.Inventory inv = getInventoryList();
+        List<InventoryItem> lister = inv.getItems();
+        for (int x = 0;x < lister.size();x++)
+        {
+            Object row[] = new Object[5];
+            row[0] = inv.getItems().get(x).getPart().getPartId();
+            row[1] = inv.getItems().get(x).getPart().getPartName();
+            row[2] = inv.getItems().get(x).getPart().getPartType();
+            row[3] = inv.getItems().get(x).getPart().getPartManufacturer();
+            row[4] = inv.getItems().get(x).getPart().getPartPrice();
+            if (row[2].toString().equals(filterName))
+            {
+                mdl.addRow(row);
+            }
+        }
+        targetTable.setModel(mdl);
+        systemLog("Filter by: " + filterName);
+    }
+    
     //
     // Web Services
     //

@@ -41,6 +41,7 @@ public class frmSystemLog extends javax.swing.JFrame {
             }
         });
 
+        txtSysLog.setEditable(false);
         txtSysLog.setBackground(new java.awt.Color(0, 0, 0));
         txtSysLog.setColumns(20);
         txtSysLog.setForeground(new java.awt.Color(0, 255, 51));
@@ -59,8 +60,8 @@ public class frmSystemLog extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
