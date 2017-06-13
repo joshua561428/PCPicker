@@ -62,6 +62,7 @@
                 <input type="submit" value="Logout" name="button" onclick=location.href='${pageContext.request.contextPath}/Logout;' style="border:1px solid #ccc; padding:5px">
             </div>
             <div>
+                <br>Active orders<br>
                 <form action ="OrderPage" method ="get">
                     <input type="hidden" name ="orderLength" value="${fn:length(orders)}">
                     <c:forEach items="${orders}" var="order" varStatus ="loopCounter">                
@@ -92,11 +93,43 @@
                            
 
                     </c:forEach>
-                    <input type="submit" value="Cancel Order" name="submit${loopCounter.index}"><br>
-                    <input type="submit" value="View Order" name="submit${loopCounter.index}">
-                    <br><br>
+                    <div class="buttons">
+                        <input type="submit" value="Cancel Order" name="submit${loopCounter.index}"><br>
+                        <input type="submit" value="View Order" name="submit${loopCounter.index}">
+                        <br>
+                    </div>
+                        <br>
                     </c:forEach>
                 </form>
+                    
+                    <br><br>Order History <br>
+                    
+                 <c:forEach items="${ordersHistory}" var="order" varStatus ="loopCounter">                
+                    <c:forEach items="${order.value}" var="details" varStatus="loopCounter2">
+                        <c:choose>
+                            <c:when test="${loopCounter2.index == 0 }">
+                                orderid :${details.value}
+                                <input type ="hidden" name ="orderid" value ="${details.value}">
+                            </c:when>
+                            <c:when test="${loopCounter2.index == 1}">
+                                date created:    ${details.value}
+                            </c:when>
+                            <c:when test="${loopCounter2.index == 2}">
+                                paymenttype: ${details.value}
+                            </c:when>
+                            <c:when test="${loopCounter2.index == 3}">
+                                num items: ${details.value}
+                            </c:when>
+                            <c:when test="${loopCounter2.index == 4}">
+                                Delivery Date: ${details.value}
+                            </c:when>
+                            <c:otherwise>
+                                total price: ${details.value}
+                            </c:otherwise>
+                        </c:choose>
+                               
+                    </c:forEach>
+                 </c:forEach>
             </div>
         </div>
     </body>

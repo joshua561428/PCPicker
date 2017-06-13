@@ -28,8 +28,8 @@
     </target>
     <target name="wsimport-client-pcpicker_webservice" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/pcpicker_webservice"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/pcpicker_webservice" destdir="${build.generated.dir}/jax-wsCache/pcpicker_webservice" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/pcpicker_webservice/wsdl/localhost_8080/pcpicker_webserver/pcpicker_webservice.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/pcpicker_webserver/pcpicker_webservice?wsdl" xnocompile="true" xendorsed="true" target="2.1">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/pcpicker_webservice/wsdl/localhost_8080/pcpicker_webserver/pcpicker_webservice.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/pcpicker_webservice" destdir="${build.generated.dir}/jax-wsCache/pcpicker_webservice" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/pcpicker_webservice/wsdl/192.168.119.185_8080/pcpicker_webserver/pcpicker_webservice.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://192.168.119.185:8080/pcpicker_webserver/pcpicker_webservice?wsdl" xnocompile="true" xendorsed="true" target="2.1">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/pcpicker_webservice/wsdl/192.168.119.185_8080/pcpicker_webserver/pcpicker_webservice.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/pcpicker_webservice"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">

@@ -51,6 +51,9 @@ public class AccountPage extends HttpServlet {
         int cust_id = Integer.parseInt((String)request.getSession().getAttribute("userid"));
         List<Order> orders = WebMethods.getOrderList(cust_id);
         request.setAttribute("orders", createOrderHashMap(orders));
+        
+        List<Order> orderHistory = WebMethods.getOrderHistoryList(cust_id);
+        request.setAttribute("ordersHistory", createOrderHashMap(orderHistory));
         request.getRequestDispatcher("accountpage.jsp").forward(request, response);
     }
 

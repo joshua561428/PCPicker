@@ -169,6 +169,12 @@ public class WebMethods {
         return port.cancelOrder(orderId);
     }
 
+    public static java.util.List<pcpicker.Order> getOrderHistoryList(int custId) {
+        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
+        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
+        return port.getOrderHistoryList(custId);
+    }
+
   
 
 

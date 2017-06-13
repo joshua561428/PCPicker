@@ -60,6 +60,10 @@
 
 <xs:element name="getMouseListResponse" type="tns:getMouseListResponse"/>
 
+<xs:element name="getOrderHistoryList" type="tns:getOrderHistoryList"/>
+
+<xs:element name="getOrderHistoryListResponse" type="tns:getOrderHistoryListResponse"/>
+
 <xs:element name="getOrderList" type="tns:getOrderList"/>
 
 <xs:element name="getOrderListResponse" type="tns:getOrderListResponse"/>
@@ -177,6 +181,18 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="getOrderHistoryList">
+<xs:sequence>
+<xs:element name="cust_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOrderHistoryListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:Order" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="cancelOrder">
 <xs:sequence>
 <xs:element name="order_id" type="xs:int"/>
@@ -199,21 +215,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="addOrder">
-<xs:sequence>
-<xs:element name="cust_id" type="xs:int"/>
-<xs:element name="part_ids" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="quantity" type="xs:int" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="paymentType" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="addOrderResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="getKeyboardList">
 <xs:sequence/>
 </xs:complexType>
@@ -233,6 +234,21 @@
 </xs:sequence>
 </xs:extension>
 </xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="addOrder">
+<xs:sequence>
+<xs:element name="cust_id" type="xs:int"/>
+<xs:element name="part_ids" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="quantity" type="xs:int" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="paymentType" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addOrderResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="getMotherboardList">
@@ -371,27 +387,6 @@
 </xs:complexContent>
 </xs:complexType>
 
-<xs:complexType name="getMouseList">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="getMouseListResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:Mouse" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Mouse">
-<xs:complexContent>
-<xs:extension base="tns:Part">
-<xs:sequence>
-<xs:element name="dpi" type="xs:int"/>
-<xs:element name="connection_" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
-
 <xs:complexType name="getCoolerList">
 <xs:sequence/>
 </xs:complexType>
@@ -409,6 +404,27 @@
 <xs:element name="liquid_cooling" type="xs:boolean"/>
 <xs:element name="rated_tdp" type="xs:int"/>
 <xs:element name="supported_sockets" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="getMouseList">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getMouseListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:Mouse" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Mouse">
+<xs:complexContent>
+<xs:extension base="tns:Part">
+<xs:sequence>
+<xs:element name="dpi" type="xs:int"/>
+<xs:element name="connection_" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:extension>
 </xs:complexContent>
