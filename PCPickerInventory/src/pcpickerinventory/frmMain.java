@@ -37,7 +37,7 @@ public class frmMain extends javax.swing.JFrame {
         tabInventories = new javax.swing.JTabbedPane();
         panelInventory = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblParts = new javax.swing.JTable();
         addComponentButton = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
@@ -64,6 +64,7 @@ public class frmMain extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        btnRefresh = new javax.swing.JButton();
         mnuMain = new javax.swing.JMenuBar();
         mnuFile = new javax.swing.JMenu();
         mnuFileBranch = new javax.swing.JMenuItem();
@@ -88,12 +89,9 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblParts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Type", "Manufacturer", "Price"
@@ -114,7 +112,7 @@ public class frmMain extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblParts);
 
         addComponentButton.setText("Add");
         addComponentButton.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +122,11 @@ public class frmMain extends javax.swing.JFrame {
         });
 
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         txtSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,7 +194,7 @@ public class frmMain extends javax.swing.JFrame {
                 .addComponent(txtParam3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblParam4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(txtParam4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblParam5)
@@ -287,6 +290,13 @@ public class frmMain extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelInventoryLayout = new javax.swing.GroupLayout(panelInventory);
         panelInventory.setLayout(panelInventoryLayout);
         panelInventoryLayout.setHorizontalGroup(
@@ -307,7 +317,8 @@ public class frmMain extends javax.swing.JFrame {
                         .addComponent(btnSearch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRefresh))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -319,14 +330,15 @@ public class frmMain extends javax.swing.JFrame {
                     .addGroup(panelInventoryLayout.createSequentialGroup()
                         .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnSearch)
-                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRefresh))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1))
                     .addGroup(panelInventoryLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(panelItemDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelItemSpecs, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panelItemSpecs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnClear)
@@ -526,6 +538,23 @@ public class frmMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_compIdTextActionPerformed
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        try {
+            service.getInventory(tblParts);
+            service.systemLog("Inventory listing success.");
+        } catch (Exception e) {
+            service.systemLog(e, e.getMessage());
+            service.errAlert(mnuSystem);
+            service.errAlert(mnuSystemLog);
+        }
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -565,6 +594,7 @@ public class frmMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addComponentButton;
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JTextField compIdText;
     private javax.swing.JTextField compManufacturerText;
@@ -579,7 +609,6 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblParam1;
     private javax.swing.JLabel lblParam2;
     private javax.swing.JLabel lblParam3;
@@ -596,6 +625,7 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JPanel panelItemDetails;
     private javax.swing.JPanel panelItemSpecs;
     private javax.swing.JTabbedPane tabInventories;
+    private javax.swing.JTable tblParts;
     private javax.swing.JTextField txtParam1;
     private javax.swing.JTextField txtParam2;
     private javax.swing.JTextField txtParam3;

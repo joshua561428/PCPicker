@@ -5,7 +5,14 @@
  */
 package pcpickerinventory;
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import pcpicker_webservicefordesktop.Inventory;
+import pcpicker_webservicefordesktop.InventoryItem;
 
 /**
  *
@@ -71,6 +78,27 @@ public class service {
         addPowerSupply(ID, manufacturer, name, wattage, rating, formFactor, price, type);
     }
     
+    public static void getInventory(JTable targetTable)
+    {
+        DefaultTableModel myTable = (DefaultTableModel)targetTable.getModel();
+        myTable.setRowCount(0);
+        targetTable.setModel(myTable);
+        DefaultTableModel mdl = (DefaultTableModel)targetTable.getModel();
+        pcpicker_webservicefordesktop.Inventory inv = getInventoryList();
+        List<InventoryItem> lister = inv.getItems();
+        for (int x = 0;x < lister.size();x++)
+        {
+            Object row[] = new Object[5];
+            row[0] = inv.getItems().get(x).getPart().getPartId();
+            row[1] = inv.getItems().get(x).getPart().getPartName();
+            row[2] = inv.getItems().get(x).getPart().getPartType();
+            row[3] = inv.getItems().get(x).getPart().getPartManufacturer();
+            row[4] = inv.getItems().get(x).getPart().getPartPrice();
+            mdl.addRow(row);
+        }
+        targetTable.setModel(mdl);
+    }
+     
     //
     // Web Services
     //
@@ -98,6 +126,12 @@ public class service {
         pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
         return port.addPowerSupply(compId, compManufacturer, compName, wattage, rating, formFactor, compPrice, compType);
     }
- 
-    
+
+    private static Inventory getInventoryList() {
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service service = new pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service();
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
+        return port.getInventoryList();
+    }
+
+        
 }
