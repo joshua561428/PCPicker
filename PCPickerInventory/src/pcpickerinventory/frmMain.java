@@ -67,6 +67,7 @@ public class frmMain extends javax.swing.JFrame {
         btnRefresh = new javax.swing.JButton();
         cmbFilter = new javax.swing.JComboBox<>();
         btnFilter = new javax.swing.JButton();
+        panelProducts = new javax.swing.JPanel();
         mnuMain = new javax.swing.JMenuBar();
         mnuFile = new javax.swing.JMenu();
         mnuFileBranch = new javax.swing.JMenuItem();
@@ -379,6 +380,19 @@ public class frmMain extends javax.swing.JFrame {
 
         tabInventories.addTab("Master Inventory", panelInventory);
 
+        javax.swing.GroupLayout panelProductsLayout = new javax.swing.GroupLayout(panelProducts);
+        panelProducts.setLayout(panelProductsLayout);
+        panelProductsLayout.setHorizontalGroup(
+            panelProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 902, Short.MAX_VALUE)
+        );
+        panelProductsLayout.setVerticalGroup(
+            panelProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 661, Short.MAX_VALUE)
+        );
+
+        tabInventories.addTab("Quezon City Branch", panelProducts);
+
         mnuFile.setText("File");
 
         mnuFileBranch.setText("Branch");
@@ -602,7 +616,8 @@ public class frmMain extends javax.swing.JFrame {
         compIdText.setText(tblParts.getValueAt(tRow, 0).toString());
         compNameText.setText(tblParts.getValueAt(tRow, 1).toString());
         compTypeCombo.setSelectedItem(tblParts.getValueAt(tRow, 2).toString());
-        
+        compManufacturerText.setText(tblParts.getValueAt(tRow, 3).toString());
+        compPriceText.setText(tblParts.getValueAt(tRow, 4).toString());
     }//GEN-LAST:event_tblPartsMouseClicked
 
     /**
@@ -676,6 +691,7 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JPanel panelInventory;
     private javax.swing.JPanel panelItemDetails;
     private javax.swing.JPanel panelItemSpecs;
+    private javax.swing.JPanel panelProducts;
     private javax.swing.JTabbedPane tabInventories;
     private javax.swing.JTable tblParts;
     private javax.swing.JTextField txtParam1;
