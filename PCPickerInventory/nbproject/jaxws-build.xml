@@ -18,8 +18,8 @@
     </target>
     <target name="wsimport-client-Pcpicker_webserviceForDesktop" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/Pcpicker_webserviceForDesktop"/>
-        <property name="wsdl-Pcpicker_webserviceForDesktop" location="xml-resources/web-service-references/Pcpicker_webserviceForDesktop/wsdl/192.168.119.185_8080/pcpicker_webserver/Pcpicker_webserviceForDesktop.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/Pcpicker_webserviceForDesktop" destdir="${build.generated.dir}/jax-wsCache/Pcpicker_webserviceForDesktop" wsdl="${wsdl-Pcpicker_webserviceForDesktop}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://192.168.119.185:8080/pcpicker_webserver/Pcpicker_webserviceForDesktop?wsdl" xnocompile="true" xendorsed="true">
+        <property name="wsdl-Pcpicker_webserviceForDesktop" location="xml-resources/web-service-references/Pcpicker_webserviceForDesktop/wsdl/localhost_8080/pcpicker_webserver/Pcpicker_webserviceForDesktop.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/Pcpicker_webserviceForDesktop" destdir="${build.generated.dir}/jax-wsCache/Pcpicker_webserviceForDesktop" wsdl="${wsdl-Pcpicker_webserviceForDesktop}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/pcpicker_webserver/Pcpicker_webserviceForDesktop?wsdl" xnocompile="true" xendorsed="true">
             <depends file="${wsdl-Pcpicker_webserviceForDesktop}"/>
             <produces dir="${build.generated.dir}/jax-wsCache/Pcpicker_webserviceForDesktop"/>
         </wsimport>

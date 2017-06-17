@@ -70,7 +70,7 @@ public class FormControl {
                 _partsCombo.addItem(myParts.get(x).toString().replaceAll("_", " "));
             }
         } catch (IndexOutOfBoundsException e) {
-            System.err.println("Range out of bounds: " + e.getMessage());
+            System.err.println("Index out of bounds: " + e.getMessage());
         }
     }
     
@@ -88,7 +88,8 @@ public class FormControl {
             }
             lMod = (ListModel)modeller;
             _partsList.setModel(lMod);
-        } catch (Exception e) {
+        } catch (IndexOutOfBoundsException e) {
+            System.err.println("Index out of bounds: " + e.getMessage());
         }
     }
     

@@ -15,9 +15,9 @@ public class Parts {
     //
     public static String partID = "";
     public static String partName = "";
-    public static double partPrice = 0.0;
-    public static String partManufacturer = "";
     public static String partType = "";
+    public static String partManufacturer = "";
+    public static double partPrice = 0.0;
     
     //
     // PC Parts

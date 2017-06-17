@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package pcpickerinventory;
+import GoogleAPI.GoogleMapFrame;
+import GoogleAPI.GoogleMapLocator;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,7 @@ public class frmMain extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         tabInventories = new javax.swing.JTabbedPane();
         panelInventory = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -58,16 +61,19 @@ public class frmMain extends javax.swing.JFrame {
         compNameText = new javax.swing.JTextField();
         compTypeCombo = new javax.swing.JComboBox<>();
         compManufacturerText = new javax.swing.JTextField();
-        compPriceText = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        compPriceText = new javax.swing.JFormattedTextField();
         btnRefresh = new javax.swing.JButton();
         cmbFilter = new javax.swing.JComboBox<>();
         btnFilter = new javax.swing.JButton();
-        panelProducts = new javax.swing.JPanel();
+        panelGoogleMap = new javax.swing.JPanel();
+        btnSetLocation = new javax.swing.JButton();
+        txtLocation = new javax.swing.JTextField();
+        frameMap = new javax.swing.JInternalFrame();
         mnuMain = new javax.swing.JMenuBar();
         mnuFile = new javax.swing.JMenu();
         mnuFileBranch = new javax.swing.JMenuItem();
@@ -78,6 +84,19 @@ public class frmMain extends javax.swing.JFrame {
         mnuSystemLog = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
+
+        jInternalFrame1.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -248,6 +267,8 @@ public class frmMain extends javax.swing.JFrame {
 
         jLabel17.setText("Component Price:");
 
+        compPriceText.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
+
         javax.swing.GroupLayout panelItemDetailsLayout = new javax.swing.GroupLayout(panelItemDetails);
         panelItemDetails.setLayout(panelItemDetailsLayout);
         panelItemDetailsLayout.setHorizontalGroup(
@@ -263,13 +284,13 @@ public class frmMain extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelItemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(compNameText, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(compIdText)
                     .addGroup(panelItemDetailsLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(panelItemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(compManufacturerText, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(compTypeCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, 137, Short.MAX_VALUE)
-                            .addComponent(compPriceText)))
-                    .addComponent(compIdText))
+                            .addComponent(compPriceText))))
                 .addGap(16, 16, 16))
         );
         panelItemDetailsLayout.setVerticalGroup(
@@ -293,9 +314,9 @@ public class frmMain extends javax.swing.JFrame {
                     .addComponent(jLabel18))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelItemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(compPriceText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(jLabel17)
+                    .addComponent(compPriceText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         btnRefresh.setText("Refresh");
@@ -375,23 +396,59 @@ public class frmMain extends javax.swing.JFrame {
                         .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnClear)
                             .addComponent(addComponentButton))
-                        .addContainerGap(64, Short.MAX_VALUE))))
+                        .addContainerGap(157, Short.MAX_VALUE))))
         );
 
         tabInventories.addTab("Master Inventory", panelInventory);
 
-        javax.swing.GroupLayout panelProductsLayout = new javax.swing.GroupLayout(panelProducts);
-        panelProducts.setLayout(panelProductsLayout);
-        panelProductsLayout.setHorizontalGroup(
-            panelProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 902, Short.MAX_VALUE)
+        btnSetLocation.setText("Set Location");
+        btnSetLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetLocationActionPerformed(evt);
+            }
+        });
+
+        frameMap.setVisible(true);
+
+        javax.swing.GroupLayout frameMapLayout = new javax.swing.GroupLayout(frameMap.getContentPane());
+        frameMap.getContentPane().setLayout(frameMapLayout);
+        frameMapLayout.setHorizontalGroup(
+            frameMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 628, Short.MAX_VALUE)
         );
-        panelProductsLayout.setVerticalGroup(
-            panelProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 661, Short.MAX_VALUE)
+        frameMapLayout.setVerticalGroup(
+            frameMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 609, Short.MAX_VALUE)
         );
 
-        tabInventories.addTab("Quezon City Branch", panelProducts);
+        javax.swing.GroupLayout panelGoogleMapLayout = new javax.swing.GroupLayout(panelGoogleMap);
+        panelGoogleMap.setLayout(panelGoogleMapLayout);
+        panelGoogleMapLayout.setHorizontalGroup(
+            panelGoogleMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGoogleMapLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelGoogleMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGoogleMapLayout.createSequentialGroup()
+                        .addComponent(frameMap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 256, Short.MAX_VALUE))
+                    .addGroup(panelGoogleMapLayout.createSequentialGroup()
+                        .addComponent(btnSetLocation)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtLocation))))
+        );
+        panelGoogleMapLayout.setVerticalGroup(
+            panelGoogleMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGoogleMapLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(panelGoogleMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSetLocation)
+                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(frameMap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+
+        tabInventories.addTab("Google Map", panelGoogleMap);
 
         mnuFile.setText("File");
 
@@ -620,6 +677,16 @@ public class frmMain extends javax.swing.JFrame {
         compPriceText.setText(tblParts.getValueAt(tRow, 4).toString());
     }//GEN-LAST:event_tblPartsMouseClicked
 
+    private void btnSetLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetLocationActionPerformed
+        // TODO add your handling code here:
+        
+        GoogleAPI.GoogleMapLocator myLocator = new GoogleMapLocator(txtLocation.getText(), "15", "1", "roadmap", "red");
+        GoogleAPI.GoogleMapFrame myMap = new GoogleMapFrame();
+        //System.out.println(myLocator.getMarkedPosition());
+        myLocator.generateMap();
+        myMap.display(frameMap);
+    }//GEN-LAST:event_btnSetLocationActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -662,12 +729,15 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JButton btnFilter;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnSetLocation;
     private javax.swing.JComboBox<String> cmbFilter;
     private javax.swing.JTextField compIdText;
     private javax.swing.JTextField compManufacturerText;
     private javax.swing.JTextField compNameText;
-    private javax.swing.JTextField compPriceText;
+    private javax.swing.JFormattedTextField compPriceText;
     private javax.swing.JComboBox<String> compTypeCombo;
+    private javax.swing.JInternalFrame frameMap;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -688,12 +758,13 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JMenuBar mnuMain;
     private javax.swing.JMenu mnuSystem;
     private javax.swing.JMenuItem mnuSystemLog;
+    private javax.swing.JPanel panelGoogleMap;
     private javax.swing.JPanel panelInventory;
     private javax.swing.JPanel panelItemDetails;
     private javax.swing.JPanel panelItemSpecs;
-    private javax.swing.JPanel panelProducts;
     private javax.swing.JTabbedPane tabInventories;
     private javax.swing.JTable tblParts;
+    private javax.swing.JTextField txtLocation;
     private javax.swing.JTextField txtParam1;
     private javax.swing.JTextField txtParam2;
     private javax.swing.JTextField txtParam3;
