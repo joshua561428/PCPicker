@@ -51,7 +51,7 @@ public class GoogleMapLocator {
     
     public void displaySpecific()
     {
-        
+        pcpickerinventory.service.systemLog("URL by name: " + imageURL + mSpecific.value() + mZoom.value() + mDimension.value() + mScale.value() + mType.value() + mMarker.value() + mKey.value());
         System.out.println(imageURL + mSpecific.value() + mZoom.value() + mDimension.value() + mScale.value() + mType.value() + mMarker.value() + mKey.value());
     }
     
@@ -63,6 +63,7 @@ public class GoogleMapLocator {
     
     public void displayCoordinates()
     {
+        pcpickerinventory.service.systemLog("URL by coordinates: " + imageURL + mCoordinate.value() + mZoom.value() + mDimension.value() + mScale.value() + mType.value() + mMarker.value() + mKey.value());
         System.out.println(imageURL + mCoordinate.value() + mZoom.value() + mDimension.value() + mScale.value() + mType.value() + mMarker.value() + mKey.value());
     }
     
@@ -108,12 +109,14 @@ public class GoogleMapLocator {
             }
         } 
         catch (Exception e) {
+            pcpickerinventory.service.systemLog(e, e.getMessage());
             System.err.println(e.getMessage());
         }
         finally{
             try {
                 out.close();
             } catch (Exception e) {
+                pcpickerinventory.service.systemLog(e, e.getMessage());
                 System.err.println(e.getMessage());
             }
         }
@@ -141,8 +144,10 @@ public class GoogleMapLocator {
                 st2 = nn2.getFirstChild().getNodeValue();
                 _latitudeTextField.setText(st1);
                 _longitudeTextField.setText(st2);
+                pcpickerinventory.service.systemLog("Coordinates Retrieved: (" + st1 + "," + st2 + ")");
             }
         } catch (Exception e) {
+            pcpickerinventory.service.systemLog(e, e.getMessage());
             System.err.println(e.getMessage());
         }
         
