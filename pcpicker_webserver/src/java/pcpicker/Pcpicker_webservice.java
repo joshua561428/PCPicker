@@ -13,24 +13,80 @@ import javax.jws.*;
 public class Pcpicker_webservice
 {
     String user="root"; // meron rin sa Pcpicker_webserviceForDesktop
-    String pass="";
+    String pass="1825";
+
+    private Boolean filterPart(Part p, String search, String manufacturer, Integer minPrice, Integer maxPrice)
+    {
+        Boolean remove = false;
+        
+        
+        if(search != null)        
+            if( (!p.part_id.toLowerCase().contains(search.toLowerCase()))  &&  (!p.part_name.toLowerCase().contains(search.toLowerCase())))
+                remove = true;
+        
+        if(manufacturer != null)
+            if(!p.part_manufacturer.toLowerCase().contains(manufacturer.toLowerCase()))
+                remove = true;
+        
+        if(minPrice != null)
+            if(p.part_price < minPrice)
+                return true;
+        
+        if(maxPrice != null)
+            if(p.part_price > maxPrice)
+                return true;
+        
+        return remove;
+    }
+    private String convertComponentType(String compType)
+    {
+        if(compType.equals("CPU"))
+            compType = "Processor";
+        else if(compType.equals("GPU"))
+            compType = "Graphics Card";
+        else if(compType.equals("Cooler"))
+            compType = "Heatsink";
+        
+        return compType;
+    }
     
-   
-    
-    
-        /**
-     * Web service operation
-     * @param part_id
-     * @return 
-     */
-    
-    
+    @WebMethod(operationName = "getMaxPrice")
+    public double getMaxPrice(@WebParam(name = "compType") String compType) {
+        double max=0.0;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+
+            String sql = "{call getMaxPrice(?)}"; ////////////////////////////////
+            compType = convertComponentType(compType);            
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            callableStatement.setString(1,compType);
+            ResultSet rs = callableStatement.executeQuery();
+
+            while (rs.next()) {
+                max = rs.getDouble(1);
+            }
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return max;
+    }
     
     @WebMethod(operationName = "getProcessorList")
-    public ArrayList<Processor> getProcessorList() {
+    public ArrayList<Processor> getProcessorList(
+            @WebParam(name = "search") String search,
+            @WebParam(name = "manufacturer") String manufacturer,
+            @WebParam(name = "minPrice") Integer minPrice,
+            @WebParam(name = "maxPrice") Integer maxPrice) {
         ArrayList<Processor> a = new ArrayList(); ///////////////////////////////
         int i = 0;
-
+        System.out.println("Server manufacturer " + manufacturer);
+        System.out.println("server search " + search);
+        System.out.println("server min " + minPrice);
+        System.out.println("server max " + maxPrice);
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
@@ -41,19 +97,24 @@ public class Pcpicker_webservice
 
             while (rs.next()) {
                 int last = a.size();
+                
                 a.add(new Processor()); ////////////////////////////////////////////
-
                 a.get(last).setPart_id(rs.getString(1));/////////////////////////////
                 a.get(last).setPart_type(rs.getString(2));//////////////////
                 a.get(last).setPart_manufacturer(rs.getString(3));////////////////
                 a.get(last).setPart_name(rs.getString(4));///////////////
                 a.get(last).setPart_price(rs.getDouble(5));////////////////
+                a.get(last).setImagePath(rs.getString(6));////////////////
                 //*****************************************nadoble comp_id
-                a.get(last).setCore_clock(rs.getDouble(7));/////////////////
-                a.get(last).setCore_num(rs.getInt(8));/////////////////
-                a.get(last).setThread_num(rs.getInt(9));////////////////////
-                a.get(last).setSocket_(rs.getString(10));////////////////
-                a.get(last).setTdp(rs.getInt(11));/////////////////////
+                a.get(last).setCore_clock(rs.getDouble(8));/////////////////
+                a.get(last).setCore_num(rs.getInt(9));/////////////////
+                a.get(last).setThread_num(rs.getInt(10));////////////////////
+                a.get(last).setSocket_(rs.getString(11));////////////////
+                a.get(last).setTdp(rs.getInt(12));/////////////////////
+                
+                if(filterPart(a.get(last),search,manufacturer,minPrice,maxPrice))
+                    a.remove(last);
+                
             }
             callableStatement.close();
             conn.close();
@@ -64,7 +125,11 @@ public class Pcpicker_webservice
     }
 
     @WebMethod(operationName = "getCoolerList")
-    public ArrayList<Cooler> getCoolerList() {
+    public ArrayList<Cooler> getCoolerList(
+            @WebParam(name = "search") String search,
+            @WebParam(name = "manufacturer") String manufacturer,
+            @WebParam(name = "minPrice") Integer minPrice,
+            @WebParam(name = "maxPrice") Integer maxPrice) {
         ArrayList<Cooler> a = new ArrayList(); ///////////////////////////////
         int i = 0;
 
@@ -85,10 +150,13 @@ public class Pcpicker_webservice
                 a.get(last).setPart_manufacturer(rs.getString(3));////////////////
                 a.get(last).setPart_name(rs.getString(4));///////////////
                 a.get(last).setPart_price(rs.getDouble(5));////////////////
+                a.get(last).setImagePath(rs.getString(6));////////////////
                 //*****************************************nadoble comp_id
-                a.get(last).setSupported_sockets(rs.getString(7));/////////////////
-                a.get(last).setLiquid_cooling(rs.getBoolean(8));/////////////////
-                a.get(last).setRated_tdp(rs.getInt(9));////////////////////
+                a.get(last).setSupported_sockets(rs.getString(8));/////////////////
+                a.get(last).setLiquid_cooling(rs.getBoolean(9));/////////////////
+                a.get(last).setRated_tdp(rs.getInt(10));////////////////////
+                if(filterPart(a.get(last),search,manufacturer,minPrice,maxPrice))
+                    a.remove(last);
             }
             callableStatement.close();
             conn.close();
@@ -99,7 +167,11 @@ public class Pcpicker_webservice
     }
 
     @WebMethod(operationName = "getGraphicsCardList")
-    public ArrayList<GraphicsCard> getGraphicsCardList() {
+    public ArrayList<GraphicsCard> getGraphicsCardList(
+            @WebParam(name = "search") String search,
+            @WebParam(name = "manufacturer") String manufacturer,
+            @WebParam(name = "minPrice") Integer minPrice,
+            @WebParam(name = "maxPrice") Integer maxPrice) {
         ArrayList<GraphicsCard> a = new ArrayList(); ///////////////////////////////
         int i = 0;
 
@@ -120,11 +192,14 @@ public class Pcpicker_webservice
                 a.get(last).setPart_manufacturer(rs.getString(3));////////////////
                 a.get(last).setPart_name(rs.getString(4));///////////////
                 a.get(last).setPart_price(rs.getDouble(5));////////////////
+                a.get(last).setImagePath(rs.getString(6));////////////////
                 //*****************************************nadoble comp_id
-                a.get(last).setCore_clock(rs.getInt(7));/////////////////
-                a.get(last).setMem_ddr(rs.getString(8));/////////////////
-                a.get(last).setMem_capacity(rs.getInt(9));////////////////////
-                a.get(last).setMem_clock(rs.getInt(10));/////////////////////
+                a.get(last).setCore_clock(rs.getInt(8));/////////////////
+                a.get(last).setMem_ddr(rs.getString(9));/////////////////
+                a.get(last).setMem_capacity(rs.getInt(10));////////////////////
+                a.get(last).setMem_clock(rs.getInt(11));/////////////////////
+                if(filterPart(a.get(last),search,manufacturer,minPrice,maxPrice))
+                    a.remove(last);
             }
             callableStatement.close();
             conn.close();
@@ -135,7 +210,11 @@ public class Pcpicker_webservice
     }
 
     @WebMethod(operationName = "getKeyboardList")
-    public ArrayList<Keyboard> getKeyboardList() {
+    public ArrayList<Keyboard> getKeyboardList(
+            @WebParam(name = "search") String search,
+            @WebParam(name = "manufacturer") String manufacturer,
+            @WebParam(name = "minPrice") Integer minPrice,
+            @WebParam(name = "maxPrice") Integer maxPrice) {
         ArrayList<Keyboard> a = new ArrayList(); ///////////////////////////////
         int i = 0;
 
@@ -156,9 +235,12 @@ public class Pcpicker_webservice
                 a.get(last).setPart_manufacturer(rs.getString(3));////////////////
                 a.get(last).setPart_name(rs.getString(4));///////////////
                 a.get(last).setPart_price(rs.getDouble(5));////////////////
+                a.get(last).setImagePath(rs.getString(6));////////////////
                 //*****************************************nadoble comp_id
-                a.get(last).setBacklit(rs.getBoolean(7));/////////////////
-                a.get(last).setType_(rs.getString(8));/////////////////
+                a.get(last).setBacklit(rs.getBoolean(8));/////////////////
+                a.get(last).setType_(rs.getString(9));/////////////////
+                if(filterPart(a.get(last),search,manufacturer,minPrice,maxPrice))
+                    a.remove(last);
             }
             callableStatement.close();
             conn.close();
@@ -169,7 +251,11 @@ public class Pcpicker_webservice
     }
 
     @WebMethod(operationName = "getMemoryList")
-    public ArrayList<Memory> getMemoryList() {
+    public ArrayList<Memory> getMemoryList(
+            @WebParam(name = "search") String search,
+            @WebParam(name = "manufacturer") String manufacturer,
+            @WebParam(name = "minPrice") Integer minPrice,
+            @WebParam(name = "maxPrice") Integer maxPrice) {
         ArrayList<Memory> a = new ArrayList(); ///////////////////////////////
         int i = 0;
 
@@ -190,10 +276,13 @@ public class Pcpicker_webservice
                 a.get(last).setPart_manufacturer(rs.getString(3));////////////////
                 a.get(last).setPart_name(rs.getString(4));///////////////
                 a.get(last).setPart_price(rs.getDouble(5));////////////////
+                a.get(last).setImagePath(rs.getString(6));////////////////
                 //*****************************************nadoble comp_id
-                a.get(last).setMem_capacity(rs.getInt(7));/////////////////
-                a.get(last).setMem_ddr(rs.getString(8));/////////////////
-                a.get(last).setMem_clock(rs.getInt(9));////////////////////
+                a.get(last).setMem_capacity(rs.getInt(8));/////////////////
+                a.get(last).setMem_ddr(rs.getString(9));/////////////////
+                a.get(last).setMem_clock(rs.getInt(10));////////////////////
+                if(filterPart(a.get(last),search,manufacturer,minPrice,maxPrice))
+                    a.remove(last);
             }
             callableStatement.close();
             conn.close();
@@ -204,7 +293,11 @@ public class Pcpicker_webservice
     }
 
     @WebMethod(operationName = "getMonitorList")
-    public ArrayList<Monitor> getMonitorList() {
+    public ArrayList<Monitor> getMonitorList(
+            @WebParam(name = "search") String search,
+            @WebParam(name = "manufacturer") String manufacturer,
+            @WebParam(name = "minPrice") Integer minPrice,
+            @WebParam(name = "maxPrice") Integer maxPrice) {
         ArrayList<Monitor> a = new ArrayList(); ///////////////////////////////
         int i = 0;
 
@@ -225,11 +318,14 @@ public class Pcpicker_webservice
                 a.get(last).setPart_manufacturer(rs.getString(3));////////////////
                 a.get(last).setPart_name(rs.getString(4));///////////////
                 a.get(last).setPart_price(rs.getDouble(5));////////////////
+                a.get(last).setImagePath(rs.getString(6));////////////////
                 //*****************************************nadoble comp_id
-                a.get(last).setAspect_ratio(rs.getString(7));/////////////////
-                a.get(last).setScreen_size(rs.getInt(8));/////////////////
-                a.get(last).setMax_resolution(rs.getString(9));////////////////////
-                a.get(last).setRefresh_rate(rs.getInt(10));////////////////
+                a.get(last).setAspect_ratio(rs.getString(8));/////////////////
+                a.get(last).setScreen_size(rs.getInt(9));/////////////////
+                a.get(last).setMax_resolution(rs.getString(10));////////////////////
+                a.get(last).setRefresh_rate(rs.getInt(11));////////////////
+                if(filterPart(a.get(last),search,manufacturer,minPrice,maxPrice))
+                    a.remove(last);
             }
             callableStatement.close();
             conn.close();
@@ -240,7 +336,11 @@ public class Pcpicker_webservice
     }
 
     @WebMethod(operationName = "getMotherboardList")
-    public ArrayList<Motherboard> getMotherboardList() {
+    public ArrayList<Motherboard> getMotherboardList(
+            @WebParam(name = "search") String search,
+            @WebParam(name = "manufacturer") String manufacturer,
+            @WebParam(name = "minPrice") Integer minPrice,
+            @WebParam(name = "maxPrice") Integer maxPrice) {
         ArrayList<Motherboard> a = new ArrayList(); ///////////////////////////////
         int i = 0;
 
@@ -261,10 +361,13 @@ public class Pcpicker_webservice
                 a.get(last).setPart_manufacturer(rs.getString(3));////////////////
                 a.get(last).setPart_name(rs.getString(4));///////////////
                 a.get(last).setPart_price(rs.getDouble(5));////////////////
+                a.get(last).setImagePath(rs.getString(6));////////////////
                 //*****************************************nadoble comp_id
-                a.get(last).setSocket(rs.getString(7));/////////////////
-                a.get(last).setMem_slots(rs.getInt(8));/////////////////
-                a.get(last).setForm_factor(rs.getString(9));////////////////////
+                a.get(last).setSocket(rs.getString(8));/////////////////
+                a.get(last).setMem_slots(rs.getInt(9));/////////////////
+                a.get(last).setForm_factor(rs.getString(10));////////////////////
+                if(filterPart(a.get(last),search,manufacturer,minPrice,maxPrice))
+                    a.remove(last);
             }
             callableStatement.close();
             conn.close();
@@ -275,7 +378,11 @@ public class Pcpicker_webservice
     }
 
     @WebMethod(operationName = "getMouseList")
-    public ArrayList<Mouse> getMouseList() {
+    public ArrayList<Mouse> getMouseList(
+            @WebParam(name = "search") String search,
+            @WebParam(name = "manufacturer") String manufacturer,
+            @WebParam(name = "minPrice") Integer minPrice,
+            @WebParam(name = "maxPrice") Integer maxPrice) {
         ArrayList<Mouse> a = new ArrayList(); ///////////////////////////////
         int i = 0;
 
@@ -296,9 +403,12 @@ public class Pcpicker_webservice
                 a.get(last).setPart_manufacturer(rs.getString(3));////////////////
                 a.get(last).setPart_name(rs.getString(4));///////////////
                 a.get(last).setPart_price(rs.getDouble(5));////////////////
+                a.get(last).setImagePath(rs.getString(6));////////////////
                 //*****************************************nadoble comp_id
-                a.get(last).setDpi(rs.getInt(7));/////////////////
-                a.get(last).setConnection_(rs.getString(8));/////////////////
+                a.get(last).setDpi(rs.getInt(8));/////////////////
+                a.get(last).setConnection_(rs.getString(9));/////////////////
+                if(filterPart(a.get(last),search,manufacturer,minPrice,maxPrice))
+                    a.remove(last);
             }
             callableStatement.close();
             conn.close();
@@ -309,7 +419,11 @@ public class Pcpicker_webservice
     }
 
     @WebMethod(operationName = "getStorageList")
-    public ArrayList<Storage> getStorageList() {
+    public ArrayList<Storage> getStorageList(
+            @WebParam(name = "search") String search,
+            @WebParam(name = "manufacturer") String manufacturer,
+            @WebParam(name = "minPrice") Integer minPrice,
+            @WebParam(name = "maxPrice") Integer maxPrice) {
         ArrayList<Storage> a = new ArrayList(); ///////////////////////////////
         int i = 0;
 
@@ -330,10 +444,13 @@ public class Pcpicker_webservice
                 a.get(last).setPart_manufacturer(rs.getString(3));////////////////
                 a.get(last).setPart_name(rs.getString(4));///////////////
                 a.get(last).setPart_price(rs.getDouble(5));////////////////
+                a.get(last).setImagePath(rs.getString(6));////////////////
                 //*****************************************nadoble comp_id
-                a.get(last).setType_(rs.getString(7));/////////////////
-                a.get(last).setCapacity(rs.getInt(8));/////////////////
-                a.get(last).setInterface_(rs.getString(9));
+                a.get(last).setType_(rs.getString(8));/////////////////
+                a.get(last).setCapacity(rs.getInt(9));/////////////////
+                a.get(last).setInterface_(rs.getString(10));
+                if(filterPart(a.get(last),search,manufacturer,minPrice,maxPrice))
+                    a.remove(last);
             }
             callableStatement.close();
             conn.close();
@@ -344,7 +461,11 @@ public class Pcpicker_webservice
     }
 
     @WebMethod(operationName = "getPowerSupplyList")
-    public ArrayList<PowerSupply> getPowerSupplyList() {
+    public ArrayList<PowerSupply> getPowerSupplyList(
+            @WebParam(name = "search") String search,
+            @WebParam(name = "manufacturer") String manufacturer,
+            @WebParam(name = "minPrice") Integer minPrice,
+            @WebParam(name = "maxPrice") Integer maxPrice) {
         ArrayList<PowerSupply> a = new ArrayList(); ///////////////////////////////
         int i = 0;
 
@@ -365,10 +486,13 @@ public class Pcpicker_webservice
                 a.get(last).setPart_manufacturer(rs.getString(3));////////////////
                 a.get(last).setPart_name(rs.getString(4));///////////////
                 a.get(last).setPart_price(rs.getDouble(5));////////////////
+                a.get(last).setImagePath(rs.getString(6));////////////////
                 //*****************************************nadoble comp_id
-                a.get(last).setWattage(rs.getInt(7));/////////////////
-                a.get(last).setRating(rs.getString(8));/////////////////
-                a.get(last).setForm_factor(rs.getString(9));
+                a.get(last).setWattage(rs.getInt(8));/////////////////
+                a.get(last).setRating(rs.getString(9));/////////////////
+                a.get(last).setForm_factor(rs.getString(10));
+                if(filterPart(a.get(last),search,manufacturer,minPrice,maxPrice))
+                    a.remove(last);
             }
             callableStatement.close();
             conn.close();

@@ -28,7 +28,7 @@ import pcpicker.Part;
 public class Pcpicker_webserviceForDesktop {
 
     String user="root"; // meron rin sa Pcpicker_webservice
-    String pass="";
+    String pass="1825";
     
    @WebMethod(operationName = "getOrder")
     public Order getOrder(@WebParam(name = "order_id") int order_id) {
