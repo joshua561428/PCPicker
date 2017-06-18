@@ -15,7 +15,7 @@ import org.w3c.dom.*;
  * @author appbenigno
  */
 public class GoogleMapLocator {
-    //
+    // [Sample Format]
     // https://maps.googleapis.com/maps/api/staticmap?center=Berkeley,CA&zoom=14&size=400x400&key=YOUR_API_KEY
     //
     
@@ -29,34 +29,17 @@ public class GoogleMapLocator {
     public mapScale mScale = new mapScale();
     public mapZoom mZoom = new mapZoom();
     public mapType mType = new mapType();
-    public mapKey mKey = new mapKey();
+    public mapKey mKey = new mapKey("AIzaSyA9GSrFDlDtDCRlcZzB9alI1X86VBLXsqA");
     
-
-    /*
-    public double latitude = 0.0;
-    public double longitude = 0.0;
-    public String locationSpecific; 
-    public String locationCoordinates; 
-    public String scale = "&scale="; // 1=(multiplier x1)  2=(multiplier x2)
-    public String scaleValue = "";
-    public String zoom = "&zoom="; // 1=(World) 5=(Landmass) 10=(City) 15=(Streets) 20=(Buildings)
-    public String zoomValue = "";
-    public int dimensionLength = 640;
-    public int dimensionHeight = 640;
-    public String dimension = "&size=";
-    public String dimensionValue = dimensionLength + "x" + dimensionHeight;
-    public String mapType = "&maptype="; // roadmap, satellite, terrain, hybrid
-    public String mapTypeValue = "";
-    public String markerColor = ""; // black, brown, green, purple, yellow, blue, gray, orange, red, white
-    public String marker = "&markers=color:";
-    public String markerValue = markerColor + "|";
-    public String key = "&key=";
-    public String keyValue = "AIzaSyBt5syC_GlqrOA2Y3w0pU-rXXMlbg5ZTvk";
-    */
-    
-
+    //
+    // Default Constructor
+    //
     public GoogleMapLocator() {
     }
+    
+    //
+    // Parametered Constructor
+    //
     public GoogleMapLocator(String _LocationName, String _Zoom, String _Scale, String _MapType, String _MarkerColor)
     {
         mSpecific = new mapSpecific(_LocationName);
@@ -66,24 +49,26 @@ public class GoogleMapLocator {
         mMarker = new mapMarker(_MarkerColor, _LocationName);
     }
     
-    public void displayName()
+    public void displaySpecific()
     {
-        System.out.println(imageURL + mSpecific.value() + mZoom.value() + mDimension.value() + mType.value() + mMarker.value());
+        
+        System.out.println(imageURL + mSpecific.value() + mZoom.value() + mDimension.value() + mScale.value() + mType.value() + mMarker.value() + mKey.value());
     }
     
     public String getMarkedPosition()
     {
         //https://maps.googleapis.com/maps/api/staticmap?alabangtowncenter&size=630x600&scale=2&maptype=roadmap&markers=color:red|alabang,town,center
-        return imageURL + mSpecific.value() + mZoom.value() + mDimension.value() + mScale.value() + mType.value() + mMarker.value();
+        return imageURL + mSpecific.value() + mZoom.value() + mDimension.value() + mScale.value() + mType.value() + mMarker.value() + mKey.value();
     }
     
     public void displayCoordinates()
     {
-        System.out.println(imageURL + mCoordinate.value() + mZoom.value() + mDimension.value() + mType.value() + mMarker.value());
+        System.out.println(imageURL + mCoordinate.value() + mZoom.value() + mDimension.value() + mScale.value() + mType.value() + mMarker.value() + mKey.value());
     }
     
     public void generateMap()
     {
+        System.out.println(getMarkedPosition());
         try
         {
             URL url = new URL(getMarkedPosition());
@@ -97,7 +82,6 @@ public class GoogleMapLocator {
                 os.write(b, 0, length);
             }
             pcpickerinventory.service.systemLog("Created image.jpg");
-
             is.close();
             os.close();
             pcpickerinventory.service.systemLog("Closed util's");
@@ -115,7 +99,7 @@ public class GoogleMapLocator {
         BufferedWriter out = null;
         try {
             // https://maps.googleapis.com/maps/api/directions/json?origin=mapua+unversity+makati&destination=mapua+university+intramuros
-            URL url = new URL("https://maps.googleapis.com/maps/api/directions/xml?origin=" + _currentLocation.replaceAll(" ", "+") + "&destination=" + _destinationLocation.replaceAll(" ", "+"));
+            URL url = new URL("https://maps.googleapis.com/maps/api/directions/xml?origin=" + _currentLocation.replaceAll(" ", "+") + "&destination=" + _destinationLocation.replaceAll(" ", "+") + mKey.value());
             theHTML = new BufferedReader(new InputStreamReader(url.openStream()));
             fStream = new FileWriter("url.xml");
             out = new BufferedWriter(fStream);
