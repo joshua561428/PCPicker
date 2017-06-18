@@ -83,7 +83,7 @@ public class ShoppingCart extends HttpServlet {
         Cart cart = (Cart)request.getSession().getAttribute("cart");
         if(cart==null)
             cart = new Cart();
-        System.out.print("getcart quantity " + cart.numItems + "    " + cart.getList().size());
+        //System.out.print("getcart quantity " + cart.numItems + "    " + cart.getList().size());
         
         return cart;
     }
@@ -108,7 +108,7 @@ public class ShoppingCart extends HttpServlet {
         }
         //System.out.println("----------------partid= "+ partid);    
         Part a = WebMethods.getPart(partid);
-        System.out.println("submitPart"+a.getPartId());
+        //S.ystem.out.println("submitPart"+a.getPartId());
         
         return WebMethods.getPart(partid);
     }
@@ -126,7 +126,7 @@ public class ShoppingCart extends HttpServlet {
             items.put("5",cart.getList().get(i).quantity * cart.getList().get(i).part.getPartPrice());
             map.put(Integer.toString(i), items);
         }
-        System.out.println("cart quantity: " + cart.numItems);
+       // System.out.println("cart quantity: " + cart.numItems);
         return map;
     }
     

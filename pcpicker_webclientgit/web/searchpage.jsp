@@ -216,36 +216,26 @@
                     ${empty sessionScope.username?'Log in or Register':sessionScope.username}                    
                 </a>
             </div>
-            
             <div class ="cartsummary">
                 <a href="<%=request.getContextPath()%>/ShoppingCart">                   
                     ${cartsummary}                    
                 </a>
             </div>
-                
-            <div class ="menubar_banner">
-                <div class="dropdown fade">
-                    <button class="dropbtn fade">Products ▽ </button>
-                    <div class="dropdown-content fade">
-                        <form action="SearchPage" method="doGet">
-                            <input type="submit" value="CPU" name="test">
-                            <input type="submit" value="GPU" name="test">
-                            <input type="submit" value="Memory" name="test">
-                            <input type="submit" value="Motherboard" name="test">
-                            <input type="submit" value="Cooler" name="test">
-                            <input type="submit" value="Storage" name="test">                         
-                            <input type="submit" value="Power Supply" name="test">
-                            <input type="submit" value="Monitor" name="test">
-                            <input type="submit" value="Keyboard" name="test">
-                            <input type="submit" value="Mouse" name="test">
-                        </form>
-                    </div>
-                </div>
-                <div class = "search_bar">
-                    <input type ="input" placeholder="search">                
-                </div>
-                <div class ="search_button">
-                    <input type="submit" value="search">
+            
+            <div class ="menubar_banner">   
+                <div class="buttons">
+                    <form action="SearchPage" method="doGet">
+                        <input type="submit" value="CPU" name="test">
+                        <input type="submit" value="GPU" name="test">
+                        <input type="submit" value="Memory" name="test">
+                        <input type="submit" value="Motherboard" name="test">
+                        <input type="submit" value="Cooler" name="test">
+                        <input type="submit" value="Storage" name="test">                         
+                        <input type="submit" value="Power Supply" name="test">
+                        <input type="submit" value="Monitor" name="test">
+                        <input type="submit" value="Keyboard" name="test">
+                        <input type="submit" value="Mouse" name="test">
+                    </form>
                 </div>
             </div>
         </div>
@@ -258,17 +248,18 @@
                         <div class ="search_filter_banner">
                             Filter
                         </div>
+                        
                         <div class ="search_filter_wrapper">
                             <div class ="search_filter_label">Manufacturer</div>
                             <div class="search_filter_checkbox_list"> 
                                 <select name="manufacturer">
                                     <c:forEach items="${manufacturers}" var="manufacturers_">
-                                        <option value="${manufacturers_.value}">${manufacturers_.value}</option>
+                                        <option value="${manufacturers_.value}" ${manufacturers_.value.equals(manufacturerval) ? 'selected' : ''}>${manufacturers_.value}</option>
                                     </c:forEach>
                                 </select>  
                             </div>
                         </div>
-
+                         <%--
                         <c:if test="${componentType=='CPU'||componentType=='Processor' || componentType =='Motherboard'}">
                             <div class ="search_filter_wrapper">                 
                                 <div class ="search_filter_label">Socket</div>
@@ -637,7 +628,7 @@
                               </div>                   
                             </div>
                         </c:if> 
-                         
+                        --%>
                         <div class ="search_filter_wrapper"> 
                             <div class ="search_filter_label">Price Range</div>
                             <div class="search_slider" id="price_slider"></div>   
@@ -649,7 +640,14 @@
                                 </div>           
                             </div>                   
                         </div>
-
+                        <div class ="search_filter_wrapper">
+                            <div class ="search_filter_label">Search</div>
+                            <div class="search_filter_checkbox_list"> 
+                                <div class = "search_bar">
+                                    <input type ="input" name="searchbar" value="${searchbar}" placeholder="search">                
+                                </div>
+                            </div>
+                        </div>
                         <div class ="search_filter_wrapper"> 
                             <br><input type="submit" value="Filter results">
                         </div>
@@ -709,27 +707,8 @@
                             </c:forEach>
                             
                        </form>      
-                                
-                        
-                
-                                
-                       
                     </div>
-                    
-                    
-              
-                    
-                    
                 </div>
-
-
-
-
-               
         </div>
-        
-               
-        
-       
     </body>
 </html>

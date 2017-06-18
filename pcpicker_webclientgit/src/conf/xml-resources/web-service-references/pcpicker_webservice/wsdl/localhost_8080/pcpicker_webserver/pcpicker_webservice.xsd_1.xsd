@@ -36,6 +36,10 @@
 
 <xs:element name="getManufacturersResponse" type="tns:getManufacturersResponse"/>
 
+<xs:element name="getMaxPrice" type="tns:getMaxPrice"/>
+
+<xs:element name="getMaxPriceResponse" type="tns:getMaxPriceResponse"/>
+
 <xs:element name="getMaxResolutions" type="tns:getMaxResolutions"/>
 
 <xs:element name="getMaxResolutionsResponse" type="tns:getMaxResolutionsResponse"/>
@@ -107,6 +111,7 @@
 <xs:element name="part_name" type="xs:string" minOccurs="0"/>
 <xs:element name="part_price" type="xs:double"/>
 <xs:element name="part_type" type="xs:string" minOccurs="0"/>
+<xs:element name="imagePath" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -142,6 +147,18 @@
 <xs:complexType name="getMemoryTypesResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getMaxPrice">
+<xs:sequence>
+<xs:element name="compType" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getMaxPriceResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -181,18 +198,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getOrderHistoryList">
-<xs:sequence>
-<xs:element name="cust_id" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getOrderHistoryListResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:Order" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="cancelOrder">
 <xs:sequence>
 <xs:element name="order_id" type="xs:int"/>
@@ -202,6 +207,18 @@
 <xs:complexType name="cancelOrderResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOrderHistoryList">
+<xs:sequence>
+<xs:element name="cust_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOrderHistoryListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:Order" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -216,7 +233,12 @@
 </xs:complexType>
 
 <xs:complexType name="getKeyboardList">
-<xs:sequence/>
+<xs:sequence>
+<xs:element name="search" type="xs:string" minOccurs="0"/>
+<xs:element name="manufacturer" type="xs:string" minOccurs="0"/>
+<xs:element name="minPrice" type="xs:int" minOccurs="0"/>
+<xs:element name="maxPrice" type="xs:int" minOccurs="0"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="getKeyboardListResponse">
@@ -252,7 +274,12 @@
 </xs:complexType>
 
 <xs:complexType name="getMotherboardList">
-<xs:sequence/>
+<xs:sequence>
+<xs:element name="search" type="xs:string" minOccurs="0"/>
+<xs:element name="manufacturer" type="xs:string" minOccurs="0"/>
+<xs:element name="minPrice" type="xs:int" minOccurs="0"/>
+<xs:element name="maxPrice" type="xs:int" minOccurs="0"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="getMotherboardListResponse">
@@ -273,30 +300,13 @@
 </xs:complexContent>
 </xs:complexType>
 
-<xs:complexType name="getMemoryList">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="getMemoryListResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:Memory" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Memory">
-<xs:complexContent>
-<xs:extension base="tns:Part">
-<xs:sequence>
-<xs:element name="mem_capacity" type="xs:int"/>
-<xs:element name="mem_ddr" type="xs:string" minOccurs="0"/>
-<xs:element name="mem_clock" type="xs:int"/>
-</xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
-
 <xs:complexType name="getMonitorList">
-<xs:sequence/>
+<xs:sequence>
+<xs:element name="search" type="xs:string" minOccurs="0"/>
+<xs:element name="manufacturer" type="xs:string" minOccurs="0"/>
+<xs:element name="minPrice" type="xs:int" minOccurs="0"/>
+<xs:element name="maxPrice" type="xs:int" minOccurs="0"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="getMonitorListResponse">
@@ -318,8 +328,40 @@
 </xs:complexContent>
 </xs:complexType>
 
+<xs:complexType name="getMemoryList">
+<xs:sequence>
+<xs:element name="search" type="xs:string" minOccurs="0"/>
+<xs:element name="manufacturer" type="xs:string" minOccurs="0"/>
+<xs:element name="minPrice" type="xs:int" minOccurs="0"/>
+<xs:element name="maxPrice" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getMemoryListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:Memory" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Memory">
+<xs:complexContent>
+<xs:extension base="tns:Part">
+<xs:sequence>
+<xs:element name="mem_capacity" type="xs:int"/>
+<xs:element name="mem_ddr" type="xs:string" minOccurs="0"/>
+<xs:element name="mem_clock" type="xs:int"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
 <xs:complexType name="getStorageList">
-<xs:sequence/>
+<xs:sequence>
+<xs:element name="search" type="xs:string" minOccurs="0"/>
+<xs:element name="manufacturer" type="xs:string" minOccurs="0"/>
+<xs:element name="minPrice" type="xs:int" minOccurs="0"/>
+<xs:element name="maxPrice" type="xs:int" minOccurs="0"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="getStorageListResponse">
@@ -341,7 +383,12 @@
 </xs:complexType>
 
 <xs:complexType name="getProcessorList">
-<xs:sequence/>
+<xs:sequence>
+<xs:element name="search" type="xs:string" minOccurs="0"/>
+<xs:element name="manufacturer" type="xs:string" minOccurs="0"/>
+<xs:element name="minPrice" type="xs:int" minOccurs="0"/>
+<xs:element name="maxPrice" type="xs:int" minOccurs="0"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="getProcessorListResponse">
@@ -365,7 +412,12 @@
 </xs:complexType>
 
 <xs:complexType name="getGraphicsCardList">
-<xs:sequence/>
+<xs:sequence>
+<xs:element name="search" type="xs:string" minOccurs="0"/>
+<xs:element name="manufacturer" type="xs:string" minOccurs="0"/>
+<xs:element name="minPrice" type="xs:int" minOccurs="0"/>
+<xs:element name="maxPrice" type="xs:int" minOccurs="0"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="getGraphicsCardListResponse">
@@ -382,49 +434,6 @@
 <xs:element name="mem_ddr" type="xs:string" minOccurs="0"/>
 <xs:element name="mem_capacity" type="xs:int"/>
 <xs:element name="mem_clock" type="xs:int"/>
-</xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
-
-<xs:complexType name="getCoolerList">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="getCoolerListResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:Cooler" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Cooler">
-<xs:complexContent>
-<xs:extension base="tns:Part">
-<xs:sequence>
-<xs:element name="liquid_cooling" type="xs:boolean"/>
-<xs:element name="rated_tdp" type="xs:int"/>
-<xs:element name="supported_sockets" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
-
-<xs:complexType name="getMouseList">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="getMouseListResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:Mouse" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="Mouse">
-<xs:complexContent>
-<xs:extension base="tns:Part">
-<xs:sequence>
-<xs:element name="dpi" type="xs:int"/>
-<xs:element name="connection_" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:extension>
 </xs:complexContent>
@@ -448,8 +457,76 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getPowerSupplyList">
+<xs:complexType name="getCoolerList">
+<xs:sequence>
+<xs:element name="search" type="xs:string" minOccurs="0"/>
+<xs:element name="manufacturer" type="xs:string" minOccurs="0"/>
+<xs:element name="minPrice" type="xs:int" minOccurs="0"/>
+<xs:element name="maxPrice" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCoolerListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:Cooler" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Cooler">
+<xs:complexContent>
+<xs:extension base="tns:Part">
+<xs:sequence>
+<xs:element name="liquid_cooling" type="xs:boolean"/>
+<xs:element name="rated_tdp" type="xs:int"/>
+<xs:element name="supported_sockets" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="getMouseList">
+<xs:sequence>
+<xs:element name="search" type="xs:string" minOccurs="0"/>
+<xs:element name="manufacturer" type="xs:string" minOccurs="0"/>
+<xs:element name="minPrice" type="xs:int" minOccurs="0"/>
+<xs:element name="maxPrice" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getMouseListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:Mouse" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Mouse">
+<xs:complexContent>
+<xs:extension base="tns:Part">
+<xs:sequence>
+<xs:element name="dpi" type="xs:int"/>
+<xs:element name="connection_" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="getMaxResolutions">
 <xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getMaxResolutionsResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPowerSupplyList">
+<xs:sequence>
+<xs:element name="search" type="xs:string" minOccurs="0"/>
+<xs:element name="manufacturer" type="xs:string" minOccurs="0"/>
+<xs:element name="minPrice" type="xs:int" minOccurs="0"/>
+<xs:element name="maxPrice" type="xs:int" minOccurs="0"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="getPowerSupplyListResponse">
@@ -468,16 +545,6 @@
 </xs:sequence>
 </xs:extension>
 </xs:complexContent>
-</xs:complexType>
-
-<xs:complexType name="getMaxResolutions">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="getMaxResolutionsResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="addCustomer">

@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="css/test.css">
     </head>
     <body>
-        <div class ="banner">
+       <div class ="banner">
             <div class ="logo">  
                 <a href="${pageContext.request.contextPath}/Homepage"><img src="img/logo.png" alt="logo" /></a>
             </div>
@@ -29,29 +29,21 @@
                     ${cartsummary}                    
                 </a>
             </div>
-            <div class ="menubar_banner">
-                <div class="dropdown fade">
-                    <button class="dropbtn fade">Products ▽ </button>
-                    <div class="dropdown-content fade">
-                        <form action="SearchPage" method="doGet">
-                            <input type="submit" value="CPU" name="test">
-                            <input type="submit" value="GPU" name="test">
-                            <input type="submit" value="Memory" name="test">
-                            <input type="submit" value="Motherboard" name="test">
-                            <input type="submit" value="Cooler" name="test">
-                            <input type="submit" value="Storage" name="test">                         
-                            <input type="submit" value="Power Supply" name="test">
-                            <input type="submit" value="Monitor" name="test">
-                            <input type="submit" value="Keyboard" name="test">
-                            <input type="submit" value="Mouse" name="test">
-                        </form>
-                    </div>
-                </div>
-                <div class = "search_bar">
-                    <input type ="input" placeholder="search">                
-                </div>
-                <div class ="search_button">
-                    <input type="submit" value="search">
+            
+            <div class ="menubar_banner">   
+                <div class="buttons">
+                    <form action="SearchPage" method="doGet">
+                        <input type="submit" value="CPU" name="test">
+                        <input type="submit" value="GPU" name="test">
+                        <input type="submit" value="Memory" name="test">
+                        <input type="submit" value="Motherboard" name="test">
+                        <input type="submit" value="Cooler" name="test">
+                        <input type="submit" value="Storage" name="test">                         
+                        <input type="submit" value="Power Supply" name="test">
+                        <input type="submit" value="Monitor" name="test">
+                        <input type="submit" value="Keyboard" name="test">
+                        <input type="submit" value="Mouse" name="test">
+                    </form>
                 </div>
             </div>
         </div>

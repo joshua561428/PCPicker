@@ -29,19 +29,20 @@ html, body{
 
 .banner{
     padding:0;
-    height:25%;
+    height:12em;
     width:100%;
     border: 1px solid;
     background-color:#051C38;    
-    position:relative
+    position:relative;
+    overflow:hidden;
 }
 .menubar_banner{
     position: relative;
     background-color:#051C38;  
-   
+    overflow:hidden;
     margin-bottom: 0.5em;
     margin-right: auto;
-    margin-left: auto;
+    margin-left: 5%;
 }
 
 
@@ -124,8 +125,7 @@ html, body{
 .search_bar{
     position:relative;
     display:inline-block;
-    margin-left: 0.6em;
-    margin-right: 0.4em;
+    
     
     
 }
@@ -134,10 +134,11 @@ html, body{
     box-sizing: border-box;
     display: inline-block;
     margin-top:0.1em;
-    width: 28em;
+    width: 100%;
     padding: 6px;
     font-family: 'Segoe UI', sans-serif;
     font-size: 0.95em;
+    border:1px solid #ccc;
 }
 .search_button{
     display:inline-block;
@@ -395,7 +396,7 @@ html, body{
     position: relative;
     display:inline-block;
     vertical-align: top;
-    width:40em;
+    width:60em;
 }
 .search_results_container_outer input[type=text]{
     font-family:"Segoe UI", sans-serif;
@@ -512,11 +513,22 @@ html, body{
     margin-left: 5em;
     
 }
+.orderlabels2{
+    font-family: "Segoe UI", sans-serif;
+    font-weight: normal;
+    position:absolute;
+    display: inline-block;
+    padding : 5px;
+    font-size: 1.5em;
+    margin-left: 5em;
+    right: 1em;
+    
+}
 .olabel{
     font-weight:lighter;
      position:relative;
     display: inline-block;
-     margin-right: 10em;
+     margin-right: 5em;
 }
 .searchItemWrapper2{
     position:relative;
@@ -529,6 +541,7 @@ html, body{
     min-height: 1.5em;
     
 }
+
 .partimage{
     position: absolute;
     top: 1em;
@@ -538,13 +551,13 @@ html, body{
     display:inline-block;
 }
 .partimage img{
-    max-height: 5em;
-    max-width: 5em;
+    max-height: 6em;
+    max-width: 6em;
     display:inline-block;
     
 }
 .partid{
-    left:4.5em;
+    left:7.5em;
     top:0.2em;
     position:relative;
     display:inline-block;
@@ -555,7 +568,7 @@ html, body{
 }
 
 .partname{
-    left:5em;
+   left:7.5em;
     top:0.2em;
     position:relative;
     display:inline-block;
@@ -718,21 +731,94 @@ html, body{
      background-color: #226666;
 }
 .buttons input[type=submit]{
-    border: 1px solid #ccc;
-    padding:15px;
+    padding:12px;
     font-weight: lighter;
     font-family: "Segoe UI", sans-serif;
     font-size: 1em;
    
-    margin: 5px;
+    margin: 3px;
     color:white;
      background-color: #226666;
 }
 .buttons input[type=submit]:hover{
+    transition:all 0.2s ease;
+    background-color: #003333;
+   
+    color:white;
+}
+.buttons2{
+    position: relative;
+    display: inline-block;
+}
+.buttons2 input[type=submit]{
+  
+    border: 1px solid #ccc;
+    padding:5px;
+    font-weight: lighter;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 1em;
+    min-width: 150px;
+    margin: 5px;
+    color:white;
+    background-color: #226666;
+}
+.accountpageorderitem{
+    padding:1px;
+    margin-right: 1px;
+    display:inline-block;
+    position:relative;
+    width:8.5em;
+}
+.searchItemWrapper3{
+    position:relative;
+    margin:5px;
+    padding:5px;
+    position:relative;
+    border-bottom: 1px solid #ccc;
+    color:black;
+    font-weight: 300;
+    min-height: 1.5em;
+    display: inline-block;
+    width:100%;
+    
+}
+.accountlabel{
+    display: inline-block;
+    position:relative;
+    width:8.5em;
+    border-bottom:1px solid #ccc;
+}
+.borderbottom{
+    width:100%;
+    border-bottom: 1px solid #ccc;
+}
+.buttons2 input[type=submit]:hover{
     transition:color 0.5s ease;
     background-color: #003333;
     margin: 5px;
     color:white;
+}
+.accountbanner{
+    font-family: "Segoe UI", sans-serif;
+    font-weight: lighter;
+    font-size:2em;
+    border-bottom: 2px solid #ccc;
+    padding: 5px;
+    
+}
+.acount{
+    left:30%;
+    position:relative;
+    font-size: 1.5em;
+}
+.acount input[type=submit]{
+    padding: 3px;
+    
+}
+.acount input[type=submit]:hover{
+    background-color: #003333;
+    color:white;
+    transition:color 0.5s ease;
 }
 .partAdd2 input[type=submit]:hover{
     transition:color 0.5s ease;
@@ -760,7 +846,7 @@ html, body{
     color:white;
 }
 .partdetails{
-    left:7em;
+    left:10em;
     position: relative;
     margin:5px;
     

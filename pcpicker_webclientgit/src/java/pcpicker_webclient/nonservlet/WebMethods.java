@@ -51,86 +51,7 @@ public class WebMethods {
         return port.getGPUMemoryTypes();
     }
 
-    public static java.util.List<pcpicker.Monitor> getMonitorList() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required
-        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
-        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
-        return port.getMonitorList();
-    }
-
-    public static java.util.List<pcpicker.Memory> getMemoryList() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required
-        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
-        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
-        return port.getMemoryList();
-    }
-
-    public static java.util.List<pcpicker.Processor> getProcessorList() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required
-        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
-        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
-        return port.getProcessorList();
-    }
-
-    public static java.util.List<pcpicker.Storage> getStorageList() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
-        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
-        return port.getStorageList();
-    }
-
-    public static java.util.List<pcpicker.Mouse> getMouseList() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
-        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
-        return port.getMouseList();
-    }
-
-    public static java.util.List<pcpicker.Motherboard> getMotherboardList() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
-        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
-        return port.getMotherboardList();
-    }
-
-    public static java.util.List<pcpicker.Keyboard> getKeyboardList() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required
-        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
-        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
-        return port.getKeyboardList();
-    }
-
-    public static java.util.List<pcpicker.GraphicsCard> getGraphicsCardList() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
-        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
-        return port.getGraphicsCardList();
-    }
-
-    public static java.util.List<pcpicker.Cooler> getCoolerList() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
-        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
-        return port.getCoolerList();
-    }
-
-    public static java.util.List<pcpicker.PowerSupply> getPowerSupplyList() {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
-        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
-        return port.getPowerSupplyList();
-    }
-
+    
     public static Part getPart(java.lang.String partId) {
       pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
         pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
@@ -173,6 +94,72 @@ public class WebMethods {
         pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
         pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
         return port.getOrderHistoryList(custId);
+    }
+
+    public static java.util.List<pcpicker.Processor> getProcessorList(java.lang.String search, java.lang.String manufacturer, java.lang.Integer minPrice, java.lang.Integer maxPrice) {
+        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
+        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
+        return port.getProcessorList(search, manufacturer, minPrice, maxPrice);
+    }
+
+    public static java.util.List<pcpicker.Storage> getStorageList(java.lang.String search, java.lang.String manufacturer, java.lang.Integer minPrice, java.lang.Integer maxPrice) {
+        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
+        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
+        return port.getStorageList(search, manufacturer, minPrice, maxPrice);
+    }
+
+    public static java.util.List<pcpicker.PowerSupply> getPowerSupplyList(java.lang.String search, java.lang.String manufacturer, java.lang.Integer minPrice, java.lang.Integer maxPrice) {
+        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
+        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
+        return port.getPowerSupplyList(search, manufacturer, minPrice, maxPrice);
+    }
+
+    public static java.util.List<pcpicker.Mouse> getMouseList(java.lang.String search, java.lang.String manufacturer, java.lang.Integer minPrice, java.lang.Integer maxPrice) {
+        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
+        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
+        return port.getMouseList(search, manufacturer, minPrice, maxPrice);
+    }
+
+    public static java.util.List<pcpicker.Motherboard> getMotherboardList(java.lang.String search, java.lang.String manufacturer, java.lang.Integer minPrice, java.lang.Integer maxPrice) {
+        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
+        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
+        return port.getMotherboardList(search, manufacturer, minPrice, maxPrice);
+    }
+
+    public static java.util.List<pcpicker.Monitor> getMonitorList(java.lang.String search, java.lang.String manufacturer, java.lang.Integer minPrice, java.lang.Integer maxPrice) {
+        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
+        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
+        return port.getMonitorList(search, manufacturer, minPrice, maxPrice);
+    }
+
+    public static java.util.List<pcpicker.Memory> getMemoryList(java.lang.String search, java.lang.String manufacturer, java.lang.Integer minPrice, java.lang.Integer maxPrice) {
+        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
+        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
+        return port.getMemoryList(search, manufacturer, minPrice, maxPrice);
+    }
+
+    public static java.util.List<pcpicker.Keyboard> getKeyboardList(java.lang.String search, java.lang.String manufacturer, java.lang.Integer minPrice, java.lang.Integer maxPrice) {
+        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
+        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
+        return port.getKeyboardList(search, manufacturer, minPrice, maxPrice);
+    }
+
+    public static java.util.List<pcpicker.GraphicsCard> getGraphicsCardList(java.lang.String search, java.lang.String manufacturer, java.lang.Integer minPrice, java.lang.Integer maxPrice) {
+        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
+        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
+        return port.getGraphicsCardList(search, manufacturer, minPrice, maxPrice);
+    }
+
+    public static java.util.List<pcpicker.Cooler> getCoolerList(java.lang.String search, java.lang.String manufacturer, java.lang.Integer minPrice, java.lang.Integer maxPrice) {
+        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
+        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
+        return port.getCoolerList(search, manufacturer, minPrice, maxPrice);
+    }
+
+    public static double getMaxPrice(java.lang.String compType) {
+        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
+        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
+        return port.getMaxPrice(compType);
     }
 
   
