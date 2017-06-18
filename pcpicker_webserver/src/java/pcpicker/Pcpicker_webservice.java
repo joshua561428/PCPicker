@@ -851,6 +851,8 @@ public class Pcpicker_webservice
                 a.get(last).setActive(rs.getBoolean(5));
                 a.get(last).setItems(getOrderItems(a.get(last).getOrder_id()));
                 a.get(last).setDeliveryDate(rs.getString(7));
+                a.get(last).setDeliveryAddress(rs.getString(10));
+               // System.out.println("adasdasdasdzxczczxc" + a.get(last).getDeliveryAddress());
             }
             callableStatement.close();
             conn.close();
