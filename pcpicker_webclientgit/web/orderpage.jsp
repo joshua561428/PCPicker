@@ -108,7 +108,9 @@
                                 <br>
                 </c:forEach>
                 <div class="orderlabels2">
+                     Delivery Address:  <div class ="olabel"> ${deliveryAddress}</div>
                     Total Price:  <div class ="olabel"> ₱${totalprice}</div>
+                   
                 </div>
             </div>
                 

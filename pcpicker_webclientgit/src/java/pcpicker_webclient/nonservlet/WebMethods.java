@@ -66,12 +66,7 @@ public class WebMethods {
         return port.login(username, password);
     }
 
-    public static int addOrder(int custId, java.util.List<java.lang.String> partIds, java.util.List<java.lang.Integer> quantity, java.lang.String paymentType) {
-        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
-        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
-        return port.addOrder(custId, partIds, quantity, paymentType);
-    }
-
+   
     public static java.util.List<pcpicker.Order> getOrderList(int custId) {
         pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
         pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
@@ -160,6 +155,12 @@ public class WebMethods {
         pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
         pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
         return port.getMaxPrice(compType);
+    }
+
+    public static int addOrder(int custId, java.util.List<java.lang.String> partIds, java.util.List<java.lang.Integer> quantity, java.lang.String paymentType, java.lang.String deliveryAddress) {
+        pcpicker.PcpickerWebservice_Service service = new pcpicker.PcpickerWebservice_Service();
+        pcpicker.PcpickerWebservice port = service.getPcpickerWebservicePort();
+        return port.addOrder(custId, partIds, quantity, paymentType, deliveryAddress);
     }
 
   

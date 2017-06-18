@@ -49,7 +49,7 @@ public class Checkout extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Cart cart = (Cart)request.getSession().getAttribute("cart");
-       
+        String deliveryAddress = (String) request.getParameter("deliveryAddress");
         if(cart == null || cart.getList().size() == 0)
         {
             SessionMessage.setMessage(request, "No items in cart");
@@ -59,12 +59,14 @@ public class Checkout extends HttpServlet {
         {
             //not logged in   
             SessionMessage.setMessage(request, "Please login before Checking out");
+            request.setAttribute("deliveryAddress",deliveryAddress);
             response.sendRedirect(request.getContextPath()+"/ShoppingCart");           
         }
         else
-        {
+        {            
+            System.out.println(deliveryAddress);
             int userid = Integer.parseInt((String)request.getSession().getAttribute("userid"));  
-            int orderId = WebMethods.addOrder(userid, cart.getPartList(), cart.getQuantityList(), "");
+            int orderId = WebMethods.addOrder(userid, cart.getPartList(), cart.getQuantityList(), "Cash on Delivery",deliveryAddress);
             request.getSession().setAttribute("cart", null);           
             SessionMessage.setInt(request,orderId);
             response.sendRedirect(request.getContextPath()+"/OrderPage");

@@ -37,6 +37,7 @@ public class OrderPage extends HttpServlet {
         int custid = Integer.parseInt((String)request.getSession().getAttribute("userid"));
         Integer orderid = getOrderId(request);
         Integer submit = getSubmitValue(request);
+        String deliveryAddress = "";
         if(submit == VIEW)
         {
             List<Order> orders = WebMethods.getOrderList(custid); 
@@ -49,15 +50,16 @@ public class OrderPage extends HttpServlet {
                     op = o.getItems();
                     deliveryDate = o.getDeliveryDate();
                     request.setAttribute("datecreated",o.getDateCreated());
+                    deliveryAddress = o.getDeliveryAddress();
                     //System.out.println("adasdasdasdasdqeqweqdzczxdfwewrwesdfsdfsdf");
                     break;
                 }
             }
-
+                System.out.println("del " + deliveryAddress);
             HashMap opmap = createOrderPartHashMap(op);
             double totalprice = calculateTotalPrice(op);
 
-           
+            request.setAttribute("deliveryAddress",deliveryAddress);
             request.setAttribute("deliveryDate",deliveryDate);
             request.setAttribute("totalprice",totalprice);
             request.setAttribute("orderid",orderid);

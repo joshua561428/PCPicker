@@ -11,8 +11,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Shopping Cart</title>
         <link rel="stylesheet" href="css/test.css">
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcA9vCw-f0B8M61ei7LkO-u2tvo0l7m5A&libraries=places"></script>
     </head>
     <body>
         <div class ="banner">
@@ -130,8 +131,12 @@
                 <div class="buttons">
                     <div class="checkoutbutton">
                         <form method ="post" action ="Checkout">
-                            <input type="submit" value="Checkout" name="submit">
+                            <input type="submit" value="Proceed to Checkout" name="submit">
                              ${message}<br>
+                              <div class="deliveryaddresss">
+                            <label for="locationTextField">Delivery Address</label>
+                            <input id="locationTextField" value="${deliveryAddress}" name ="deliveryAddress" type="text" size="50" required>
+                        </div>
                         </form>
                     </div>
                        
@@ -144,8 +149,20 @@
                         </form>
                     </div>
                 </div>
+           
+       
             </div>                    
            
         </div>
+                            
+                            
+        <script>
+            function init() {
+                var input = document.getElementById('locationTextField');
+                var autocomplete = new google.maps.places.Autocomplete(input);
+            }
+            google.maps.event.addDomListener(window, 'load', init);
+        </script>
+    
     </body>
 </html>

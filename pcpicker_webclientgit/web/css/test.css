@@ -681,7 +681,8 @@ html, body{
 .checkoutbutton{
     position: absolute;
     display: inline-table;
-    right: 0.5em;
+    right: 2.5em;
+    margin-top: 5px;
 }
 .continuebutton{
     position: relative;
@@ -850,6 +851,14 @@ html, body{
     position: relative;
     margin:5px;
     
+}
+.deliveryaddresss{
+    position:absolute;
+    right: 1em;
+}
+.deliveryaddresss input[type=text]{
+    border: 1px solid #ccc;
+    padding: 3px;
 }
 /*-----------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------*/
