@@ -768,17 +768,23 @@ public class Pcpicker_webservice
     }
     
     @WebMethod(operationName = "addOrder")
-    public int addOrder(@WebParam(name = "cust_id") int cust_id, @WebParam(name = "part_ids") ArrayList<String> part_ids, @WebParam(name = "quantity") ArrayList<Integer> quantity, @WebParam(name = "paymentType") String paymentType) {
+    public int addOrder(
+            @WebParam(name = "cust_id") int cust_id, 
+            @WebParam(name = "part_ids") ArrayList<String> part_ids,
+            @WebParam(name = "quantity") ArrayList<Integer> quantity, 
+            @WebParam(name = "paymentType") String paymentType,
+            @WebParam(name = "deliveryAddress") String deliveryAddress    
+    ) {
         int order_id = 0; 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
           
-            String sql = "{call addOrder(?,?)}"; 
+            String sql = "{call addOrder(?,?,?)}"; 
             CallableStatement callableStatement = conn.prepareCall(sql);
             callableStatement.setInt(1, cust_id);
             callableStatement.setString(2,paymentType);
-            
+            callableStatement.setString(3,deliveryAddress);
             ResultSet rs = callableStatement.executeQuery();
             while (rs.next()) {
                 order_id = rs.getInt(1);

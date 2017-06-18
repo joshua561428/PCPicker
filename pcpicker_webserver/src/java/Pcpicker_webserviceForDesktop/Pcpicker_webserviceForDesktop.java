@@ -53,6 +53,7 @@ public class Pcpicker_webserviceForDesktop {
                 a.setActive(rs.getBoolean(5));
                 a.setItems(getOrderItems(a.getOrder_id()));
                 a.setDeliveryDate(rs.getString(7));
+                a.setDeliveryAddress(rs.getString(8));
             }
             callableStatement.close();
             conn.close();

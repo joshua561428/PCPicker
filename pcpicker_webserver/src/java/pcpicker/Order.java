@@ -28,6 +28,8 @@ public class Order
     protected Boolean cancel; 
     @XmlElement(name ="cancelDate")
     protected String cancelDate; 
+    @XmlElement(name ="deliveryAddress")
+    protected String deliveryAddress; 
     /**
      * @return the acceptedBy
      */
@@ -165,6 +167,20 @@ public class Order
      */
     public void setCancel(Boolean cancel) {
         this.cancel = cancel;
+    }
+
+    /**
+     * @return the deliveryAddress
+     */
+    public String getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    /**
+     * @param deliveryAddress the deliveryAddress to set
+     */
+    public void setDeliveryAddress(String deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
     }
     
  
