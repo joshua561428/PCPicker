@@ -4,17 +4,9 @@
  * and open the template in the editor.
  */
 package pcpickerinventory;
-import GoogleAPI.GoogleMapFrame;
-import GoogleAPI.GoogleMapLocator;
+import GoogleAPI.*;
 import java.awt.Color;
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import pcpickerinventory.WinForms;
 import pcpickerinventory.lib.*;
-import pcpickerinventory.parts.*;
 
 /**
  *
@@ -746,11 +738,10 @@ public class frmMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         GoogleAPI.GoogleMapLocator myLocator = new GoogleMapLocator(txtLocation.getText(), "15", "1", "roadmap", "red");
-        GoogleAPI.GoogleMapFrame myMap = new GoogleMapFrame();
         myLocator.generateMap();
         myLocator.getCoordinates(txtLocation.getText(),txtLocation.getText());
         myLocator.retrieveCoordinates(txtLatitude,txtLongitude);
-        myMap.display(frameMap);
+        myLocator.displayMap(frameMap);
     }//GEN-LAST:event_btnSetLocationActionPerformed
 
     /**
