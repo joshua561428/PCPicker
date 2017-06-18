@@ -4,15 +4,12 @@
  * and open the template in the editor.
  */
 package GoogleAPI;
-import java.awt.EventQueue;
 import java.io.*;
 import java.net.URL;
-import java.util.logging.Logger;
-import javax.swing.*;
-import java.awt.*;
-import java.util.Scanner;
-import javax.swing.border.EmptyBorder;
-
+import javax.swing.JFormattedTextField;
+import javax.swing.JTextField;
+import javax.xml.parsers.*;
+import org.w3c.dom.*;
 /**
  *
  * @author appbenigno
@@ -108,5 +105,62 @@ public class GoogleMapLocator {
             pcpickerinventory.service.systemLog(e,"Could not create image.jpg");
             System.exit(1);
         }// fin getting and storing image
+    }
+    
+    public void getCoordinates(String _currentLocation, String _destinationLocation){
+        String thisLine;
+        
+        BufferedReader theHTML = null;
+        FileWriter fStream = null;
+        BufferedWriter out = null;
+        try {
+            // https://maps.googleapis.com/maps/api/directions/json?origin=mapua+unversity+makati&destination=mapua+university+intramuros
+            URL url = new URL("https://maps.googleapis.com/maps/api/directions/xml?origin=" + _currentLocation.replaceAll(" ", "+") + "&destination=" + _destinationLocation.replaceAll(" ", "+"));
+            theHTML = new BufferedReader(new InputStreamReader(url.openStream()));
+            fStream = new FileWriter("url.xml");
+            out = new BufferedWriter(fStream);
+            while ((thisLine = theHTML.readLine()) != null){
+                out.write(thisLine);
+            }
+        } 
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        finally{
+            try {
+                out.close();
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+        }
+    }
+    public void retrieveCoordinates(JFormattedTextField _latitudeTextField, JFormattedTextField _longitudeTextField){
+        try {
+            File file = new File("url.xml");
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.parse(file);
+            doc.getDocumentElement().normalize();
+            NodeList nl = doc.getElementsByTagName("status");
+            Element n = (Element)nl.item(0);
+            String st = n.getFirstChild().getNodeValue();
+            
+            String st1, st2;
+
+            if (st.equals("OK"))
+            {
+                NodeList n2a = doc.getElementsByTagName("lat");
+                NodeList n2b = doc.getElementsByTagName("lng");
+                Element nn1 = (Element)n2a.item(0);
+                Element nn2 = (Element)n2b.item(0);
+                st1 = nn1.getFirstChild().getNodeValue();
+                st2 = nn2.getFirstChild().getNodeValue();
+                _latitudeTextField.setText(st1);
+                _longitudeTextField.setText(st2);
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        
     }
 }

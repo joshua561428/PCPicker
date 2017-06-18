@@ -7,6 +7,9 @@ package pcpickerinventory;
 import GoogleAPI.GoogleMapFrame;
 import GoogleAPI.GoogleMapLocator;
 import java.awt.Color;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import pcpickerinventory.WinForms;
@@ -57,23 +60,30 @@ public class frmMain extends javax.swing.JFrame {
         txtParam5 = new javax.swing.JTextField();
         btnClear = new javax.swing.JButton();
         panelItemDetails = new javax.swing.JPanel();
-        compIdText = new javax.swing.JTextField();
-        compNameText = new javax.swing.JTextField();
-        compTypeCombo = new javax.swing.JComboBox<>();
-        compManufacturerText = new javax.swing.JTextField();
+        txtComponentID = new javax.swing.JTextField();
+        txtComponentName = new javax.swing.JTextField();
+        cmbComponentType = new javax.swing.JComboBox<>();
+        txtComponentManufacturer = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        compPriceText = new javax.swing.JFormattedTextField();
+        txtComponentPrice = new javax.swing.JFormattedTextField();
         btnRefresh = new javax.swing.JButton();
         cmbFilter = new javax.swing.JComboBox<>();
         btnFilter = new javax.swing.JButton();
         panelGoogleMap = new javax.swing.JPanel();
+        frameMap = new javax.swing.JInternalFrame();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtLongitude = new javax.swing.JFormattedTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtLatitude = new javax.swing.JFormattedTextField();
+        jLabel1 = new javax.swing.JLabel();
         btnSetLocation = new javax.swing.JButton();
         txtLocation = new javax.swing.JTextField();
-        frameMap = new javax.swing.JInternalFrame();
         mnuMain = new javax.swing.JMenuBar();
         mnuFile = new javax.swing.JMenu();
         mnuFileBranch = new javax.swing.JMenuItem();
@@ -239,21 +249,21 @@ public class frmMain extends javax.swing.JFrame {
 
         panelItemDetails.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        compIdText.addActionListener(new java.awt.event.ActionListener() {
+        txtComponentID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                compIdTextActionPerformed(evt);
+                txtComponentIDActionPerformed(evt);
             }
         });
 
-        compTypeCombo.addActionListener(new java.awt.event.ActionListener() {
+        cmbComponentType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                compTypeComboActionPerformed(evt);
+                cmbComponentTypeActionPerformed(evt);
             }
         });
 
-        compManufacturerText.addActionListener(new java.awt.event.ActionListener() {
+        txtComponentManufacturer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                compManufacturerTextActionPerformed(evt);
+                txtComponentManufacturerActionPerformed(evt);
             }
         });
 
@@ -267,7 +277,7 @@ public class frmMain extends javax.swing.JFrame {
 
         jLabel17.setText("Component Price:");
 
-        compPriceText.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
+        txtComponentPrice.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
 
         javax.swing.GroupLayout panelItemDetailsLayout = new javax.swing.GroupLayout(panelItemDetails);
         panelItemDetails.setLayout(panelItemDetailsLayout);
@@ -283,14 +293,14 @@ public class frmMain extends javax.swing.JFrame {
                     .addComponent(jLabel17))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelItemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(compNameText, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(compIdText)
+                    .addComponent(txtComponentName, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtComponentID)
                     .addGroup(panelItemDetailsLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(panelItemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(compManufacturerText, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(compTypeCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, 137, Short.MAX_VALUE)
-                            .addComponent(compPriceText))))
+                            .addComponent(txtComponentManufacturer, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbComponentType, javax.swing.GroupLayout.Alignment.LEADING, 0, 137, Short.MAX_VALUE)
+                            .addComponent(txtComponentPrice))))
                 .addGap(16, 16, 16))
         );
         panelItemDetailsLayout.setVerticalGroup(
@@ -298,24 +308,24 @@ public class frmMain extends javax.swing.JFrame {
             .addGroup(panelItemDetailsLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(panelItemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(compIdText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtComponentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelItemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(compNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtComponentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelItemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(compTypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbComponentType, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel19))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelItemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(compManufacturerText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtComponentManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelItemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(compPriceText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtComponentPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -355,7 +365,7 @@ public class frmMain extends javax.swing.JFrame {
                         .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
                     .addGroup(panelInventoryLayout.createSequentialGroup()
                         .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
@@ -396,10 +406,37 @@ public class frmMain extends javax.swing.JFrame {
                         .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnClear)
                             .addComponent(addComponentButton))
-                        .addContainerGap(157, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         tabInventories.addTab("Master Inventory", panelInventory);
+
+        frameMap.setVisible(true);
+
+        javax.swing.GroupLayout frameMapLayout = new javax.swing.GroupLayout(frameMap.getContentPane());
+        frameMap.getContentPane().setLayout(frameMapLayout);
+        frameMapLayout.setHorizontalGroup(
+            frameMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        frameMapLayout.setVerticalGroup(
+            frameMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 609, Short.MAX_VALUE)
+        );
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel3.setText("(Latitude) - Y");
+
+        jLabel4.setText("(Longitude) - X");
+
+        txtLongitude.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+
+        jLabel2.setText(",");
+
+        txtLatitude.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+
+        jLabel1.setText("Coordinates:");
 
         btnSetLocation.setText("Set Location");
         btnSetLocation.addActionListener(new java.awt.event.ActionListener() {
@@ -408,17 +445,52 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
 
-        frameMap.setVisible(true);
-
-        javax.swing.GroupLayout frameMapLayout = new javax.swing.GroupLayout(frameMap.getContentPane());
-        frameMap.getContentPane().setLayout(frameMapLayout);
-        frameMapLayout.setHorizontalGroup(
-            frameMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 628, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnSetLocation)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtLocation))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtLatitude, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(txtLongitude, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 274, Short.MAX_VALUE)))
+                .addContainerGap())
         );
-        frameMapLayout.setVerticalGroup(
-            frameMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 609, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSetLocation)
+                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtLatitude, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtLongitude, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelGoogleMapLayout = new javax.swing.GroupLayout(panelGoogleMap);
@@ -427,28 +499,22 @@ public class frmMain extends javax.swing.JFrame {
             panelGoogleMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGoogleMapLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelGoogleMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelGoogleMapLayout.createSequentialGroup()
-                        .addComponent(frameMap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 256, Short.MAX_VALUE))
-                    .addGroup(panelGoogleMapLayout.createSequentialGroup()
-                        .addComponent(btnSetLocation)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtLocation))))
+                .addGroup(panelGoogleMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(frameMap)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 361, Short.MAX_VALUE))
         );
         panelGoogleMapLayout.setVerticalGroup(
             panelGoogleMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGoogleMapLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(panelGoogleMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSetLocation)
-                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(frameMap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tabInventories.addTab("Google Map", panelGoogleMap);
+        tabInventories.addTab("Branch Locator", panelGoogleMap);
 
         mnuFile.setText("File");
 
@@ -507,7 +573,7 @@ public class frmMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tabInventories)
-                .addGap(20, 20, 20))
+                .addGap(41, 41, 41))
         );
 
         pack();
@@ -529,46 +595,46 @@ public class frmMain extends javax.swing.JFrame {
         WinForms.Inventory().setVisible(true);
     }//GEN-LAST:event_mnuFileInventoryActionPerformed
 
-    private void compTypeComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compTypeComboActionPerformed
-        FormControl.setParameters((String)compTypeCombo.getSelectedItem(), lblParam1, txtParam1, lblParam2, txtParam2, lblParam3, txtParam3, lblParam4, txtParam4, lblParam5, txtParam5);
-    }//GEN-LAST:event_compTypeComboActionPerformed
+    private void cmbComponentTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbComponentTypeActionPerformed
+        FormControl.setParameters((String)cmbComponentType.getSelectedItem(), lblParam1, txtParam1, lblParam2, txtParam2, lblParam3, txtParam3, lblParam4, txtParam4, lblParam5, txtParam5);
+    }//GEN-LAST:event_cmbComponentTypeActionPerformed
 
     private void addComponentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addComponentButtonActionPerformed
-        if (compTypeCombo.getSelectedItem().toString().equals(Parts.Type.Processor.toString().replaceAll("_", " ")))
+        if (cmbComponentType.getSelectedItem().toString().equals(Parts.Type.Processor.toString().replaceAll("_", " ")))
         {
             try {
-                service.insert_CPU(compIdText.getText(), compManufacturerText.getText(), compNameText.getText(), Double.parseDouble(compPriceText.getText()), compTypeCombo.getSelectedItem().toString(), Integer.parseInt(txtParam3.getText()), Integer.parseInt(txtParam1.getText()), Integer.parseInt(txtParam2.getText()), txtParam4.getText(), Integer.parseInt(txtParam5.getText()));
-                service.systemLog(compTypeCombo.getSelectedItem() + " Added");
+                service.insert_CPU(txtComponentID.getText(), txtComponentManufacturer.getText(), txtComponentName.getText(), Double.parseDouble(txtComponentPrice.getText()), cmbComponentType.getSelectedItem().toString(), Integer.parseInt(txtParam3.getText()), Integer.parseInt(txtParam1.getText()), Integer.parseInt(txtParam2.getText()), txtParam4.getText(), Integer.parseInt(txtParam5.getText()));
+                service.systemLog(cmbComponentType.getSelectedItem() + " Added");
             } catch (Exception e) {
                 service.errAlert(mnuSystem);
                 service.systemLog(e, e.getMessage());
             }
         }
-        else if (compTypeCombo.getSelectedItem().toString().equals(Parts.Type.Graphics_Card.toString().replaceAll("_", " ")))
+        else if (cmbComponentType.getSelectedItem().toString().equals(Parts.Type.Graphics_Card.toString().replaceAll("_", " ")))
         {
             try {
-                service.insert_GPU(compIdText.getText(), compManufacturerText.getText(), compNameText.getText(), Double.parseDouble(compPriceText.getText()), compTypeCombo.getSelectedItem().toString(), Integer.parseInt(txtParam1.getText()), txtParam2.getText(), txtParam3.getText(), Integer.parseInt(txtParam4.getText()));
-                service.systemLog(compTypeCombo.getSelectedItem() + " Added");
+                service.insert_GPU(txtComponentID.getText(), txtComponentManufacturer.getText(), txtComponentName.getText(), Double.parseDouble(txtComponentPrice.getText()), cmbComponentType.getSelectedItem().toString(), Integer.parseInt(txtParam1.getText()), txtParam2.getText(), txtParam3.getText(), Integer.parseInt(txtParam4.getText()));
+                service.systemLog(cmbComponentType.getSelectedItem() + " Added");
             } catch (Exception e) {
                 service.errAlert(mnuSystem);
                 service.systemLog(e, e.getMessage());
             }
         }
-        else if (compTypeCombo.getSelectedItem().toString().equals(Parts.Type.Memory.toString().replaceAll("_", " ")))
+        else if (cmbComponentType.getSelectedItem().toString().equals(Parts.Type.Memory.toString().replaceAll("_", " ")))
         {
             try {
-                service.insert_Memory(compIdText.getText(), compManufacturerText.getText(), compNameText.getText(), Double.parseDouble(compPriceText.getText()), compTypeCombo.getSelectedItem().toString(), Integer.parseInt(txtParam1.getText()), txtParam2.getText(), Integer.parseInt(txtParam3.getText()));
-                service.systemLog(compTypeCombo.getSelectedItem() + " Added");
+                service.insert_Memory(txtComponentID.getText(), txtComponentManufacturer.getText(), txtComponentName.getText(), Double.parseDouble(txtComponentPrice.getText()), cmbComponentType.getSelectedItem().toString(), Integer.parseInt(txtParam1.getText()), txtParam2.getText(), Integer.parseInt(txtParam3.getText()));
+                service.systemLog(cmbComponentType.getSelectedItem() + " Added");
             } catch (Exception e) {
                 service.errAlert(mnuSystem);
                 service.systemLog(e, e.getMessage());
             }
         }
-        else if (compTypeCombo.getSelectedItem().toString().equals(Parts.Type.Power_Supply.toString().replaceAll("_", " ")))
+        else if (cmbComponentType.getSelectedItem().toString().equals(Parts.Type.Power_Supply.toString().replaceAll("_", " ")))
         {
             try {
-                service.insert_PowerSupply(compIdText.getText(), compManufacturerText.getText(), compNameText.getText(), Double.parseDouble(compPriceText.getText()), compTypeCombo.getSelectedItem().toString(), Integer.parseInt(txtParam1.getText()), txtParam2.getText(), txtParam3.getText());
-                service.systemLog(compTypeCombo.getSelectedItem() + " Added");
+                service.insert_PowerSupply(txtComponentID.getText(), txtComponentManufacturer.getText(), txtComponentName.getText(), Double.parseDouble(txtComponentPrice.getText()), cmbComponentType.getSelectedItem().toString(), Integer.parseInt(txtParam1.getText()), txtParam2.getText(), txtParam3.getText());
+                service.systemLog(cmbComponentType.getSelectedItem() + " Added");
             } catch (Exception e) {
                 service.errAlert(mnuSystem);
                 service.systemLog(e, e.getMessage());
@@ -582,12 +648,12 @@ public class frmMain extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        FormControl.getParts(compTypeCombo);
+        FormControl.getParts(cmbComponentType);
         FormControl.getParts(cmbFilter);
     }//GEN-LAST:event_formWindowOpened
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        FormControl.clearAll(compIdText, compNameText, compPriceText, compManufacturerText, compTypeCombo, txtParam1, txtParam2, txtParam3, txtParam4, txtParam5);        
+        FormControl.clearAll(txtComponentID, txtComponentName, txtComponentPrice, txtComponentManufacturer, cmbComponentType, txtParam1, txtParam2, txtParam3, txtParam4, txtParam5);        
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void txtParam5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtParam5ActionPerformed
@@ -628,21 +694,20 @@ public class frmMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowDeactivated
 
-    private void compManufacturerTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compManufacturerTextActionPerformed
+    private void txtComponentManufacturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtComponentManufacturerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_compManufacturerTextActionPerformed
+    }//GEN-LAST:event_txtComponentManufacturerActionPerformed
 
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearchActionPerformed
 
-    private void compIdTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compIdTextActionPerformed
+    private void txtComponentIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtComponentIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_compIdTextActionPerformed
+    }//GEN-LAST:event_txtComponentIDActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
@@ -670,11 +735,11 @@ public class frmMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         int tRow = tblParts.getSelectedRow();
         int tCol = tblParts.getSelectedColumn();
-        compIdText.setText(tblParts.getValueAt(tRow, 0).toString());
-        compNameText.setText(tblParts.getValueAt(tRow, 1).toString());
-        compTypeCombo.setSelectedItem(tblParts.getValueAt(tRow, 2).toString());
-        compManufacturerText.setText(tblParts.getValueAt(tRow, 3).toString());
-        compPriceText.setText(tblParts.getValueAt(tRow, 4).toString());
+        txtComponentID.setText(tblParts.getValueAt(tRow, 0).toString());
+        txtComponentName.setText(tblParts.getValueAt(tRow, 1).toString());
+        cmbComponentType.setSelectedItem(tblParts.getValueAt(tRow, 2).toString());
+        txtComponentManufacturer.setText(tblParts.getValueAt(tRow, 3).toString());
+        txtComponentPrice.setText(tblParts.getValueAt(tRow, 4).toString());
     }//GEN-LAST:event_tblPartsMouseClicked
 
     private void btnSetLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetLocationActionPerformed
@@ -682,8 +747,9 @@ public class frmMain extends javax.swing.JFrame {
         
         GoogleAPI.GoogleMapLocator myLocator = new GoogleMapLocator(txtLocation.getText(), "15", "1", "roadmap", "red");
         GoogleAPI.GoogleMapFrame myMap = new GoogleMapFrame();
-        //System.out.println(myLocator.getMarkedPosition());
         myLocator.generateMap();
+        myLocator.getCoordinates(txtLocation.getText(),txtLocation.getText());
+        myLocator.retrieveCoordinates(txtLatitude,txtLongitude);
         myMap.display(frameMap);
     }//GEN-LAST:event_btnSetLocationActionPerformed
 
@@ -730,20 +796,21 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSetLocation;
+    private javax.swing.JComboBox<String> cmbComponentType;
     private javax.swing.JComboBox<String> cmbFilter;
-    private javax.swing.JTextField compIdText;
-    private javax.swing.JTextField compManufacturerText;
-    private javax.swing.JTextField compNameText;
-    private javax.swing.JFormattedTextField compPriceText;
-    private javax.swing.JComboBox<String> compTypeCombo;
     private javax.swing.JInternalFrame frameMap;
     private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JLabel lblParam1;
@@ -764,7 +831,13 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JPanel panelItemSpecs;
     private javax.swing.JTabbedPane tabInventories;
     private javax.swing.JTable tblParts;
+    private javax.swing.JTextField txtComponentID;
+    private javax.swing.JTextField txtComponentManufacturer;
+    private javax.swing.JTextField txtComponentName;
+    private javax.swing.JFormattedTextField txtComponentPrice;
+    private javax.swing.JFormattedTextField txtLatitude;
     private javax.swing.JTextField txtLocation;
+    private javax.swing.JFormattedTextField txtLongitude;
     private javax.swing.JTextField txtParam1;
     private javax.swing.JTextField txtParam2;
     private javax.swing.JTextField txtParam3;
