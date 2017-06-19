@@ -14,6 +14,7 @@ import javax.jws.Oneway;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import pcpicker.Coordinates;
 import pcpicker.Customer;
 import pcpicker.Delivery;
 import pcpicker.Order;
@@ -29,6 +30,11 @@ public class Pcpicker_webserviceForDesktop {
 
     String user="root"; // meron rin sa Pcpicker_webservice
     String pass="1825";
+    
+    @WebMethod(operationName = "getCoordinates")
+    public Coordinates getCoordinates(@WebParam(name = "address") String  address) {
+        return Coordinates.getCoordinates(address);
+    }
     
    @WebMethod(operationName = "getOrder")
     public Order getOrder(@WebParam(name = "order_id") int order_id) {
@@ -91,6 +97,7 @@ public class Pcpicker_webserviceForDesktop {
                 a.get(last).setItems(getOrderItems(a.get(last).getOrder_id()));
                 a.get(last).setDeliveryDate(rs.getString(7));
                 a.get(last).setDeliveryAddress(rs.getString(10));
+               
             }
             callableStatement.close();
             conn.close();
@@ -197,6 +204,7 @@ public class Pcpicker_webserviceForDesktop {
                 a.get(last).setPart_id(partId);//////////////////
                 a.get(last).setQuantity(rs.getInt(3));////////////////     
                 a.get(last).setPrice(part.getPart_price());
+                a.get(last).setPart(part);
             }
             callableStatement.close();
             conn.close();
