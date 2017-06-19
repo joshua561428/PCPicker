@@ -53,7 +53,7 @@ public class Pcpicker_webserviceForDesktop {
                 a.setActive(rs.getBoolean(5));
                 a.setItems(getOrderItems(a.getOrder_id()));
                 a.setDeliveryDate(rs.getString(7));
-                a.setDeliveryAddress(rs.getString(8));
+                a.setDeliveryAddress(rs.getString(10));
             }
             callableStatement.close();
             conn.close();
@@ -90,6 +90,7 @@ public class Pcpicker_webserviceForDesktop {
                 a.get(last).setActive(rs.getBoolean(5));
                 a.get(last).setItems(getOrderItems(a.get(last).getOrder_id()));
                 a.get(last).setDeliveryDate(rs.getString(7));
+                a.get(last).setDeliveryAddress(rs.getString(10));
             }
             callableStatement.close();
             conn.close();
@@ -491,6 +492,7 @@ public class Pcpicker_webserviceForDesktop {
                 a.get(last).setCity(rs.getString(2));//////////////////
                 a.get(last).setAddress(rs.getString(3));////////////////
                 a.get(last).setZip_code(rs.getInt(4));///////////////
+                a.get(last).setName(rs.getString(5));
             }
             callableStatement.close();
             conn.close();

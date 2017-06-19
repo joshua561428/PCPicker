@@ -30,6 +30,9 @@ public class Order
     protected String cancelDate; 
     @XmlElement(name ="deliveryAddress")
     protected String deliveryAddress; 
+    @XmlElement(name ="coodinates")
+    protected Coordinates coordinates; 
+    
     /**
      * @return the acceptedBy
      */
@@ -180,6 +183,7 @@ public class Order
      * @param deliveryAddress the deliveryAddress to set
      */
     public void setDeliveryAddress(String deliveryAddress) {
+        coordinates = Coordinates.getCoordinates(deliveryAddress);
         this.deliveryAddress = deliveryAddress;
     }
     
