@@ -20,6 +20,7 @@ import pcpicker.Delivery;
 import pcpicker.Order;
 import pcpicker.Order_Parts;
 import pcpicker.Part;
+import shared.DistanceCalculator;
 
 /**
  *
@@ -31,9 +32,73 @@ public class Pcpicker_webserviceForDesktop {
     String user="root"; // meron rin sa Pcpicker_webservice
     String pass="1825";
     
+    
+    
+    
+    
     @WebMethod(operationName = "getCoordinates")
     public Coordinates getCoordinates(@WebParam(name = "address") String  address) {
         return Coordinates.getCoordinates(address);
+    }
+    
+     @WebMethod(operationName = "rejectOrder")
+    public int rejectOrder(@WebParam(name = "orderId") int orderId ) {
+        
+        int order_id = 0; 
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+          
+            String sql = "{call rejectOrder(?,?)}"; 
+            CallableStatement callableStatement = conn.prepareCall(sql);    
+            callableStatement.setInt(1,orderId);
+            int nextbranch = DistanceCalculator.getNextNearestBranch(getOrder(orderId),getBranchesListCOORD());
+            System.out.println(nextbranch + "adasdasdasdfal;krjqkeqwjklejem");
+            callableStatement.setInt(2, nextbranch);
+            callableStatement.executeQuery();
+           
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        
+        
+        
+        return 1;
+    }
+    
+    
+    private  ArrayList<Branch> getBranchesListCOORD() {
+        ArrayList<Branch> a = new ArrayList(); ///////////////////////////////
+        int i = 0;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+
+            String sql = "{call get_Branch_list()}"; ////////////////////////////////
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            ResultSet rs = callableStatement.executeQuery();
+
+            while (rs.next()) {
+                int last = a.size();
+                a.add(new Branch()); ////////////////////////////////////////////
+
+                a.get(last).setBranch_id(rs.getInt(1));/////////////////////////////
+                a.get(last).setCity(rs.getString(2));//////////////////
+                a.get(last).setAddress(rs.getString(3));////////////////
+                a.get(last).setZip_code(rs.getInt(4));///////////////
+                a.get(last).setName(rs.getString(5));
+                a.get(last).getCoordinatesFromAPI();
+            }
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return a;
     }
     
     @WebMethod(operationName = "getCustomer")
