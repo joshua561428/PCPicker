@@ -9,6 +9,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.Types;
 import java.util.ArrayList;
 import javax.jws.Oneway;
 import javax.jws.WebService;
@@ -53,7 +54,6 @@ public class Pcpicker_webserviceForDesktop {
             CallableStatement callableStatement = conn.prepareCall(sql);    
             callableStatement.setInt(1,orderId);
             int nextbranch = DistanceCalculator.getNextNearestBranch(getOrder(orderId),getBranchesListCOORD());
-            System.out.println(nextbranch + "adasdasdasdfal;krjqkeqwjklejem");
             callableStatement.setInt(2, nextbranch);
             callableStatement.executeQuery();
            
@@ -61,11 +61,28 @@ public class Pcpicker_webserviceForDesktop {
             conn.close();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-        }
+        }   
+        return 1;
+    }
+     
+    @WebMethod(operationName = "completeOrder")
+    public int completeOrder(@WebParam(name = "orderId") int orderId ) {
         
         
-        
-        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+          
+            String sql = "{call completeOrder(?)}"; 
+            CallableStatement callableStatement = conn.prepareCall(sql);    
+            callableStatement.setInt(1,orderId);
+            callableStatement.executeQuery();
+           
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }   
         return 1;
     }
     
@@ -206,16 +223,57 @@ public class Pcpicker_webserviceForDesktop {
         return a;
     }
     
+       @WebMethod(operationName = "getForDeliveryOrders")
+    public ArrayList<Order> getForDeliveryOrders(@WebParam(name = "branch_id") int branch_id) {
+        ArrayList<Order> a = new ArrayList(); ///////////////////////////////
+        int i = 0;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+
+            String sql = "{call getForDeliveryOrders(?)}"; ////////////////////////////////
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            callableStatement.setInt(1, branch_id);
+            ResultSet rs = callableStatement.executeQuery();
+
+            while (rs.next()) {
+                int last = a.size();
+                a.add(new Order()); ////////////////////////////////////////////
+
+                a.get(last).setOrder_id(rs.getInt("order_id"));/////////////////////////////
+                a.get(last).setCust_id(rs.getInt("cust_id"));//////////////////
+                a.get(last).setDate_created(rs.getString("date_created"));////////////////
+                a.get(last).setPayment_type(rs.getString("payment_type"));
+                a.get(last).setStatus(rs.getInt("status_"));
+                a.get(last).setItems(getOrderItems(a.get(last).getOrder_id()));
+               
+                a.get(last).setDeliveryAddress(rs.getString("deliveryAddress"));
+                
+                System.out.println("asdasdmv,mxcvxcvxcvxvxcvcxvxcvxcv "+a.get(last).getDeliveryAddress());
+                a.get(last).setNearestBranchRequest(rs.getInt("nearestBranchRequest"));
+                a.get(last).setDeliveryDate(rs.getString("deliveryDate"));
+               
+            }
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return a;
+    }
+    
+    
     
     @WebMethod(operationName = "setOrderDeliveryDate")
-    public void setOrderDeliveryDate(@WebParam(name = "order_id") String order_id, @WebParam(name = "deliveryDate_") String deliveryDate_) {
+    public void setOrderDeliveryDate(@WebParam(name = "order_id") int order_id, @WebParam(name = "deliveryDate_") String deliveryDate_) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
           
             String sql = "{call setOrderDeliveryDate(?,?)}"; 
             CallableStatement callableStatement = conn.prepareCall(sql);
-            callableStatement.setString(1, order_id);
+            callableStatement.setInt(1, order_id);
             callableStatement.setString(2,deliveryDate_);
             
             callableStatement.executeUpdate();
@@ -227,16 +285,17 @@ public class Pcpicker_webserviceForDesktop {
         }
     }
     @WebMethod(operationName = "acceptOrder")
-    public void acceptOrder(@WebParam(name = "order_id") String order_id, @WebParam(name = "branch_id") int branch_id, @WebParam(name = "deliveryDate_") String deliveryDate_) {
+    public void acceptOrder(@WebParam(name = "order_id") int order_id, @WebParam(name = "branch_id") int branch_id) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
           
             String sql = "{call acceptOrder(?,?,?)}"; 
             CallableStatement callableStatement = conn.prepareCall(sql);
-            callableStatement.setString(1, order_id);
+            callableStatement.setInt(1, order_id);
             callableStatement.setInt(2,branch_id);
-            callableStatement.setString(3,deliveryDate_);
+                callableStatement.setNull(3, Types.DATE);
+   
             
             callableStatement.executeUpdate();
             
