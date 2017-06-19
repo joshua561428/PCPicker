@@ -46,8 +46,7 @@ public class Branch
      * @param address the address to set
      */
     public void setAddress(String address) {
-        this.address = address;
-        coordinates = Coordinates.getCoordinates(address);
+        this.address = address;        
     }
 
     /**
@@ -76,6 +75,11 @@ public class Branch
     @XmlElement(name ="coodinates")
     protected Coordinates coordinates; 
 
+    public void getCoordinatesFromAPI()
+    {
+        coordinates = Coordinates.getCoordinates(address);
+    }
+    
     /**
      * @return the name
      */

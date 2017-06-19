@@ -1,9 +1,11 @@
 package pcpicker;
 
+import Pcpicker_webserviceForDesktop.Branch;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.*;
 import javax.jws.*;
+import shared.DistanceCalculator;
 
 /**
  *
@@ -767,6 +769,56 @@ public class Pcpicker_webservice
         return a;
     }
     
+    private int getNearestBranch(Order order)
+    {
+        ArrayList<Branch> branchList= new ArrayList<Branch>();
+        //branchList = getBranchestList();
+        double lowestDistance = DistanceCalculator.distance(order.coordinates,branchList.get(0).getCoordinates());
+        Branch nearestBranch = branchList.get(0);
+        for(int i=1; i < branchList.size(); i++)
+        {
+            double distance = DistanceCalculator.distance(order.coordinates,branchList.get(i).getCoordinates());
+            if(distance<lowestDistance)
+            {
+                lowestDistance = distance;
+                nearestBranch = branchList.get(i);
+            }            
+        }
+        
+        return nearestBranch.getBranch_id();
+    }
+      
+    private ArrayList<Branch> getBranchesList() {
+        ArrayList<Branch> a = new ArrayList(); ///////////////////////////////
+        int i = 0;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+
+            String sql = "{call get_Branch_list()}"; ////////////////////////////////
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            ResultSet rs = callableStatement.executeQuery();
+
+            while (rs.next()) {
+                int last = a.size();
+                a.add(new Branch()); ////////////////////////////////////////////
+
+                a.get(last).setBranch_id(rs.getInt(1));/////////////////////////////
+                a.get(last).setCity(rs.getString(2));//////////////////
+                a.get(last).setAddress(rs.getString(3));////////////////
+                a.get(last).setZip_code(rs.getInt(4));///////////////
+                a.get(last).setName(rs.getString(5));
+                a.get(last).getCoordinatesFromAPI();
+            }
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return a;
+    }
+    
     @WebMethod(operationName = "addOrder")
     public int addOrder(
             @WebParam(name = "cust_id") int cust_id, 
@@ -780,11 +832,12 @@ public class Pcpicker_webservice
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
           
-            String sql = "{call addOrder(?,?,?)}"; 
+            String sql = "{call addOrder(?,?,?,?)}"; 
             CallableStatement callableStatement = conn.prepareCall(sql);
             callableStatement.setInt(1, cust_id);
             callableStatement.setString(2,paymentType);
             callableStatement.setString(3,deliveryAddress);
+            callableStatement.setInt(4, 1);
             ResultSet rs = callableStatement.executeQuery();
             while (rs.next()) {
                 order_id = rs.getInt(1);
@@ -844,14 +897,15 @@ public class Pcpicker_webservice
                 int last = a.size();
                 a.add(new Order()); ////////////////////////////////////////////
 
-                a.get(last).setOrder_id(rs.getInt(1));/////////////////////////////
-                a.get(last).setCust_id(rs.getInt(2));//////////////////
-                a.get(last).setDate_created(rs.getString(3));////////////////
-                a.get(last).setPayment_type(rs.getString(4));
-                a.get(last).setActive(rs.getBoolean(5));
+                a.get(last).setOrder_id(rs.getInt("order_id"));/////////////////////////////
+                a.get(last).setCust_id(rs.getInt("cust_id"));//////////////////
+                a.get(last).setDate_created(rs.getString("date_created"));////////////////
+                a.get(last).setPayment_type(rs.getString("payment_type"));
+                a.get(last).setStatus(rs.getInt("status_"));
                 a.get(last).setItems(getOrderItems(a.get(last).getOrder_id()));
-                a.get(last).setDeliveryDate(rs.getString(7));
-                a.get(last).setDeliveryAddress(rs.getString(10));
+                a.get(last).setDeliveryDate(rs.getString("deliveryDate"));
+                a.get(last).setDeliveryAddress(rs.getString("deliveryAddress"));
+                a.get(last).setNearestBranchRequest(rs.getInt("nearestBranchRequest"));
                // System.out.println("adasdasdasdzxczczxc" + a.get(last).getDeliveryAddress());
             }
             callableStatement.close();
@@ -880,13 +934,15 @@ public class Pcpicker_webservice
                 int last = a.size();
                 a.add(new Order()); ////////////////////////////////////////////
 
-                a.get(last).setOrder_id(rs.getInt(1));/////////////////////////////
-                a.get(last).setCust_id(rs.getInt(2));//////////////////
-                a.get(last).setDate_created(rs.getString(3));////////////////
-                a.get(last).setPayment_type(rs.getString(4));
-                a.get(last).setActive(rs.getBoolean(5));
+                  a.get(last).setOrder_id(rs.getInt("order_id"));/////////////////////////////
+                a.get(last).setCust_id(rs.getInt("cust_id"));//////////////////
+                a.get(last).setDate_created(rs.getString("date_created"));////////////////
+                a.get(last).setPayment_type(rs.getString("payment_type"));
+                a.get(last).setStatus(rs.getInt("status_"));
                 a.get(last).setItems(getOrderItems(a.get(last).getOrder_id()));
-                a.get(last).setDeliveryDate(rs.getString(7));
+                a.get(last).setDeliveryDate(rs.getString("deliveryDate"));
+                a.get(last).setDeliveryAddress(rs.getString("deliveryAddress"));
+                a.get(last).setNearestBranchRequest(rs.getInt("nearestBranchRequest"));
             }
             callableStatement.close();
             conn.close();
@@ -907,13 +963,13 @@ public class Pcpicker_webservice
             CallableStatement callableStatement = conn.prepareCall(sql);
             callableStatement.setInt(1, order_id);
             ResultSet rs = callableStatement.executeQuery();
-
             while (rs.next()) {
                 int last = a.size();
                 a.add(new Order_Parts()); ////////////////////////////////////////////
                 a.get(last).setOrder_id(rs.getInt(1));/////////////////////////////t
                 String partId = rs.getString(2);
                 Part part = getPart(partId);
+                
                 a.get(last).setPart_id(partId);//////////////////
                 a.get(last).setQuantity(rs.getInt(3));////////////////     
                 a.get(last).setPrice(part.getPart_price());

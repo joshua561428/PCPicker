@@ -84,14 +84,15 @@ public class Pcpicker_webserviceForDesktop {
 
             while (rs.next()) {
                 
-                a.setOrder_id(rs.getInt(1));/////////////////////////////
-                a.setCust_id(rs.getInt(2));//////////////////
-                a.setDate_created(rs.getString(3));////////////////
-                a.setPayment_type(rs.getString(4));
-                a.setActive(rs.getBoolean(5));
+               a.setOrder_id(rs.getInt("order_id"));/////////////////////////////
+                a.setCust_id(rs.getInt("cust_id"));//////////////////
+                a.setDate_created(rs.getString("date_created"));////////////////
+                a.setPayment_type(rs.getString("payment_type"));
+                a.setStatus(rs.getInt("status_"));
                 a.setItems(getOrderItems(a.getOrder_id()));
-                a.setDeliveryDate(rs.getString(7));
-                a.setDeliveryAddress(rs.getString(10));
+                a.setDeliveryDate(rs.getString("deliveryDate"));
+                a.setDeliveryAddress(rs.getString("deliveryAddress"));
+                a.setNearestBranchRequest(rs.getInt("nearestBranchRequest"));
             }
             callableStatement.close();
             conn.close();
@@ -104,7 +105,7 @@ public class Pcpicker_webserviceForDesktop {
 //    return lahat ng order na di pa naacept ng branch
 //    -----------------------------------------------
     @WebMethod(operationName = "getActivePendingOrderList")
-    public ArrayList<Order> getActivePendingOrderList() {
+    public ArrayList<Order> getActivePendingOrderList(@WebParam(name = "branch_id") int branch_id) {
         ArrayList<Order> a = new ArrayList(); ///////////////////////////////
         int i = 0;
 
@@ -112,23 +113,24 @@ public class Pcpicker_webserviceForDesktop {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
 
-            String sql = "{call getActivePendingOrders()}"; ////////////////////////////////
+            String sql = "{call getActivePendingOrders(?)}"; ////////////////////////////////
             CallableStatement callableStatement = conn.prepareCall(sql);
-           
+            callableStatement.setInt(1, branch_id);
             ResultSet rs = callableStatement.executeQuery();
 
             while (rs.next()) {
                 int last = a.size();
                 a.add(new Order()); ////////////////////////////////////////////
 
-                a.get(last).setOrder_id(rs.getInt(1));/////////////////////////////
-                a.get(last).setCust_id(rs.getInt(2));//////////////////
-                a.get(last).setDate_created(rs.getString(3));////////////////
-                a.get(last).setPayment_type(rs.getString(4));
-                a.get(last).setActive(rs.getBoolean(5));
+                a.get(last).setOrder_id(rs.getInt("order_id"));/////////////////////////////
+                a.get(last).setCust_id(rs.getInt("cust_id"));//////////////////
+                a.get(last).setDate_created(rs.getString("date_created"));////////////////
+                a.get(last).setPayment_type(rs.getString("payment_type"));
+                a.get(last).setStatus(rs.getInt("status_"));
                 a.get(last).setItems(getOrderItems(a.get(last).getOrder_id()));
-                a.get(last).setDeliveryDate(rs.getString(7));
-                a.get(last).setDeliveryAddress(rs.getString(10));
+                a.get(last).setDeliveryDate(rs.getString("deliveryDate"));
+                a.get(last).setDeliveryAddress(rs.getString("deliveryAddress"));
+                a.get(last).setNearestBranchRequest(rs.getInt("nearestBranchRequest"));
                
             }
             callableStatement.close();

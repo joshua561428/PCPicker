@@ -5,6 +5,7 @@
  */
 package pcpicker;
 import java.net.URL;
+import java.net.URLEncoder;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -61,7 +62,8 @@ public class Coordinates {
         Double lng =0.0;  
         try{
             URL url = new URL("https://maps.googleapis.com/maps/api/geocode/xml?address="
-                        + _currentLocation.replaceAll(" ", "+")                  
+                        //+ _currentLocation.replaceAll(" ", "+")   
+                        + URLEncoder.encode(_currentLocation,"UTF-8")
                         + "&key="
                         + "AIzaSyA9GSrFDlDtDCRlcZzB9alI1X86VBLXsqA");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
