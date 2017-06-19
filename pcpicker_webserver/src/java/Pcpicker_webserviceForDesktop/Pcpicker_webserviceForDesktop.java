@@ -36,6 +36,38 @@ public class Pcpicker_webserviceForDesktop {
         return Coordinates.getCoordinates(address);
     }
     
+    @WebMethod(operationName = "getCustomer")
+    public Customer getCustomer(@WebParam(name = "custId") int custId) {
+        Customer a = new Customer();///////////////////////////////      
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+
+            String sql = "{call getCustomer(?)}"; ////////////////////////////////
+            
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            callableStatement.setInt(1,custId);
+            ResultSet rs = callableStatement.executeQuery();
+
+            while (rs.next()) {
+                
+                a.setCust_id(rs.getInt(1));/////////////////////////////
+                a.setUsername(rs.getString(2));//////////////////
+                //a.setPassword(rs.getString(3));////////////////
+                a.setFirstname(rs.getString(4));
+                a.setLastname(rs.getString(5));
+                a.setAddress(rs.getString(6));///////////////
+                a.setCity(rs.getString(7));////////////////
+                a.setZip_code(rs.getInt(8));///////////////
+            }
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return a;
+    }
    @WebMethod(operationName = "getOrder")
     public Order getOrder(@WebParam(name = "order_id") int order_id) {
         Order a = new Order();///////////////////////////////      
@@ -463,7 +495,7 @@ public class Pcpicker_webserviceForDesktop {
 
                 a.get(last).setCust_id(rs.getInt(1));/////////////////////////////
                 a.get(last).setUsername(rs.getString(2));//////////////////
-                a.get(last).setPassword(rs.getString(3));////////////////
+                //a.get(last).setPassword(rs.getString(3));////////////////
                 a.get(last).setFirstname(rs.getString(4));
                 a.get(last).setLastname(rs.getString(5));
                 a.get(last).setAddress(rs.getString(6));///////////////
