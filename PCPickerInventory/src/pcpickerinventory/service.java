@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import pcpicker_webservicefordesktop.Inventory;
 import pcpicker_webservicefordesktop.InventoryItem;
+import pcpicker_webservicefordesktop.Order;
 import pcpickerinventory.lib.Parts;
 
 /**
@@ -26,6 +27,7 @@ public class service {
     //
     public static boolean isErrorLogged = false;
     public static JTextArea sysLog = new JTextArea();
+    public static flags flag = new flags();
     
     // systemLog(Exception, String)
     public static void systemLog(Exception ex, String systemMessage)
@@ -96,10 +98,41 @@ public class service {
             row[3] = inv.getItems().get(x).getPart().getPartManufacturer();
             row[4] = inv.getItems().get(x).getPart().getPartPrice();
             mdl.addRow(row);
-            if (row[2].toString().equals("Heatsink"))
-            {
-                
-            }
+        }
+        targetTable.setModel(mdl);
+    }
+    
+    public static void getDeliveries(JTable targetTable, int _branchID){
+        DefaultTableModel myTable = (DefaultTableModel)targetTable.getModel();
+        myTable.setRowCount(0);
+        targetTable.setModel(myTable);
+        DefaultTableModel mdl = (DefaultTableModel)targetTable.getModel();
+        List<pcpicker_webservicefordesktop.Order> orders = getActivePendingOrderList(_branchID);
+        for (int x = 0;x < getActivePendingOrderList(_branchID).size();x++)
+        {
+            Object row[] = new Object[4];
+            row[0] = orders.get(x).getOrderId();
+            row[1] = orders.get(x).getDeliveryAddress();
+            row[2] = orders.get(x).getNearestBranchRequest();
+            row[3] = orders.get(x).getDeliveryDate();
+            mdl.addRow(row);
+        }
+        targetTable.setModel(mdl);
+    }
+    
+    public static void getBranchID(JTable targetTable){
+        DefaultTableModel myTable = (DefaultTableModel)targetTable.getModel();
+        myTable.setRowCount(0);
+        targetTable.setModel(myTable);
+        DefaultTableModel mdl = (DefaultTableModel)targetTable.getModel();
+        List<pcpicker_webservicefordesktop.Branch> branches = getBranchesList();
+        for (int x = 0;x < getBranchesList().size();x++)
+        {
+            Object row[] = new Object[3];
+            row[0] = branches.get(x).getBranchId();
+            row[1] = branches.get(x).getName();
+            row[2] = branches.get(x).getAddress();
+            mdl.addRow(row);
         }
         targetTable.setModel(mdl);
     }
@@ -134,6 +167,36 @@ public class service {
     // Web Services
     //
 
+    private static Inventory getInventoryList() {
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service service = new pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service();
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
+        return port.getInventoryList();
+    }
+
+    private static java.util.List<pcpicker_webservicefordesktop.Customer> getCustomerList() {
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service service = new pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service();
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
+        return port.getCustomerList();
+    }
+
+    private static Order getOrder(int orderId) {
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service service = new pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service();
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
+        return port.getOrder(orderId);
+    }
+
+    private static java.util.List<pcpicker_webservicefordesktop.Order> getActivePendingOrderList(int branchId) {
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service service = new pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service();
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
+        return port.getActivePendingOrderList(branchId);
+    }
+
+    private static java.util.List<pcpicker_webservicefordesktop.Branch> getBranchesList() {
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service service = new pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service();
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
+        return port.getBranchesList();
+    }
+
     private static String addCPU(java.lang.String compId, java.lang.String compManufacturer, java.lang.String compName, int coreClock, int coreNum, int threadNum, java.lang.String socket, int tdp, double compPrice, java.lang.String compType) {
         pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service service = new pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service();
         pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
@@ -158,11 +221,7 @@ public class service {
         return port.addPowerSupply(compId, compManufacturer, compName, wattage, rating, formFactor, compPrice, compType);
     }
 
-    private static Inventory getInventoryList() {
-        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service service = new pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service();
-        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
-        return port.getInventoryList();
-    }
+    
 
         
 }

@@ -6,6 +6,9 @@
 package pcpickerinventory;
 import GoogleAPI.*;
 import java.awt.Color;
+import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pcpickerinventory.lib.*;
 
 /**
@@ -76,6 +79,13 @@ public class frmMain extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnSetLocation = new javax.swing.JButton();
         txtLocation = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblDeliveries = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblBranches = new javax.swing.JTable();
+        btnGetDeliveries = new javax.swing.JButton();
         mnuMain = new javax.swing.JMenuBar();
         mnuFile = new javax.swing.JMenu();
         mnuFileBranch = new javax.swing.JMenuItem();
@@ -101,6 +111,7 @@ public class frmMain extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Master Inventory and Deliveries");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -357,7 +368,7 @@ public class frmMain extends javax.swing.JFrame {
                         .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
                     .addGroup(panelInventoryLayout.createSequentialGroup()
                         .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
@@ -409,11 +420,11 @@ public class frmMain extends javax.swing.JFrame {
         frameMap.getContentPane().setLayout(frameMapLayout);
         frameMapLayout.setHorizontalGroup(
             frameMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 588, Short.MAX_VALUE)
         );
         frameMapLayout.setVerticalGroup(
             frameMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 609, Short.MAX_VALUE)
+            .addGap(0, 469, Short.MAX_VALUE)
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -422,10 +433,12 @@ public class frmMain extends javax.swing.JFrame {
 
         jLabel4.setText("(Longitude) - X");
 
+        txtLongitude.setEditable(false);
         txtLongitude.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
 
         jLabel2.setText(",");
 
+        txtLatitude.setEditable(false);
         txtLatitude.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
 
         jLabel1.setText("Coordinates:");
@@ -485,28 +498,118 @@ public class frmMain extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Customers Delivery Addresses"));
+
+        tblDeliveries.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null}
+            },
+            new String [] {
+                "Order ID", "Delivery Address", "Branch Request", "Delivery Date"
+            }
+        ));
+        jScrollPane2.setViewportView(tblDeliveries);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Branch List"));
+
+        tblBranches.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null}
+            },
+            new String [] {
+                "Branch ID", "Name", "Address"
+            }
+        ));
+        tblBranches.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                tblBranchesPropertyChange(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblBranches);
+
+        btnGetDeliveries.setText("Get Deliveries");
+        btnGetDeliveries.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGetDeliveriesActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnGetDeliveries)))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(btnGetDeliveries)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout panelGoogleMapLayout = new javax.swing.GroupLayout(panelGoogleMap);
         panelGoogleMap.setLayout(panelGoogleMapLayout);
         panelGoogleMapLayout.setHorizontalGroup(
             panelGoogleMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGoogleMapLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelGoogleMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(frameMap)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 361, Short.MAX_VALUE))
+                .addGroup(panelGoogleMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelGoogleMapLayout.createSequentialGroup()
+                        .addComponent(frameMap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelGoogleMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         panelGoogleMapLayout.setVerticalGroup(
             panelGoogleMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGoogleMapLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(frameMap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(panelGoogleMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGoogleMapLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(frameMap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelGoogleMapLayout.createSequentialGroup()
+                        .addGap(0, 4, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(133, 133, 133))))
         );
 
-        tabInventories.addTab("Branch Locator", panelGoogleMap);
+        tabInventories.addTab("Deliveries", panelGoogleMap);
 
         mnuFile.setText("File");
 
@@ -557,8 +660,8 @@ public class frmMain extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabInventories)
-                .addGap(24, 24, 24))
+                .addComponent(tabInventories, javax.swing.GroupLayout.PREFERRED_SIZE, 1155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -642,6 +745,8 @@ public class frmMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         FormControl.getParts(cmbComponentType);
         FormControl.getParts(cmbFilter);
+        service.getBranchID(tblBranches);
+        tblBranches.changeSelection(0, 0, false, false);
     }//GEN-LAST:event_formWindowOpened
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -738,11 +843,29 @@ public class frmMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         GoogleAPI.GoogleMapLocator myLocator = new GoogleMapLocator(txtLocation.getText(), "15", "1", "roadmap", "red");
-        myLocator.generateMap();
-        myLocator.getCoordinates(txtLocation.getText(),txtLocation.getText());
-        myLocator.retrieveCoordinates(txtLatitude,txtLongitude);
+        try {
+            myLocator.generateMap();
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        myLocator.getGeoCoordinates();
+        myLocator.saveGeoCoordinates();
         myLocator.displayMap(frameMap);
+        myLocator.displayGeoCoordinates(txtLatitude, txtLongitude);
     }//GEN-LAST:event_btnSetLocationActionPerformed
+
+    private void btnGetDeliveriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetDeliveriesActionPerformed
+        // TODO add your handling code here:
+        int tRow = tblBranches.getSelectedRow();
+        int tCol = 0;
+        int selected = Integer.parseInt(tblBranches.getValueAt(tRow, tCol).toString());
+        service.getDeliveries(tblDeliveries, selected);
+    }//GEN-LAST:event_btnGetDeliveriesActionPerformed
+
+    private void tblBranchesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tblBranchesPropertyChange
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tblBranchesPropertyChange
 
     /**
      * @param args the command line arguments
@@ -784,6 +907,7 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JButton addComponentButton;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnFilter;
+    private javax.swing.JButton btnGetDeliveries;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSetLocation;
@@ -802,7 +926,11 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JLabel lblParam1;
     private javax.swing.JLabel lblParam2;
@@ -821,6 +949,8 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JPanel panelItemDetails;
     private javax.swing.JPanel panelItemSpecs;
     private javax.swing.JTabbedPane tabInventories;
+    private javax.swing.JTable tblBranches;
+    private javax.swing.JTable tblDeliveries;
     private javax.swing.JTable tblParts;
     private javax.swing.JTextField txtComponentID;
     private javax.swing.JTextField txtComponentManufacturer;
