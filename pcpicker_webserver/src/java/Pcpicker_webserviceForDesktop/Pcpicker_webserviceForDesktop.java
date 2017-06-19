@@ -34,7 +34,41 @@ public class Pcpicker_webserviceForDesktop {
     String pass="1825";
     
     
-    
+     @WebMethod(operationName = "getAcceptedOrders")
+    public ArrayList<Order> getAcceptedOrders() {
+        ArrayList<Order> a = new ArrayList(); ///////////////////////////////
+        int i = 0;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+
+            String sql = "{call getAcceptedOrders()}"; ////////////////////////////////
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            ResultSet rs = callableStatement.executeQuery();
+
+            while (rs.next()) {
+                int last = a.size();
+                a.add(new Order()); ////////////////////////////////////////////
+
+                a.get(last).setOrder_id(rs.getInt("order_id"));/////////////////////////////
+                a.get(last).setCust_id(rs.getInt("cust_id"));//////////////////
+                a.get(last).setDate_created(rs.getString("date_created"));////////////////
+                a.get(last).setPayment_type(rs.getString("payment_type"));
+                a.get(last).setStatus(rs.getInt("status_"));
+                a.get(last).setItems(getOrderItems(a.get(last).getOrder_id()));
+                a.get(last).setDeliveryDate(rs.getString("deliveryDate"));
+                a.get(last).setDeliveryAddress(rs.getString("deliveryAddress"));
+                a.get(last).setNearestBranchRequest(rs.getInt("nearestBranchRequest"));
+               
+            }
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return a;
+    }
     
     
     @WebMethod(operationName = "getCoordinates")
