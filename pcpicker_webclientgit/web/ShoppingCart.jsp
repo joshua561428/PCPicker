@@ -135,7 +135,7 @@
                              ${message}<br>
                               <div class="deliveryaddresss">
                             <label for="locationTextField">Delivery Address</label>
-                            <input id="locationTextField" value="${deliveryAddress}" name ="deliveryAddress" type="text" size="50" required>
+                            <input id="locationTextField" value="${deliveryAddress}" name ="deliveryAddress" type="text" size="50" required onkeypress="return event.keyCode != 13;">
                         </div>
                         </form>
                     </div>
@@ -163,6 +163,6 @@
             }
             google.maps.event.addDomListener(window, 'load', init);
         </script>
-    
+       
     </body>
 </html>
