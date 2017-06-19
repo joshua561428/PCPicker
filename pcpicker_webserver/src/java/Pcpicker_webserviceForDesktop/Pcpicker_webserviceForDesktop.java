@@ -785,5 +785,166 @@ public class Pcpicker_webserviceForDesktop {
         b.setItems(a);
         return b;
     }
+    
+    @WebMethod(operationName = "addCooler")    
+    public String addCooler(@WebParam(name = "comp_id") String comp_id, @WebParam(name = "comp_manufacturer") String comp_manufacturer, @WebParam(name = "comp_name") String comp_name, @WebParam(name = "supported_sockets") String supported_sockets, @WebParam(name = "liquid_cooling") boolean liquid_cooling, @WebParam(name = "rated_tdp") int rated_tdp, @WebParam(name = "comp_price") double comp_price, @WebParam(name = "comp_type") String comp_type) {
+      try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+
+            String sql = "{call add_cooler(?,?,?,?,?,?,?,?)}"; ////////////////////////////////
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            callableStatement.setString(1, comp_id);
+            callableStatement.setString(2, comp_manufacturer);
+            callableStatement.setString(3, comp_name);
+            callableStatement.setString(4, supported_sockets);
+            callableStatement.setBoolean(5, liquid_cooling);
+            callableStatement.setInt(6, rated_tdp);
+            callableStatement.setDouble(7, comp_price);
+            callableStatement.setString(8, comp_type);
+            
+            callableStatement.executeUpdate();
+
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return "";
+    }
+    
+    @WebMethod(operationName = "addMotherboard")    
+    public String addMotherboard(@WebParam(name = "comp_id") String comp_id, @WebParam(name = "comp_manufacturer") String comp_manufacturer, @WebParam(name = "comp_name") String comp_name, @WebParam(name = "socket") String socket, @WebParam(name = "mem_slots") int mem_slots, @WebParam(name = "form_factor") String form_factor, @WebParam(name = "comp_price") double comp_price, @WebParam(name = "comp_type") String comp_type) {
+      try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+
+            String sql = "{call add_motherboard(?,?,?,?,?,?,?,?)}"; ////////////////////////////////
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            callableStatement.setString(1, comp_id);
+            callableStatement.setString(2, comp_manufacturer);
+            callableStatement.setString(3, comp_name);
+            callableStatement.setString(4, socket);
+            callableStatement.setInt(5, mem_slots);
+            callableStatement.setString(6, form_factor);
+            callableStatement.setDouble(7, comp_price);
+            callableStatement.setString(8, comp_type);
+            
+            callableStatement.executeUpdate();
+
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return "";
+    }
+    
+    @WebMethod(operationName = "addStorage")    
+    public String addStorage(@WebParam(name = "comp_id") String comp_id, @WebParam(name = "comp_manufacturer") String comp_manufacturer, @WebParam(name = "comp_name") String comp_name, @WebParam(name = "type_") String type_, @WebParam(name = "capacity") int capacity, @WebParam(name = "interface_") String interface_, @WebParam(name = "comp_price") double comp_price, @WebParam(name = "comp_type") String comp_type) {
+      try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+
+            String sql = "{call add_storage(?,?,?,?,?,?,?,?)}"; ////////////////////////////////
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            callableStatement.setString(1, comp_id);
+            callableStatement.setString(2, comp_manufacturer);
+            callableStatement.setString(3, comp_name);
+            callableStatement.setString(4, type_);
+            callableStatement.setInt(5, capacity);
+            callableStatement.setString(6, interface_);
+            callableStatement.setDouble(7, comp_price);
+            callableStatement.setString(8, comp_type);
+            
+            callableStatement.executeUpdate();
+
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return "";
+    }
+    
+    @WebMethod(operationName = "addMouse")    
+    public String addMouse(@WebParam(name = "comp_id") String comp_id, @WebParam(name = "comp_manufacturer") String comp_manufacturer, @WebParam(name = "comp_name") String comp_name, @WebParam(name = "dpi") int dpi, @WebParam(name = "connection_") String connection_, @WebParam(name = "comp_price") double comp_price, @WebParam(name = "comp_type") String comp_type) {
+      try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+
+            String sql = "{call add_mouse(?,?,?,?,?,?,?)}"; ////////////////////////////////
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            callableStatement.setString(1, comp_id);
+            callableStatement.setString(2, comp_manufacturer);
+            callableStatement.setString(3, comp_name);
+            callableStatement.setInt(4, dpi);
+            callableStatement.setString(5, connection_);
+            callableStatement.setDouble(6, comp_price);
+            callableStatement.setString(7, comp_type);
+            
+            callableStatement.executeUpdate();
+
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return "";
+    }
+    
+        @WebMethod(operationName = "addKeyboard")    
+    public String addKeyboard(@WebParam(name = "comp_id") String comp_id, @WebParam(name = "comp_manufacturer") String comp_manufacturer, @WebParam(name = "comp_name") String comp_name, @WebParam(name = "backlit") boolean backlit, @WebParam(name = "type_") String type_, @WebParam(name = "comp_price") double comp_price, @WebParam(name = "comp_type") String comp_type) {
+      try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+
+            String sql = "{call add_keyboard(?,?,?,?,?,?,?)}"; ////////////////////////////////
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            callableStatement.setString(1, comp_id);
+            callableStatement.setString(2, comp_manufacturer);
+            callableStatement.setString(3, comp_name);
+            callableStatement.setBoolean(4, backlit);
+            callableStatement.setString(5, type_);
+            callableStatement.setDouble(6, comp_price);
+            callableStatement.setString(7, comp_type);
+            
+            callableStatement.executeUpdate();
+
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return "";
+    }
+    
+    @WebMethod(operationName = "addMonitor")    
+    public String addMonitor(@WebParam(name = "comp_id") String comp_id, @WebParam(name = "comp_manufacturer") String comp_manufacturer, @WebParam(name = "comp_name") String comp_name, @WebParam(name = "aspect_ratio") String aspect_ratio, @WebParam(name = "screen_size") String screen_size, @WebParam(name = "max_resolution") String max_resolution, @WebParam(name = "refresh_rate") int refresh_rate, @WebParam(name = "comp_price") double comp_price, @WebParam(name = "comp_type") String comp_type) {
+      try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/pcpicker", user, pass);
+
+            String sql = "{call add_monitor(?,?,?,?,?,?,?,?,?)}"; ////////////////////////////////
+            CallableStatement callableStatement = conn.prepareCall(sql);
+            callableStatement.setString(1, comp_id);
+            callableStatement.setString(2, comp_manufacturer);
+            callableStatement.setString(3, comp_name);
+            callableStatement.setString(4, aspect_ratio);
+            callableStatement.setString(5, screen_size);
+            callableStatement.setString(6, max_resolution);
+            callableStatement.setInt(7, refresh_rate);
+            callableStatement.setDouble(8, comp_price);
+            callableStatement.setString(9, comp_type);
+            
+            callableStatement.executeUpdate();
+
+            callableStatement.close();
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return "";
+    }
 
 }
