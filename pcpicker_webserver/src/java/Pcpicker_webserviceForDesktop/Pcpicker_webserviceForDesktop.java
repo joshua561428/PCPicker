@@ -263,6 +263,13 @@ public class Pcpicker_webserviceForDesktop {
         return a;
     }
     
+    @WebMethod(operationName = "getNumLists")
+    public int getNumLists(@WebParam(name = "branchid") int branchid) {
+        
+        ArrayList<Order> order = getActivePendingOrderList(branchid);
+        return order.size();
+        
+    }
     
     
     @WebMethod(operationName = "setOrderDeliveryDate")
