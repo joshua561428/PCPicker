@@ -270,7 +270,7 @@ public class GoogleMapLocator {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(null);
         JLabel imgMap = new JLabel(mapIcon());
-        imgMap.setBounds(5, 5, 600, 600);
+        imgMap.setBounds(5, 5, 500, 500);
         targetIFrame.getContentPane().removeAll();
         targetIFrame.getContentPane().add(imgMap);
         targetIFrame.revalidate();
@@ -278,7 +278,7 @@ public class GoogleMapLocator {
     public ImageIcon mapIcon()
     {
         ImageIcon imageIcon = new ImageIcon((new ImageIcon(mapFile))
-                .getImage().getScaledInstance(600, 600,
+                .getImage().getScaledInstance(500, 500,
                         java.awt.Image.SCALE_SMOOTH));
         return imageIcon;
     }

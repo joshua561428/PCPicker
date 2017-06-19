@@ -64,10 +64,15 @@ public class frmMain extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        txtComponentPrice = new javax.swing.JFormattedTextField();
+        txtComponentPrice = new javax.swing.JTextField();
         btnRefresh = new javax.swing.JButton();
         cmbFilter = new javax.swing.JComboBox<>();
         btnFilter = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblInvBranches = new javax.swing.JTable();
+        btnAddToBranch = new javax.swing.JButton();
+        jSpinner1 = new javax.swing.JSpinner();
         panelGoogleMap = new javax.swing.JPanel();
         frameMap = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
@@ -86,6 +91,7 @@ public class frmMain extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblBranches = new javax.swing.JTable();
         btnGetDeliveries = new javax.swing.JButton();
+        btnGetDistance = new javax.swing.JButton();
         mnuMain = new javax.swing.JMenuBar();
         mnuFile = new javax.swing.JMenu();
         mnuFileBranch = new javax.swing.JMenuItem();
@@ -280,8 +286,6 @@ public class frmMain extends javax.swing.JFrame {
 
         jLabel17.setText("Component Price:");
 
-        txtComponentPrice.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
-
         javax.swing.GroupLayout panelItemDetailsLayout = new javax.swing.GroupLayout(panelItemDetails);
         panelItemDetails.setLayout(panelItemDetailsLayout);
         panelItemDetailsLayout.setHorizontalGroup(
@@ -329,7 +333,7 @@ public class frmMain extends javax.swing.JFrame {
                 .addGroup(panelItemDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(txtComponentPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         btnRefresh.setText("Refresh");
@@ -352,6 +356,51 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
 
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Branch List"));
+
+        tblInvBranches.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null}
+            },
+            new String [] {
+                "Branch ID", "Name", "Address"
+            }
+        ));
+        tblInvBranches.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                tblInvBranchesPropertyChange(evt);
+            }
+        });
+        jScrollPane5.setViewportView(tblInvBranches);
+
+        btnAddToBranch.setText("ADD TO BRANCH");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(btnAddToBranch)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddToBranch)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
         javax.swing.GroupLayout panelInventoryLayout = new javax.swing.GroupLayout(panelInventory);
         panelInventory.setLayout(panelInventoryLayout);
         panelInventoryLayout.setHorizontalGroup(
@@ -370,61 +419,68 @@ public class frmMain extends javax.swing.JFrame {
                 .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
                     .addGroup(panelInventoryLayout.createSequentialGroup()
-                        .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-                            .addComponent(btnFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panelInventoryLayout.createSequentialGroup()
-                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(panelInventoryLayout.createSequentialGroup()
-                                .addComponent(cmbFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnRefresh)))))
+                                .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                                    .addComponent(btnFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtSearch)
+                                    .addComponent(cmbFilter, 0, 172, Short.MAX_VALUE)))
+                            .addComponent(btnRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         panelInventoryLayout.setVerticalGroup(
             panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInventoryLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(panelInventoryLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelInventoryLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(panelItemDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panelInventoryLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSearch))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRefresh)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnFilter)
+                            .addComponent(cmbFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelInventoryLayout.createSequentialGroup()
-                        .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSearch)
-                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnFilter)
-                            .addComponent(btnRefresh))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1))
-                    .addGroup(panelInventoryLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(panelItemDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panelItemSpecs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelInventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnClear)
-                            .addComponent(addComponentButton))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(addComponentButton)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         tabInventories.addTab("Master Inventory", panelInventory);
 
+        frameMap.setPreferredSize(new java.awt.Dimension(520, 540));
         frameMap.setVisible(true);
 
         javax.swing.GroupLayout frameMapLayout = new javax.swing.GroupLayout(frameMap.getContentPane());
         frameMap.getContentPane().setLayout(frameMapLayout);
         frameMapLayout.setHorizontalGroup(
             frameMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 588, Short.MAX_VALUE)
+            .addGap(0, 508, Short.MAX_VALUE)
         );
         frameMapLayout.setVerticalGroup(
             frameMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGap(0, 509, Short.MAX_VALUE)
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -475,7 +531,7 @@ public class frmMain extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(txtLongitude, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 274, Short.MAX_VALUE)))
+                        .addGap(0, 180, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -558,7 +614,7 @@ public class frmMain extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnGetDeliveries)))
@@ -574,6 +630,13 @@ public class frmMain extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnGetDistance.setText("Get Distance");
+        btnGetDistance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGetDistanceActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelGoogleMapLayout = new javax.swing.GroupLayout(panelGoogleMap);
         panelGoogleMap.setLayout(panelGoogleMapLayout);
         panelGoogleMapLayout.setHorizontalGroup(
@@ -584,11 +647,14 @@ public class frmMain extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelGoogleMapLayout.createSequentialGroup()
                         .addComponent(frameMap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 26, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelGoogleMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGoogleMapLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnGetDistance)))
                 .addContainerGap())
         );
         panelGoogleMapLayout.setVerticalGroup(
@@ -599,14 +665,14 @@ public class frmMain extends javax.swing.JFrame {
                     .addGroup(panelGoogleMapLayout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(frameMap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(frameMap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelGoogleMapLayout.createSequentialGroup()
-                        .addGap(0, 4, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(133, 133, 133))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGetDistance)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabInventories.addTab("Deliveries", panelGoogleMap);
@@ -668,7 +734,7 @@ public class frmMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tabInventories)
-                .addGap(41, 41, 41))
+                .addContainerGap())
         );
 
         pack();
@@ -698,7 +764,8 @@ public class frmMain extends javax.swing.JFrame {
         if (cmbComponentType.getSelectedItem().toString().equals(Parts.Type.Processor.toString().replaceAll("_", " ")))
         {
             try {
-                service.insert_CPU(txtComponentID.getText(), txtComponentManufacturer.getText(), txtComponentName.getText(), Double.parseDouble(txtComponentPrice.getText()), cmbComponentType.getSelectedItem().toString(), Integer.parseInt(txtParam3.getText()), Integer.parseInt(txtParam1.getText()), Integer.parseInt(txtParam2.getText()), txtParam4.getText(), Integer.parseInt(txtParam5.getText()));
+                service.insert_CPU(txtComponentID.getText(), txtComponentManufacturer.getText(), txtComponentName.getText(), Double.parseDouble(txtComponentPrice.getText()), cmbComponentType.getSelectedItem().toString(), Integer.parseInt(txtParam1.getText()), Integer.parseInt(txtParam2.getText()), Integer.parseInt(txtParam3.getText()), txtParam4.getText(), Integer.parseInt(txtParam5.getText()));
+                //service.insert_CPU(txtComponentID.getText(), txtComponentManufacturer.getText(), txtComponentName.getText(), Double.parseDouble(txtComponentPrice.getText()), cmbComponentType.getSelectedItem().toString(), Integer.parseInt(txtParam3.getText()), Integer.parseInt(txtParam1.getText()), Integer.parseInt(txtParam2.getText()), txtParam4.getText(), Integer.parseInt(txtParam5.getText()));
                 service.systemLog(cmbComponentType.getSelectedItem() + " Added");
             } catch (Exception e) {
                 service.errAlert(mnuSystem);
@@ -746,7 +813,9 @@ public class frmMain extends javax.swing.JFrame {
         FormControl.getParts(cmbComponentType);
         FormControl.getParts(cmbFilter);
         service.getBranchID(tblBranches);
+        service.getBranchID(tblInvBranches);
         tblBranches.changeSelection(0, 0, false, false);
+        tblInvBranches.changeSelection(0, 0, false, false);
     }//GEN-LAST:event_formWindowOpened
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -804,14 +873,16 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_txtComponentIDActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here1, 1);
+        System.out.println(tblInvBranches.getValueAt(tblInvBranches.getSelectedRow(), 0));
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
         try {
-            service.getInventory(tblParts);
+            service.getMasterInventory(tblParts);
             service.systemLog("Inventory listing success.");
+        //service.insert_Inventory(txtComponentID.getText(), service.dateNow(), 
         } catch (Exception e) {
             service.systemLog(e, e.getMessage());
             service.errAlert(mnuSystem);
@@ -867,6 +938,29 @@ public class frmMain extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tblBranchesPropertyChange
 
+    private void tblInvBranchesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tblInvBranchesPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblInvBranchesPropertyChange
+
+    private void btnGetDistanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetDistanceActionPerformed
+        // TODO add your handling code here:
+        GoogleMapLocator g0 = new GoogleMapLocator();
+        g0.addLocator("mapua university intramuros", "red");
+        g0.addLocator("sm city manila", "blue");
+        try {
+            g0.generateMaps();
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        g0.displayMap(frameMap);
+
+        GoogleMapLocator g1 = new GoogleMapLocator("mapua university intramuros", "15", "1", "roadmap", "red");
+        g1.getGeoCoordinates();
+        GoogleMapLocator g2 = new GoogleMapLocator("sm city manila", "15", "1", "roadmap", "red");
+        g2.getGeoCoordinates();
+        System.out.println(DistanceCalculator.distance(Double.parseDouble(g1.mCoordinate.latitude()), Double.parseDouble(g1.mCoordinate.longitude()), Double.parseDouble(g2.mCoordinate.latitude()), Double.parseDouble(g2.mCoordinate.longitude()), "K") + " Kilometers");
+    }//GEN-LAST:event_btnGetDistanceActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -905,9 +999,12 @@ public class frmMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addComponentButton;
+    private javax.swing.JButton btnAddToBranch;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnFilter;
     private javax.swing.JButton btnGetDeliveries;
+    private javax.swing.JButton btnGetDeliveries1;
+    private javax.swing.JButton btnGetDistance;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSetLocation;
@@ -928,10 +1025,15 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JLabel lblParam1;
     private javax.swing.JLabel lblParam2;
     private javax.swing.JLabel lblParam3;
@@ -950,12 +1052,14 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JPanel panelItemSpecs;
     private javax.swing.JTabbedPane tabInventories;
     private javax.swing.JTable tblBranches;
+    private javax.swing.JTable tblBranches1;
     private javax.swing.JTable tblDeliveries;
+    private javax.swing.JTable tblInvBranches;
     private javax.swing.JTable tblParts;
     private javax.swing.JTextField txtComponentID;
     private javax.swing.JTextField txtComponentManufacturer;
     private javax.swing.JTextField txtComponentName;
-    private javax.swing.JFormattedTextField txtComponentPrice;
+    private javax.swing.JTextField txtComponentPrice;
     private javax.swing.JFormattedTextField txtLatitude;
     private javax.swing.JTextField txtLocation;
     private javax.swing.JFormattedTextField txtLongitude;

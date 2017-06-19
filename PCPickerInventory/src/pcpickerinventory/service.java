@@ -15,6 +15,12 @@ import pcpicker_webservicefordesktop.Inventory;
 import pcpicker_webservicefordesktop.InventoryItem;
 import pcpicker_webservicefordesktop.Order;
 import pcpickerinventory.lib.Parts;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -28,6 +34,7 @@ public class service {
     public static boolean isErrorLogged = false;
     public static JTextArea sysLog = new JTextArea();
     public static flags flag = new flags();
+    private static final DateFormat sdf = new SimpleDateFormat("Yyyy-MM-dd");
     
     // systemLog(Exception, String)
     public static void systemLog(Exception ex, String systemMessage)
@@ -81,7 +88,17 @@ public class service {
         addPowerSupply(ID, manufacturer, name, wattage, rating, formFactor, price, type);
     }
     
-    public static void getInventory(JTable targetTable)
+    // addInventory(String, Date, int, int)
+    public static void insert_BranchInventory(String _ComponentID, String _DateAcquired, int _BranchID, int _Quantity){
+        addInventory(_ComponentID, _DateAcquired, _BranchID, _Quantity);
+    }
+    
+    public static String dateNow(){
+        Date date = new Date();
+        return sdf.format(date);
+    }
+    
+    public static void getMasterInventory(JTable targetTable)
     {
         DefaultTableModel myTable = (DefaultTableModel)targetTable.getModel();
         myTable.setRowCount(0);
@@ -221,7 +238,10 @@ public class service {
         return port.addPowerSupply(compId, compManufacturer, compName, wattage, rating, formFactor, compPrice, compType);
     }
 
-    
-
+    private static String addInventory(java.lang.String compId, java.lang.String dateAcquired, int branchId, int quantity) {
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service service = new pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service();
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
+        return port.addInventory(compId, dateAcquired, branchId, quantity);
+    }
         
 }
