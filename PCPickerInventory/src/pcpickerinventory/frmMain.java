@@ -845,6 +845,8 @@ public class frmMain extends javax.swing.JFrame {
         tblInvBranches.changeSelection(0, 0, false, false);
         btnSearch.setVisible(false);
         txtSearch.setVisible(false);
+        mnuFileBranch.setVisible(false);
+        mnuFileInventory.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -959,7 +961,8 @@ public class frmMain extends javax.swing.JFrame {
         int tRow = tblBranches.getSelectedRow();
         int tCol = 0;
         int selected = Integer.parseInt(tblBranches.getValueAt(tRow, tCol).toString());
-        service.getDeliveries(tblDeliveries, selected);
+        //service.getDeliveries(tblDeliveries, selected);
+        service.getAcceptedOrders(tblDeliveries, selected);
         tblDeliveries.changeSelection(0, 0, false, false);
     }//GEN-LAST:event_btnGetDeliveriesActionPerformed
 
@@ -1007,6 +1010,10 @@ public class frmMain extends javax.swing.JFrame {
         int branch = Integer.parseInt(tblInvBranches.getValueAt(tblInvBranches.getSelectedRow(), 0).toString());
         int count = Integer.parseInt(spinCount.getValue().toString()); 
        service.insert_BranchInventory(txtComponentID.getText(), service.dater(), branch, count);
+        System.out.println(txtComponentID.getText());
+        System.out.println(service.dater());
+        System.out.println(branch);
+        System.out.println(count);
     }//GEN-LAST:event_btnAddToBranchActionPerformed
 
     /**

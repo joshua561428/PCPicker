@@ -34,7 +34,7 @@ public class service {
     public static boolean isErrorLogged = false;
     public static JTextArea sysLog = new JTextArea();
     public static flags flag = new flags();
-    private static final DateFormat sdf = new SimpleDateFormat("Yyyy-MM-dd");
+    private static final DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     
     // systemLog(Exception, String)
     public static void systemLog(Exception ex, String systemMessage)
@@ -126,6 +126,24 @@ public class service {
         DefaultTableModel mdl = (DefaultTableModel)targetTable.getModel();
         List<pcpicker_webservicefordesktop.Order> orders = getActivePendingOrderList(_branchID);
         for (int x = 0;x < getActivePendingOrderList(_branchID).size();x++)
+        {
+            Object row[] = new Object[4];
+            row[0] = orders.get(x).getOrderId();
+            row[1] = orders.get(x).getDeliveryAddress();
+            row[2] = orders.get(x).getNearestBranchRequest();
+            row[3] = orders.get(x).getDeliveryDate();
+            mdl.addRow(row);
+        }
+        targetTable.setModel(mdl);
+    }
+    
+    public static void getAcceptedOrders(JTable targetTable, int _branchID){
+        DefaultTableModel myTable = (DefaultTableModel)targetTable.getModel();
+        myTable.setRowCount(0);
+        targetTable.setModel(myTable);
+        DefaultTableModel mdl = (DefaultTableModel)targetTable.getModel();
+        List<pcpicker_webservicefordesktop.Order> orders = getAcceptedOrders();
+        for (int x = 0;x < getAcceptedOrders().size();x++)
         {
             Object row[] = new Object[4];
             row[0] = orders.get(x).getOrderId();
@@ -242,6 +260,12 @@ public class service {
         pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service service = new pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service();
         pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
         return port.addInventory(compId, dateAcquired, branchId, quantity);
+    }
+
+    private static java.util.List<pcpicker_webservicefordesktop.Order> getAcceptedOrders() {
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service service = new pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop_Service();
+        pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
+        return port.getAcceptedOrders();
     }
 
 }
