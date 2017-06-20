@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://Pcpicker_webserviceForDesktop/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://Pcpicker_webserviceForDesktop/">
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://Pcpicker_webserviceForDesktop/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://Pcpicker_webserviceForDesktop/">
 
 <xs:element name="acceptOrder" type="tns:acceptOrder"/>
 
@@ -51,6 +51,10 @@
 <xs:element name="completeOrder" type="tns:completeOrder"/>
 
 <xs:element name="completeOrderResponse" type="tns:completeOrderResponse"/>
+
+<xs:element name="getAcceptedOrders" type="tns:getAcceptedOrders"/>
+
+<xs:element name="getAcceptedOrdersResponse" type="tns:getAcceptedOrdersResponse"/>
 
 <xs:element name="getActivePendingOrderList" type="tns:getActivePendingOrderList"/>
 
@@ -150,6 +154,25 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="addPowerSupply">
+<xs:sequence>
+<xs:element name="comp_id" type="xs:string" minOccurs="0"/>
+<xs:element name="comp_manufacturer" type="xs:string" minOccurs="0"/>
+<xs:element name="comp_name" type="xs:string" minOccurs="0"/>
+<xs:element name="wattage" type="xs:int"/>
+<xs:element name="rating" type="xs:string" minOccurs="0"/>
+<xs:element name="form_factor" type="xs:string" minOccurs="0"/>
+<xs:element name="comp_price" type="xs:double"/>
+<xs:element name="comp_type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addPowerSupplyResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="getActivePendingOrderList">
 <xs:sequence>
 <xs:element name="branch_id" type="xs:int"/>
@@ -206,20 +229,19 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="addPowerSupply">
+<xs:complexType name="addMouse">
 <xs:sequence>
 <xs:element name="comp_id" type="xs:string" minOccurs="0"/>
 <xs:element name="comp_manufacturer" type="xs:string" minOccurs="0"/>
 <xs:element name="comp_name" type="xs:string" minOccurs="0"/>
-<xs:element name="wattage" type="xs:int"/>
-<xs:element name="rating" type="xs:string" minOccurs="0"/>
-<xs:element name="form_factor" type="xs:string" minOccurs="0"/>
+<xs:element name="dpi" type="xs:int"/>
+<xs:element name="connection_" type="xs:string" minOccurs="0"/>
 <xs:element name="comp_price" type="xs:double"/>
 <xs:element name="comp_type" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="addPowerSupplyResponse">
+<xs:complexType name="addMouseResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
@@ -244,24 +266,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="addMouse">
-<xs:sequence>
-<xs:element name="comp_id" type="xs:string" minOccurs="0"/>
-<xs:element name="comp_manufacturer" type="xs:string" minOccurs="0"/>
-<xs:element name="comp_name" type="xs:string" minOccurs="0"/>
-<xs:element name="dpi" type="xs:int"/>
-<xs:element name="connection_" type="xs:string" minOccurs="0"/>
-<xs:element name="comp_price" type="xs:double"/>
-<xs:element name="comp_type" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="addMouseResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="getNumLists">
 <xs:sequence>
 <xs:element name="branchid" type="xs:int"/>
@@ -274,15 +278,26 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getForDeliveryOrders">
+<xs:complexType name="getCustomerList">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getCustomerListResponse">
 <xs:sequence>
-<xs:element name="branch_id" type="xs:int"/>
+<xs:element name="return" type="tns:Customer" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getForDeliveryOrdersResponse">
+<xs:complexType name="Customer">
 <xs:sequence>
-<xs:element name="return" type="tns:Order" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="cust_id" type="xs:int"/>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="address" type="xs:string" minOccurs="0"/>
+<xs:element name="city" type="xs:string" minOccurs="0"/>
+<xs:element name="zip_code" type="xs:int"/>
+<xs:element name="lastname" type="xs:string" minOccurs="0"/>
+<xs:element name="firstname" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -316,26 +331,25 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getCustomerList">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="getCustomerListResponse">
+<xs:complexType name="getForDeliveryOrders">
 <xs:sequence>
-<xs:element name="return" type="tns:Customer" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="branch_id" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="Customer">
+<xs:complexType name="getForDeliveryOrdersResponse">
 <xs:sequence>
-<xs:element name="cust_id" type="xs:int"/>
-<xs:element name="username" type="xs:string" minOccurs="0"/>
-<xs:element name="password" type="xs:string" minOccurs="0"/>
-<xs:element name="address" type="xs:string" minOccurs="0"/>
-<xs:element name="city" type="xs:string" minOccurs="0"/>
-<xs:element name="zip_code" type="xs:int"/>
-<xs:element name="lastname" type="xs:string" minOccurs="0"/>
-<xs:element name="firstname" type="xs:string" minOccurs="0"/>
+<xs:element name="return" type="tns:Order" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAcceptedOrders">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getAcceptedOrdersResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:Order" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -478,17 +492,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="setOrderDeliveryDate">
-<xs:sequence>
-<xs:element name="order_id" type="xs:int"/>
-<xs:element name="deliveryDate_" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="setOrderDeliveryDateResponse">
-<xs:sequence/>
-</xs:complexType>
-
 <xs:complexType name="getBranchesList">
 <xs:sequence/>
 </xs:complexType>
@@ -507,7 +510,20 @@
 <xs:element name="zip_code" type="xs:int"/>
 <xs:element name="name" type="xs:string" minOccurs="0"/>
 <xs:element name="coodinates" type="tns:Coordinates" minOccurs="0"/>
+<xs:element name="lat" type="xs:double"/>
+<xs:element name="lng" type="xs:double"/>
 </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setOrderDeliveryDate">
+<xs:sequence>
+<xs:element name="order_id" type="xs:int"/>
+<xs:element name="deliveryDate_" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setOrderDeliveryDateResponse">
+<xs:sequence/>
 </xs:complexType>
 
 <xs:complexType name="completeOrder">
@@ -555,18 +571,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getCoordinates">
-<xs:sequence>
-<xs:element name="address" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getCoordinatesResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:Coordinates" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="addInventory">
 <xs:sequence>
 <xs:element name="comp_id" type="xs:string" minOccurs="0"/>
@@ -579,6 +583,18 @@
 <xs:complexType name="addInventoryResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCoordinates">
+<xs:sequence>
+<xs:element name="address" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCoordinatesResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:Coordinates" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

@@ -93,7 +93,7 @@ public class service {
         addInventory(_ComponentID, _DateAcquired, _BranchID, _Quantity);
     }
     
-    public static String dateNow(){
+    public static String dater(){
         Date date = new Date();
         return sdf.format(date);
     }
@@ -243,5 +243,5 @@ public class service {
         pcpicker_webservicefordesktop.PcpickerWebserviceForDesktop port = service.getPcpickerWebserviceForDesktopPort();
         return port.addInventory(compId, dateAcquired, branchId, quantity);
     }
-        
+
 }

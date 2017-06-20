@@ -38,7 +38,9 @@ public class GoogleMapLocator {
     public mapScale mScale = new mapScale();
     public mapZoom mZoom = new mapZoom();
     public mapType mType = new mapType();
-    public mapKey mKey = new mapKey("AIzaSyA9GSrFDlDtDCRlcZzB9alI1X86VBLXsqA");
+    public mapKey mKey = new mapKey("AIzaSyBt5syC_GlqrOA2Y3w0pU-rXXMlbg5ZTvk");
+    //AIzaSyA9GSrFDlDtDCRlcZzB9alI1X86VBLXsqA
+    //AIzaSyBt5syC_GlqrOA2Y3w0pU-rXXMlbg5ZTvk
     
     private JPanel contentPane;    
     
@@ -256,6 +258,8 @@ public class GoogleMapLocator {
                 st2 = nn2.getFirstChild().getNodeValue();
                 _latitudeTextField.setText(st1);
                 _longitudeTextField.setText(st2);
+                mCoordinate.latitude(st1);
+                mCoordinate.longitude(st2);
                 pcpickerinventory.service.systemLog("Coordinates Retrieved: (" + st1 + "," + st2 + ")");
             }
         } catch (Exception e) {

@@ -72,7 +72,7 @@ public class frmMain extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tblInvBranches = new javax.swing.JTable();
         btnAddToBranch = new javax.swing.JButton();
-        jSpinner1 = new javax.swing.JSpinner();
+        spinCount = new javax.swing.JSpinner();
         panelGoogleMap = new javax.swing.JPanel();
         frameMap = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
@@ -92,6 +92,8 @@ public class frmMain extends javax.swing.JFrame {
         tblBranches = new javax.swing.JTable();
         btnGetDeliveries = new javax.swing.JButton();
         btnGetDistance = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        lblDistance = new javax.swing.JLabel();
         mnuMain = new javax.swing.JMenuBar();
         mnuFile = new javax.swing.JMenu();
         mnuFileBranch = new javax.swing.JMenuItem();
@@ -374,6 +376,11 @@ public class frmMain extends javax.swing.JFrame {
         jScrollPane5.setViewportView(tblInvBranches);
 
         btnAddToBranch.setText("ADD TO BRANCH");
+        btnAddToBranch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddToBranchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -386,7 +393,7 @@ public class frmMain extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(btnAddToBranch)
                         .addGap(18, 18, 18)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spinCount, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -398,7 +405,7 @@ public class frmMain extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddToBranch)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(spinCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout panelInventoryLayout = new javax.swing.GroupLayout(panelInventory);
@@ -476,11 +483,11 @@ public class frmMain extends javax.swing.JFrame {
         frameMap.getContentPane().setLayout(frameMapLayout);
         frameMapLayout.setHorizontalGroup(
             frameMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 508, Short.MAX_VALUE)
+            .addGap(0, 506, Short.MAX_VALUE)
         );
         frameMapLayout.setVerticalGroup(
             frameMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 509, Short.MAX_VALUE)
+            .addGap(0, 502, Short.MAX_VALUE)
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -505,6 +512,8 @@ public class frmMain extends javax.swing.JFrame {
                 btnSetLocationActionPerformed(evt);
             }
         });
+
+        txtLocation.setText("mapua university makati");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -531,7 +540,7 @@ public class frmMain extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(txtLongitude, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 180, Short.MAX_VALUE)))
+                        .addGap(0, 170, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -564,6 +573,11 @@ public class frmMain extends javax.swing.JFrame {
                 "Order ID", "Delivery Address", "Branch Request", "Delivery Date"
             }
         ));
+        tblDeliveries.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDeliveriesMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblDeliveries);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -572,7 +586,7 @@ public class frmMain extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -614,7 +628,7 @@ public class frmMain extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnGetDeliveries)))
@@ -637,6 +651,10 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Distance:");
+
+        lblDistance.setText("--");
+
         javax.swing.GroupLayout panelGoogleMapLayout = new javax.swing.GroupLayout(panelGoogleMap);
         panelGoogleMap.setLayout(panelGoogleMapLayout);
         panelGoogleMapLayout.setHorizontalGroup(
@@ -647,14 +665,19 @@ public class frmMain extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelGoogleMapLayout.createSequentialGroup()
                         .addComponent(frameMap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 26, Short.MAX_VALUE)))
+                        .addGap(0, 13, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelGoogleMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGoogleMapLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnGetDistance)))
+                        .addComponent(btnGetDistance))
+                    .addGroup(panelGoogleMapLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblDistance)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelGoogleMapLayout.setVerticalGroup(
@@ -671,7 +694,11 @@ public class frmMain extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnGetDistance)))
+                        .addComponent(btnGetDistance)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelGoogleMapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(lblDistance))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -816,6 +843,8 @@ public class frmMain extends javax.swing.JFrame {
         service.getBranchID(tblInvBranches);
         tblBranches.changeSelection(0, 0, false, false);
         tblInvBranches.changeSelection(0, 0, false, false);
+        btnSearch.setVisible(false);
+        txtSearch.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -931,6 +960,7 @@ public class frmMain extends javax.swing.JFrame {
         int tCol = 0;
         int selected = Integer.parseInt(tblBranches.getValueAt(tRow, tCol).toString());
         service.getDeliveries(tblDeliveries, selected);
+        tblDeliveries.changeSelection(0, 0, false, false);
     }//GEN-LAST:event_btnGetDeliveriesActionPerformed
 
     private void tblBranchesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tblBranchesPropertyChange
@@ -945,21 +975,39 @@ public class frmMain extends javax.swing.JFrame {
     private void btnGetDistanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetDistanceActionPerformed
         // TODO add your handling code here:
         GoogleMapLocator g0 = new GoogleMapLocator();
-        g0.addLocator("mapua university intramuros", "red");
-        g0.addLocator("sm city manila", "blue");
+        String loc = tblBranches.getValueAt(tblBranches.getSelectedRow(), 1).toString();
+        g0.addLocator(txtLocation.getText(), "red");
+        g0.addLocator(loc, "blue");
         try {
             g0.generateMaps();
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
         }
         g0.displayMap(frameMap);
 
-        GoogleMapLocator g1 = new GoogleMapLocator("mapua university intramuros", "15", "1", "roadmap", "red");
-        g1.getGeoCoordinates();
-        GoogleMapLocator g2 = new GoogleMapLocator("sm city manila", "15", "1", "roadmap", "red");
-        g2.getGeoCoordinates();
+        
+        GoogleMapLocator g1 = new GoogleMapLocator(txtLocation.getText(), "5", "1", "roadmap", "red");
+        g1.getDirectionCoordinates(g1.mSpecific.location(), g1.mSpecific.location());
+        g1.retrieveCoordinates(txtLatitude, txtLongitude);
+        GoogleMapLocator g2 = new GoogleMapLocator(loc, "5", "1", "roadmap", "red");
+        g2.getDirectionCoordinates(g2.mSpecific.location(), g2.mSpecific.location());
+        g2.retrieveCoordinates(txtLatitude, txtLongitude);
         System.out.println(DistanceCalculator.distance(Double.parseDouble(g1.mCoordinate.latitude()), Double.parseDouble(g1.mCoordinate.longitude()), Double.parseDouble(g2.mCoordinate.latitude()), Double.parseDouble(g2.mCoordinate.longitude()), "K") + " Kilometers");
+        lblDistance.setText(DistanceCalculator.distance(Double.parseDouble(g1.mCoordinate.latitude()), Double.parseDouble(g1.mCoordinate.longitude()), Double.parseDouble(g2.mCoordinate.latitude()), Double.parseDouble(g2.mCoordinate.longitude()), "K") + " Kilometers");
+        
     }//GEN-LAST:event_btnGetDistanceActionPerformed
+
+    private void tblDeliveriesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDeliveriesMouseClicked
+        // TODO add your handling code here:
+        txtLocation.setText(tblDeliveries.getValueAt(tblDeliveries.getSelectedRow(), 1).toString());
+    }//GEN-LAST:event_tblDeliveriesMouseClicked
+
+    private void btnAddToBranchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToBranchActionPerformed
+        // TODO add your handling code here:
+        int branch = Integer.parseInt(tblInvBranches.getValueAt(tblInvBranches.getSelectedRow(), 0).toString());
+        int count = Integer.parseInt(spinCount.getValue().toString()); 
+       service.insert_BranchInventory(txtComponentID.getText(), service.dater(), branch, count);
+    }//GEN-LAST:event_btnAddToBranchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1003,7 +1051,6 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnFilter;
     private javax.swing.JButton btnGetDeliveries;
-    private javax.swing.JButton btnGetDeliveries1;
     private javax.swing.JButton btnGetDistance;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
@@ -1021,19 +1068,18 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JLabel lblDistance;
     private javax.swing.JLabel lblParam1;
     private javax.swing.JLabel lblParam2;
     private javax.swing.JLabel lblParam3;
@@ -1050,9 +1096,9 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JPanel panelInventory;
     private javax.swing.JPanel panelItemDetails;
     private javax.swing.JPanel panelItemSpecs;
+    private javax.swing.JSpinner spinCount;
     private javax.swing.JTabbedPane tabInventories;
     private javax.swing.JTable tblBranches;
-    private javax.swing.JTable tblBranches1;
     private javax.swing.JTable tblDeliveries;
     private javax.swing.JTable tblInvBranches;
     private javax.swing.JTable tblParts;
